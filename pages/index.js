@@ -12,8 +12,14 @@ export default function Home({ allPostsData }) {
         <title>{siteTitle}</title>
       </Head>
       <section className={utilStyles.headingMd}>
-        <p>Hello! I'm Kav!</p>
-        <p>A software engineer trying to build a better web.</p>
+        <p>Hello! I'm Kaven!</p>
+        <p>A full-stack software engineer.</p>
+        <p>
+          I've helped over 50 companies across different verticals grow and
+          scale their marketing campaigns and succeed. And now, I'm looking to
+          help companies scale, optimize and create fantastic user experiences
+          using React and Rails.
+        </p>
       </section>
       <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
         <h2 className={utilStyles.headingLg}>Blog</h2>
