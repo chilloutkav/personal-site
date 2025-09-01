@@ -13,30 +13,15 @@ export default function Home({ allPostsData }) {
       </Head>
       <section className={utilStyles.headingMd}>
         <p>Hello! I'm Kaven!</p>
-        <p>A full-stack software engineer.</p>
         <p>
-          I've helped over 50 companies across different verticals grow and
-          scale their marketing campaigns and succeed. And now, I'm looking to
-          help companies scale, optimize and create fantastic user experiences
-          using React and Rails.
+          A Product Manager who bridges technical execution and business growth.
+        </p>
+        <p>
+          I bridge the gap between marketing and technology, creating efficient,
+          scalable digital workflows that drive measurable results — from
+          campaign strategy to AI-powered automation.
         </p>
       </section>
-      {/* <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
-        <h2 className={utilStyles.headingLg}>Blog</h2>
-        <ul className={utilStyles.list}>
-          {allPostsData.map(({ id, date, title }) => (
-            <li className={utilStyles.listItem} key={id}>
-              <Link href={`/posts/${id}`}>
-                <a>{title}</a>
-              </Link>
-              <br />
-              <small className={utilStyles.lightText}>
-                <Date dateString={date} />
-              </small>
-            </li>
-          ))}
-        </ul>
-      </section> */}
     </Layout>
   );
 }
