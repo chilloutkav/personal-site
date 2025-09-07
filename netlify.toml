@@ -1,9 +1,16 @@
+# Netlify Configuration for Personal Site
+# Modern Next.js 15.5.2 + TypeScript + Tailwind CSS v4
+
 [build]
   command = "next build"
   publish = ".next"
 
 [build.environment]
-  NODE_VERSION = "22"
+  NODE_VERSION = "22"  # Node.js 22 LTS for build time
+
+# REQUIRED ENVIRONMENT VARIABLES (Set in Netlify UI/CLI):
+# BUILD_IMAGE = "ubuntu-24.04-noble"  # Resolves Focal deprecation (Jan 2026)
+# AWS_LAMBDA_JS_RUNTIME = "nodejs22.x"  # Matches build Node.js version
 
 [[plugins]]
   package = "@netlify/plugin-nextjs"
