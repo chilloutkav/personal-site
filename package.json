@@ -15,11 +15,13 @@
     "lint": "next lint",
     "type-check": "tsc --noEmit",
     "clean": "rm -rf .next",
+    "clean-all": "rm -rf .next out dist *.tsbuildinfo .DS_Store",
     "dev-clean": "npm run clean && npm run dev",
     "build-analyze": "ANALYZE=true npm run build",
     "prod": "npm run build && npm run start",
     "prod-quick": "npm run start",
-    "rebuild": "npm run clean && npm run build && npm run start"
+    "rebuild": "npm run clean && npm run build && npm run start",
+    "reset": "npm run clean-all && npm ci && npm run build"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.1",
