@@ -46,6 +46,14 @@
     line-height: 1.5;
   }
 
+  .site-heading-md p {
+    margin-bottom: 1.5rem;
+  }
+
+  .site-heading-md p:last-child {
+    margin-bottom: 0;
+  }
+
   /* Utility classes */
   .site-border-circle {
     border-radius: 9999px;

@@ -1,28 +1,59 @@
 {
+  /**
+   * TypeScript Configuration for Next.js Personal Site
+   * 
+   * Optimized for Next.js 15.5.2 with strict type checking,
+   * modern ES features, and comprehensive MDX support.
+   */
   "compilerOptions": {
-    "target": "es5",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
+    /* Language and Output */
+    "target": "es5",                          // Target ES5 for broad browser compatibility
+    "lib": ["dom", "dom.iterable", "esnext"], // Include modern DOM and ES features
+    
+    /* Module Resolution */
+    "module": "esnext",                       // Use modern ES modules
+    "moduleResolution": "bundler",            // Next.js bundler-style resolution
+    "esModuleInterop": true,                  // Enable CommonJS/ES module interop
+    "resolveJsonModule": true,                // Allow importing JSON files
+    "isolatedModules": true,                  // Ensure each file can be compiled independently
+    
+    /* Type Checking */
+    "strict": true,                           // Enable all strict type checking options
+    "allowJs": true,                          // Allow JavaScript files alongside TypeScript
+    "skipLibCheck": true,                     // Skip type checking of declaration files
+    "noEmit": true,                           // Don't emit compiled JavaScript (Next.js handles this)
+    
+    /* JSX Configuration */
+    "jsx": "preserve",                        // Preserve JSX for Next.js transformation
+    
+    /* Performance */
+    "incremental": true,                      // Enable incremental compilation for faster builds
+    
+    /* Next.js Integration */
     "plugins": [
       {
-        "name": "next"
+        "name": "next"                        // Next.js TypeScript plugin for enhanced IntelliSense
       }
     ],
-    "baseUrl": ".",
+    
+    /* Path Mapping */
+    "baseUrl": ".",                           // Set base URL for module resolution
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"]                          // Enable @ alias for root directory imports
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.mdx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  
+  /* File Inclusion */
+  "include": [
+    "next-env.d.ts",                          // Next.js environment types
+    "**/*.ts",                                // All TypeScript files
+    "**/*.tsx",                               // All TypeScript JSX files
+    "**/*.mdx",                               // All MDX files for blog posts
+    ".next/types/**/*.ts"                     // Next.js generated types
+  ],
+  
+  /* File Exclusion */
+  "exclude": [
+    "node_modules"                            // Exclude dependencies from type checking
+  ]
 }
