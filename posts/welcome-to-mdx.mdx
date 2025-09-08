@@ -1,0 +1,42 @@
+---
+title: 'Welcome to MDX!'
+date: '2025-01-15'
+---
+
+# Welcome to MDX!
+
+This post demonstrates the new **MDX capabilities** of your blog. You can now embed React components directly in your markdown!
+
+## What's New?
+
+- ✅ **TypeScript Support** - Full type safety throughout the codebase
+- ✅ **MDX Integration** - Write JSX directly in your markdown
+- ✅ **Enhanced Developer Experience** - Better tooling and error messages
+- ✅ **Improved Performance** - Optimized build process
+
+## Interactive Content
+
+You can now create interactive content like:
+
+```tsx
+// Example of what's possible with MDX
+function InteractiveButton() {
+  const [count, setCount] = useState(0)
+  return (
+    <button onClick={() => setCount(count + 1)}>
+      Clicked {count} times
+    </button>
+  )
+}
+```
+
+## Technical Details
+
+Your blog now supports:
+
+1. **TypeScript** - All files converted from `.js` to `.ts`/`.tsx`
+2. **MDX Processing** - Using `next-mdx-remote` for flexible content
+3. **Type Safety** - Comprehensive interfaces for `PostData`, `PostWithContent`, etc.
+4. **ES Modules** - Modern JavaScript module system
+
+This migration maintains all existing functionality while adding powerful new capabilities for creating rich, interactive blog content!
