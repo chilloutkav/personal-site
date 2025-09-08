@@ -1,6 +1,7 @@
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import { ReactNode } from "react";
 
 const name = "Kav";
@@ -12,6 +13,8 @@ interface LayoutProps {
 }
 
 export default function Layout({ children, home }: LayoutProps) {
+  const router = useRouter();
+  
   return (
     <div className="site-container">
       <Head>
@@ -29,6 +32,7 @@ export default function Layout({ children, home }: LayoutProps) {
         <meta name="og:title" content={siteTitle} />
         <meta name="twitter:card" content="summary_large_image" />
       </Head>
+      
       <header className="site-header">
         {home ? (
           <>
@@ -43,33 +47,26 @@ export default function Layout({ children, home }: LayoutProps) {
             <h1 className="site-heading-2xl">{name}</h1>
           </>
         ) : (
-          <>
-            <Link href="/">
-              <Image
-                priority
-                src="/images/profile.jpg"
-                className="site-border-circle"
-                height={108}
-                width={108}
-                alt={name}
-              />
-            </Link>
-            <h2 className="site-heading-lg">
-              <Link href="/" className="site-color-inherit">
-                {name}
-              </Link>
-            </h2>
-          </>
+          <h2 className="site-heading-lg">{name}</h2>
         )}
-      </header>
-      <main>{children}</main>
-      {!home && (
-        <div className="site-back-to-home">
-          <Link href="/">
-            ← Back to home
+        
+        <nav className="site-nav">
+          <Link 
+            href="/" 
+            className={`site-nav-link ${router.pathname === '/' ? 'site-nav-link--active' : ''}`}
+          >
+            Home
           </Link>
-        </div>
-      )}
+          <Link 
+            href="/projects" 
+            className={`site-nav-link ${router.pathname === '/projects' ? 'site-nav-link--active' : ''}`}
+          >
+            Projects
+          </Link>
+        </nav>
+      </header>
+      
+      <main>{children}</main>
     </div>
   );
 }

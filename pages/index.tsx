@@ -16,8 +16,7 @@ export default function Home() {
         
         <p>
           I bridge the gap between marketing and technology, creating efficient,
-          scalable digital workflows that drive measurable results — from
-          campaign strategy to AI-powered automation.
+          scalable digital workflows that drive measurable results.
         </p>
       </section>
     </Layout>

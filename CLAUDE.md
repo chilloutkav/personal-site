@@ -48,14 +48,16 @@ This is a modern Next.js personal site built with **TypeScript**, **Tailwind CSS
   - `_app.tsx`: Global app wrapper with Tailwind CSS imports
   - `_document.tsx`: Custom Document component (cleaned, no workarounds needed)
   - `index.tsx`: Homepage with hero section and personal introduction
+  - `projects.tsx`: GitHub projects showcase with clean, portfolio-focused presentation
   - `posts/[id].tsx`: Dynamic routes for blog posts with MDX rendering
   - `api/`: API routes (hello endpoint)
 
 - **components/**: React components with TypeScript
-  - `layout.tsx`: Main layout wrapper with header and navigation
+  - `layout.tsx`: Enhanced layout with professional navigation system and conditional profile image display
   - Uses semantic CSS classes from Tailwind's `@layer components`
 
 - **lib/**: Utility functions and data fetching (TypeScript)
+  - `github.ts`: GitHub API utilities and TypeScript interfaces for repository data
   - `posts.ts`: Blog management functions with TypeScript interfaces
   - Comprehensive type definitions for PostData, PostWithContent, PostId
 
@@ -85,7 +87,20 @@ This is a modern Next.js personal site built with **TypeScript**, **Tailwind CSS
 .site-container { max-width: 36rem; padding: 0 1rem; margin: 3rem auto 6rem; }
 .site-heading-2xl { font-size: 2.5rem; line-height: 1.2; font-weight: 800; letter-spacing: -0.05rem; margin: 1rem 0; }
 .site-heading-xl { font-size: 2rem; line-height: 1.3; font-weight: 800; letter-spacing: -0.05rem; margin: 1rem 0; }
-/* ... and more exact specifications */
+
+/* Navigation System Classes */
+.site-nav { display: flex; gap: 2rem; margin-top: 1.5rem; padding: 0.5rem 0; }
+.site-nav-link { color: #666; font-weight: 500; padding: 0.5rem 1rem; border-radius: 6px; transition: color 0.2s ease, background-color 0.2s ease; }
+.site-nav-link--active { color: #0070f3; background-color: #f1f8ff; border: 1px solid #c8e1ff; }
+
+/* GitHub Projects Showcase Classes */
+.site-project-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin: 2rem 0; }
+.site-project-card { border: 1px solid #e1e4e8; border-radius: 8px; padding: 1.5rem; background-color: #ffffff; transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
+.site-project-language { display: flex; align-items: center; font-weight: 500; font-size: 0.875rem; color: #586069; }
+.site-project-language:before { content: ''; width: 12px; height: 12px; border-radius: 50%; background-color: #0070f3; margin-right: 0.5rem; }
+
+/* Responsive Design */
+@media (min-width: 768px) { .site-project-grid { grid-template-columns: repeat(2, 1fr); } }
 ```
 
 ### Key Features
@@ -93,10 +108,86 @@ This is a modern Next.js personal site built with **TypeScript**, **Tailwind CSS
 - **Next.js 15.5.2**: Latest Next.js with Pages Router and MDX support
 - **TypeScript**: Full TypeScript implementation with strict type checking
 - **Tailwind CSS v4**: Latest Tailwind with zero-config setup + custom components
+- **GitHub Projects Showcase**: Dynamic repository fetching with professional presentation
+- **Professional Navigation**: Site-wide navigation with active states and responsive design
 - **MDX Support**: Blog system with `@next/mdx` and `next-mdx-remote`
 - **ES Module Compatibility**: Full ES module support throughout
 - **PostCSS Processing**: Enhanced configuration for CSS processing
 - **Pixel-Perfect Styling**: Custom component classes maintain exact original design
+
+## GitHub Projects Showcase
+
+### Overview
+Comprehensive projects showcase system that automatically fetches and displays GitHub repositories with a clean, portfolio-focused presentation. Implements hybrid approach combining automated GitHub API integration with potential for manual curation.
+
+### Core Files
+- **`lib/github.ts`**: GitHub API integration with comprehensive TypeScript interfaces
+  - Repository data fetching with error handling and rate limiting
+  - Language detection and repository processing utilities  
+  - Sorting and filtering functions for project data
+  - Date formatting and display utilities
+
+- **`pages/projects.tsx`**: Projects showcase page with server-side rendering
+  - Uses `getStaticProps` with 5-minute ISR (Incremental Static Regeneration)
+  - Clean, minimal presentation focusing on project names, descriptions, and languages
+  - Responsive grid layout with hover effects and accessibility features
+  - Error handling with graceful fallbacks
+
+- **Environment Configuration**: 
+  - `.env.local`: Contains `GITHUB_USERNAME=chilloutkav` 
+  - `.env.local.example`: Template for environment setup
+  - Optional `GITHUB_TOKEN` for higher API rate limits (5000/hour vs 60/hour)
+
+### GitHub API Integration Details
+- **Username**: Configured as `chilloutkav` (discovered from git remote origin)
+- **Rate Limiting**: Handles both authenticated and unauthenticated requests gracefully
+- **Caching**: Built-in Next.js caching with 300-second revalidation
+- **Error Handling**: Comprehensive error states with user-friendly messages  
+- **Data Processing**: 
+  - Filters out archived repositories
+  - Sorts by last updated date
+  - Fetches language data for each repository
+  - Processes topics and metadata
+
+### Current Display Features
+- **Project Names**: Linked directly to GitHub repositories
+- **Descriptions**: Clean project descriptions when available
+- **Primary Languages**: Displayed with colored indicator dots
+- **Responsive Design**: Grid layout that works on mobile and desktop
+- **Professional Styling**: Portfolio-appropriate presentation without GitHub-specific clutter
+
+### Navigation System Integration
+Professional navigation system that enhances user experience:
+- **Homepage**: Shows profile image + name + navigation links
+- **Other Pages**: Shows name only + navigation links for cleaner presentation
+- **Active States**: Automatic highlighting of current page using Next.js router
+- **Responsive**: Clean mobile and desktop navigation experience
+
+## Navigation System
+
+### Implementation Details
+The navigation system uses conditional rendering based on the `home` prop:
+
+**Homepage Layout:**
+```jsx
+{home ? (
+  <>
+    <Image src="/images/profile.jpg" height={144} width={144} />
+    <h1 className="site-heading-2xl">{name}</h1>
+  </>
+) : (
+  <h2 className="site-heading-lg">{name}</h2>
+)}
+<nav className="site-nav">
+  <Link href="/" className="site-nav-link">Home</Link>
+  <Link href="/projects" className="site-nav-link">Projects</Link>
+</nav>
+```
+
+### Styling Classes
+- `.site-nav`: Navigation container with flexbox layout
+- `.site-nav-link`: Individual navigation links with hover effects
+- `.site-nav-link--active`: Active page highlighting with blue background
 
 ### MDX Configuration
 
@@ -153,6 +244,37 @@ Use custom component classes:
 - **Responsive design**: Combine custom classes with Tailwind responsive utilities
 - **Performance**: Tailwind's purging automatically removes unused styles
 
+## Environment Configuration
+
+### Required Environment Variables
+
+**`.env.local`** (Create this file in the project root):
+```bash
+# GitHub API Configuration
+GITHUB_USERNAME=chilloutkav
+
+# Optional: Add your GitHub Personal Access Token for higher rate limits
+# GITHUB_TOKEN=your_token_here
+```
+
+### GitHub Personal Access Token (Optional but Recommended)
+
+**Benefits**:
+- Increases API rate limit from 60 to 5000 requests/hour
+- Provides more reliable access during development
+- Enables access to additional repository metadata
+
+**Setup Process**:
+1. Create token at: https://github.com/settings/tokens
+2. Required scopes: `public_repo` (for accessing public repositories)
+3. Add to `.env.local` as `GITHUB_TOKEN=your_token_here`
+
+**Note**: The `.env.local` file is already in `.gitignore` and won't be committed to the repository.
+
+### Environment Files
+- **`.env.local`**: Your local environment variables (not committed to git)
+- **`.env.local.example`**: Template showing required variables (committed to git)
+
 ## Dependency Information
 
 ### Core Dependencies
@@ -191,12 +313,73 @@ Use custom component classes:
 2. **Pages**: Create new `.tsx` files in `/pages/` for additional routes
 3. **Components**: Build reusable components in `/components/` directory
 
+### GitHub Projects Development
+1. **API Testing**: Test GitHub API with `curl` or browser to verify data availability
+2. **Environment Setup**: Ensure `.env.local` contains correct `GITHUB_USERNAME=chilloutkav`
+3. **Rate Limits**: Monitor API usage; add `GITHUB_TOKEN` for higher limits if needed
+4. **Content Updates**: Projects refresh automatically every 5 minutes via ISR
+5. **Styling Extensions**: Add new `.site-project-*` classes in `global.css` for consistency
+6. **Data Processing**: Extend filtering/sorting functions in `lib/github.ts` as needed
+7. **Error Handling**: Test API failures and ensure graceful fallbacks work correctly
+
 ### Quality Assurance
 1. **Type Safety**: Strict TypeScript configuration catches issues early
 2. **Build Validation**: `npm run build` ensures production readiness
 3. **Bundle Analysis**: `npm run build-analyze` for performance optimization
 4. **Linting**: Requires ESLint CLI setup (migration needed from deprecated `next lint`)
 5. **Testing**: All functionality validated in both development and production modes
+
+## Current Implementation Status
+
+### ✅ Completed Features (Phase 1)
+
+#### **GitHub Projects Showcase System**
+- **Dynamic Repository Fetching**: Automated GitHub API integration with comprehensive error handling
+- **Clean Portfolio Presentation**: Professional, distraction-free display focusing on project names, descriptions, and languages
+- **TypeScript Integration**: Full type safety with custom interfaces and error handling
+- **Performance Optimization**: ISR with 5-minute revalidation for optimal loading and freshness
+- **Responsive Design**: Mobile and desktop-optimized grid layout
+
+#### **Professional Navigation System**
+- **Site-Wide Navigation**: Consistent navigation across all pages with active state highlighting
+- **Conditional Layout**: Homepage shows profile image, other pages prioritize content
+- **Router Integration**: Automatic active page detection using Next.js router
+- **Responsive Design**: Clean mobile and desktop navigation experience
+
+#### **Production-Ready Infrastructure**
+- **Environment Configuration**: GitHub API setup with rate limiting and token support
+- **Build System**: Clean production builds with optimized bundle sizes
+- **Server Deployment**: Both development and production server configurations working
+- **Code Quality**: Professional TypeScript patterns throughout the codebase
+
+#### **Technical Fixes Completed**
+- **React Title Tag Issues**: Fixed template literal usage for proper string rendering
+- **Production Server**: Resolved deployment and startup issues
+- **CSS Cleanup**: Removed unused classes and optimized styling architecture
+- **Navigation Integration**: Seamless integration between homepage and projects pages
+
+### 🔄 Next Phase Opportunities (Phase 2+)
+
+#### **Enhanced GitHub Integration**
+- **Advanced Filtering**: Sort and filter repositories by language, stars, or activity
+- **Component Architecture**: Dedicated `ProjectCard` and `ProjectGrid` components
+- **Enhanced Metadata**: Repository topics, deployment links, and contribution graphs
+
+#### **Featured Projects System**
+- **Manual Curation**: Detailed case studies for key projects with business impact focus
+- **Rich Content**: Screenshots, demos, and technical architecture details
+- **Product Manager Perspective**: Business outcomes, user feedback, and lessons learned
+
+#### **Performance & SEO**
+- **Advanced Caching**: Implement more sophisticated caching strategies
+- **SEO Optimization**: Meta tags, Open Graph images, and structured data
+- **Bundle Analysis**: Performance monitoring and optimization
+
+### 📊 Current Status Summary
+- **Phase 1**: ✅ **COMPLETE** - Core GitHub showcase with navigation
+- **Production Ready**: ✅ All development and deployment workflows functional
+- **Code Quality**: ✅ Professional TypeScript implementation throughout
+- **Documentation**: ✅ Comprehensive project documentation for easy session continuity
 
 ## Architecture Benefits
 
