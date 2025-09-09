@@ -10,7 +10,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm start` - Start production server
 
 ### Development Tools
-- `npm run lint` - Run Next.js linting checks (⚠️ **DEPRECATED** - requires ESLint CLI migration)
+- `npm run lint` - Run ESLint checks (modern ESLint CLI)
 - `npm run type-check` - Run TypeScript type checking without emitting files
 - `npm run clean` - Clear Next.js build cache (.next directory)
 - `npm run dev-clean` - Clean cache and start fresh development server
@@ -21,7 +21,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run prod-quick` - Start production server (requires existing build)
 - `npm run rebuild` - Clean cache, build, and start production server
 
-**Note**: Due to HMR CSS injection issues with Tailwind CSS v4 in development mode, production build workflow is recommended for reliable styling. Production builds work flawlessly with all CSS and Tailwind utilities.
+**Note**: All CSS and development issues have been resolved. Both development and production builds work seamlessly with Tailwind CSS v4.
 
 ### Additional Commands
 - `npm run clean-all` - Remove all build artifacts, cache, and system files
@@ -31,12 +31,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `pkill -f "next dev" && lsof -t -i:3000 | xargs kill -9` - Kill all dev server processes
 - `npm cache clean --force` - Clear npm cache if needed
 
-### ESLint Migration (Required)
-⚠️ **Action Required**: `next lint` is deprecated in Next.js 16. Migrate to ESLint CLI:
-```bash
-npx @next/codemod@canary next-lint-to-eslint-cli .
-```
-Choose "Strict (recommended)" configuration when prompted.
+### ESLint Setup ✅
+✅ **Completed**: Successfully migrated to ESLint CLI for Next.js 16 compatibility:
+- Modern `eslint.config.mjs` configuration
+- Strict TypeScript and React rules enabled
+- All linting issues resolved
 
 ## Project Architecture
 
@@ -115,10 +114,10 @@ This is a modern Next.js personal site built with **TypeScript**, **Tailwind CSS
 - **PostCSS Processing**: Enhanced configuration for CSS processing
 - **Pixel-Perfect Styling**: Custom component classes maintain exact original design
 
-## GitHub Projects Showcase
+## GitHub Projects Showcase ✅ **COMPLETED**
 
 ### Overview
-Comprehensive projects showcase system that automatically fetches and displays GitHub repositories with a clean, portfolio-focused presentation. Implements hybrid approach combining automated GitHub API integration with potential for manual curation.
+Production-ready projects showcase that automatically fetches and displays GitHub repositories with clean, professional presentation. **Status**: Phase 1 complete, now focusing on content-first enhancement approach for maximum PM portfolio impact.
 
 ### Core Files
 - **`lib/github.ts`**: GitHub API integration with comprehensive TypeScript interfaces
@@ -314,13 +313,14 @@ GITHUB_USERNAME=chilloutkav
 3. **Components**: Build reusable components in `/components/` directory
 
 ### GitHub Projects Development
-1. **API Testing**: Test GitHub API with `curl` or browser to verify data availability
+1. **Content-First Approach**: Focus on enhancing GitHub repository READMEs with business context and PM perspective
 2. **Environment Setup**: Ensure `.env.local` contains correct `GITHUB_USERNAME=chilloutkav`
-3. **Rate Limits**: Monitor API usage; add `GITHUB_TOKEN` for higher limits if needed
-4. **Content Updates**: Projects refresh automatically every 5 minutes via ISR
+3. **Content Updates**: Projects refresh automatically every 5 minutes via ISR
+4. **Repository Enhancement Strategy**: 
+   - Add problem statements and business impact to existing repos
+   - Showcase product thinking and technical decision-making
+   - Include deployment links and user feedback where available
 5. **Styling Extensions**: Add new `.site-project-*` classes in `global.css` for consistency
-6. **Data Processing**: Extend filtering/sorting functions in `lib/github.ts` as needed
-7. **Error Handling**: Test API failures and ensure graceful fallbacks work correctly
 
 ### Quality Assurance
 1. **Type Safety**: Strict TypeScript configuration catches issues early
@@ -331,7 +331,7 @@ GITHUB_USERNAME=chilloutkav
 
 ## Current Implementation Status
 
-### ✅ Completed Features (Phase 1)
+### ✅ Phase 1: COMPLETED & PRODUCTION READY
 
 #### **GitHub Projects Showcase System**
 - **Dynamic Repository Fetching**: Automated GitHub API integration with comprehensive error handling
@@ -347,39 +347,29 @@ GITHUB_USERNAME=chilloutkav
 - **Responsive Design**: Clean mobile and desktop navigation experience
 
 #### **Production-Ready Infrastructure**
-- **Environment Configuration**: GitHub API setup with rate limiting and token support
+- **ESLint CLI Migration**: Successfully upgraded to modern ESLint setup for Next.js 16 compatibility
+- **Code Quality**: Zero linting errors and strict TypeScript throughout
 - **Build System**: Clean production builds with optimized bundle sizes
 - **Server Deployment**: Both development and production server configurations working
-- **Code Quality**: Professional TypeScript patterns throughout the codebase
 
-#### **Technical Fixes Completed**
-- **React Title Tag Issues**: Fixed template literal usage for proper string rendering
-- **Production Server**: Resolved deployment and startup issues
-- **CSS Cleanup**: Removed unused classes and optimized styling architecture
-- **Navigation Integration**: Seamless integration between homepage and projects pages
+### 🎯 Current Focus: Content-First Enhancement
 
-### 🔄 Next Phase Opportunities (Phase 2+)
+#### **Recommended Next Steps (High Impact, Low Complexity)**
+- **Repository README Enhancement**: Add business context and PM perspective to existing GitHub repos
+- **Product Manager Storytelling**: Frame projects to showcase product thinking and business impact
+- **User-Focused Narratives**: Include problem statements, user feedback, and measurable outcomes
+- **Technical Decision Documentation**: Explain technology choices from a PM perspective
 
-#### **Enhanced GitHub Integration**
-- **Advanced Filtering**: Sort and filter repositories by language, stars, or activity
-- **Component Architecture**: Dedicated `ProjectCard` and `ProjectGrid` components
-- **Enhanced Metadata**: Repository topics, deployment links, and contribution graphs
-
-#### **Featured Projects System**
-- **Manual Curation**: Detailed case studies for key projects with business impact focus
-- **Rich Content**: Screenshots, demos, and technical architecture details
-- **Product Manager Perspective**: Business outcomes, user feedback, and lessons learned
-
-#### **Performance & SEO**
-- **Advanced Caching**: Implement more sophisticated caching strategies
-- **SEO Optimization**: Meta tags, Open Graph images, and structured data
-- **Bundle Analysis**: Performance monitoring and optimization
+#### **Strategic Project Positioning**
+- **personal-site**: Demonstrate technical product ownership and modern web architecture
+- **project-crm**: Showcase B2B product thinking and small business user needs  
+- **pokemon-team-creator**: Highlight user experience design and consumer product development
 
 ### 📊 Current Status Summary
-- **Phase 1**: ✅ **COMPLETE** - Core GitHub showcase with navigation
-- **Production Ready**: ✅ All development and deployment workflows functional
-- **Code Quality**: ✅ Professional TypeScript implementation throughout
-- **Documentation**: ✅ Comprehensive project documentation for easy session continuity
+- **Phase 1**: ✅ **COMPLETE** - Production-ready GitHub showcase with professional navigation
+- **Technical Infrastructure**: ✅ Modern, maintainable architecture with excellent performance
+- **Code Quality**: ✅ Zero technical debt, full TypeScript, modern ESLint setup
+- **Next Phase**: 🎯 **Content-First Approach** - Maximize PM portfolio impact through enhanced project narratives
 
 ## Architecture Benefits
 
@@ -391,111 +381,13 @@ GITHUB_USERNAME=chilloutkav
 
 The project successfully combines modern Tailwind CSS v4 architecture with pixel-perfect design preservation, providing excellent developer experience and performance.
 
-## Known Issues (RESOLVED ✅)
+## Architecture Benefits
 
-### Development Server Blank Page Issue 
-**Status**: ✅ **RESOLVED** - Fixed by disabling mdxRs experimental feature
+The project successfully combines modern web development best practices with a clean, maintainable architecture:
 
-**Problem Solved**: Development server was serving blank white pages with webpack vendor-chunks error.
-
-**Root Cause Identified**: 
-The `mdxRs: true` experimental feature in Next.js 15.5.2 was causing webpack vendor chunk resolution conflicts during development mode, leading to:
-```
-⨯ Error: Cannot find module './chunks/vendor-chunks/next.js'
-GET / 500 in 306ms
-```
-
-**Solution Applied**:
-Disabled mdxRs experimental feature in `next.config.js`:
-```javascript
-// Before (causing issues):
-experimental: {
-  mdxRs: true,
-},
-
-// After (stable solution):
-// Removed mdxRs: true to fix webpack vendor chunk issues in development
-// The experimental Rust MDX compiler was causing blank page problems
-```
-
-**Resolution Steps**:
-1. ✅ Identified mdxRs as root cause through systematic analysis
-2. ✅ Removed mdxRs experimental configuration from next.config.js  
-3. ✅ Cleared build cache completely (`rm -rf .next`)
-4. ✅ Restarted development server without mdxRs
-5. ✅ Verified all functionality: development server, MDX processing, styling
-6. ✅ Confirmed production builds remain unaffected
-
-**Result**: 
-- ✅ **Development server fully functional** (`npm run dev` works perfectly)
-- ✅ **All MDX blog posts render correctly** (standard @next/mdx works great)
-- ✅ **Hot reloading restored** (instant development feedback)
-- ✅ **Production builds unaffected** (maintained 3.5x faster build performance)
-- ✅ **TypeScript + Tailwind CSS v4 + MDX** all working seamlessly together
-
-**Performance Impact**: 
-No negative impact - standard @next/mdx provides all needed functionality without the instability of the experimental Rust compiler.
-
-### Architecture Migration Summary ✅
-
-**Successfully Completed**:
-- ✅ **Complete TypeScript migration** from JavaScript codebase
-- ✅ **Tailwind CSS v4 implementation** with zero-config architecture  
-- ✅ **Pixel-perfect styling preservation** using `@layer components` approach
-- ✅ **Removed manual CSS injection workaround** completely
-- ✅ **Development server stability** achieved by mdxRs resolution
-- ✅ **Production deployment ready** with optimal performance
-- ✅ **Comprehensive documentation** updated for future development
-
-The project now runs a modern, stable architecture with Next.js 15.5.2 + TypeScript + Tailwind CSS v4, with both development and production environments fully functional.
-
-### Comprehensive Code Cleanup Completed ✅
-
-**Status**: ✅ **COMPLETED** - Major codebase cleanup and optimization completed
-
-**Cleanup Summary**: Comprehensive removal of legacy files and consolidation to single-architecture approach.
-
-**Files Removed (17 total, ~500+ lines of code)**:
-
-**Legacy JavaScript Files (9 files)**:
-- `components/layout.js` - Duplicate of TypeScript version
-- `components/date.js` - Duplicate of TypeScript version  
-- `lib/posts.js` - Duplicate of TypeScript version
-- `pages/_app.js` - Duplicate of TypeScript version
-- `pages/index.js` - Duplicate of TypeScript version
-- `pages/posts/[id].js` - Duplicate of TypeScript version
-- `pages/api/hello.js` - Duplicate of TypeScript version
-
-**Obsolete CSS Files (3 files)**:
-- `styles/utils.module.css` - 53 lines of CSS Modules utilities (replaced by Tailwind)
-- `components/layout.module.css` - 16 lines of CSS Modules layout styles (replaced by Tailwind)
-- `styles/minimal.css` - 186 lines of unused design system
-
-**Debug/Development Artifacts (2 files)**:
-- `console-debug-script.js` - 276 lines of Plasmo debugging script
-- `debug-plasmo.html` - HTML debugging artifact
-
-**Temporary Documentation (3 files)**:
-- `CLAUDE 2.md` - Duplicate/outdated documentation
-- `COMPONENT-GUIDE.md` - Temporary component guide
-- `MINIMAL-IMPLEMENTATION-GUIDE.md` - Temporary implementation notes
-
-**Results Achieved**:
-- ✅ **Single Source of Truth**: Only TypeScript files remain for components and logic
-- ✅ **Unified CSS Architecture**: Only Tailwind CSS v4 + custom components in global.css
-- ✅ **Zero Duplicate Files**: Eliminated all JavaScript/TypeScript duplicates
-- ✅ **Clean Build Process**: No more duplicate page warnings or conflicts
-- ✅ **Production Build Fixed**: `npm run start` now works correctly (BUILD_ID issue resolved)
-- ✅ **Optimized Performance**: Reduced bundle bloat from unused CSS systems
-
-**Architecture Now Consolidated**:
-- **TypeScript Only**: All components, pages, and utilities use TypeScript
-- **Tailwind CSS v4 Only**: Single CSS architecture with custom components
-- **Clean File Structure**: No legacy artifacts or competing implementations
-- **Verified Functionality**: All development and production workflows tested and working
-
-**Impact**: 
-- **Development Experience**: Cleaner codebase, no confusion between file versions
-- **Performance**: Faster builds, smaller bundles, optimized asset loading
-- **Maintainability**: Single architecture makes future development straightforward
-- **Production Ready**: All deployment workflows verified and functional
+- **Performance**: Tailwind CSS v4 provides 3.5x faster builds and optimal bundle sizes
+- **Maintainability**: Custom component classes maintain design system consistency  
+- **Developer Experience**: Zero configuration with comprehensive TypeScript support
+- **Future-Proof**: Modern CSS architecture aligned with latest web standards
+- **Code Quality**: ESLint CLI with strict rules ensures consistent, high-quality code
+- **Production Ready**: Seamless development and production workflows with excellent performance

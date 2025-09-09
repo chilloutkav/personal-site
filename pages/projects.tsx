@@ -43,7 +43,7 @@ export default function Projects({ repositories, error }: ProjectsProps) {
       <section>
         <h1 className="site-heading-2xl">Projects</h1>
         <p className="site-heading-md">
-          A collection of projects showcasing technical exploration.
+          A collection of projects.
         </p>
         
         <div className="site-project-stats">
