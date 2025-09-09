@@ -8,7 +8,7 @@ export interface PostData {
   id: string
   title: string
   date: string
-  [key: string]: any
+  [key: string]: unknown
 }
 
 export interface PostWithContent extends PostData {

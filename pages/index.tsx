@@ -8,7 +8,7 @@ export default function Home() {
         <title>{siteTitle}</title>
       </Head>
       <section className="site-heading-md">
-        <p>Hello! I'm Kaven!</p>
+        <p>Hello! I&apos;m Kaven!</p>
 
         <p>
           A Product Manager who bridges technical execution and business growth.

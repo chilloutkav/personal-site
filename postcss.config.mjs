@@ -6,7 +6,7 @@
  * complex plugin configurations can interfere with CSS injection.
  */
 
-export default {
+const config = {
   plugins: {
     /**
      * Tailwind CSS v4 PostCSS Plugin
@@ -23,3 +23,5 @@ export default {
     'autoprefixer': {},
   },
 }
+
+export default config
