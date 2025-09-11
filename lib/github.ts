@@ -61,7 +61,7 @@ export interface GitHubAPIError {
 const GITHUB_API_BASE = 'https://api.github.com'
 
 // Get GitHub username from environment or use default
-const GITHUB_USERNAME = process.env.GITHUB_USERNAME || 'kavenkim'
+const GITHUB_USERNAME = process.env.GITHUB_USERNAME || 'chilloutkav'
 
 /**
  * Fetch repositories for a specific GitHub user
