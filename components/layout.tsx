@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ReactNode } from "react";
@@ -34,37 +33,31 @@ export default function Layout({ children, home }: LayoutProps) {
       </Head>
       
       <header className="site-header">
-        {home ? (
-          <>
-            <Image
-              priority
-              src="/images/profile.jpg"
-              className="site-border-circle"
-              height={144}
-              width={144}
-              alt={name}
-            />
-            <h1 className="site-heading-2xl">{name}</h1>
-          </>
-        ) : (
+        {!home && (
           <h2 className="site-heading-lg">{name}</h2>
         )}
-        
-        <nav className="site-nav">
-          <Link 
-            href="/" 
-            className={`site-nav-link ${router.pathname === '/' ? 'site-nav-link--active' : ''}`}
-          >
-            Home
-          </Link>
-          <Link 
-            href="/projects" 
-            className={`site-nav-link ${router.pathname === '/projects' ? 'site-nav-link--active' : ''}`}
-          >
-            Projects
-          </Link>
-        </nav>
       </header>
+      
+      <nav className="site-nav">
+        <Link 
+          href="/" 
+          className={`site-nav-link ${router.pathname === '/' ? 'site-nav-link--active' : ''}`}
+        >
+          Home
+        </Link>
+        <Link 
+          href="/projects" 
+          className={`site-nav-link ${router.pathname === '/projects' ? 'site-nav-link--active' : ''}`}
+        >
+          Projects
+        </Link>
+        <Link 
+          href="/about" 
+          className={`site-nav-link ${router.pathname === '/about' ? 'site-nav-link--active' : ''}`}
+        >
+          About
+        </Link>
+      </nav>
       
       <main>{children}</main>
     </div>
