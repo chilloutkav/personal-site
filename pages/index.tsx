@@ -24,14 +24,14 @@ export default function Home({ repositories }: HomeProps) {
           priority
           src="/images/profile.jpg"
           className="site-hero-image"
-          height={80}
-          width={80}
+          height={96}
+          width={96}
           alt="Kaven Kim"
         />
         <div className="site-hero-content">
           <h1 className="site-hero-title">Hey, I&apos;m Kaven!</h1>
           <p className="site-hero-subtitle">
-            A <span className="site-highlight">Product Manager</span> Who Bridges Technical Execution And Business Growth.
+            A <span className="site-highlight">Product Manager</span> Who Builds Products That Help Businesses Grow.
           </p>
           
           {/* Social Media Icons */}
@@ -79,8 +79,7 @@ export default function Home({ repositories }: HomeProps) {
       {/* About Section */}
       <section className="site-about">
         <p className="site-about-text">
-          I Bridge The Gap Between Marketing And Technology, Creating Efficient, 
-          Scalable Digital Workflows That Drive Measurable Results.
+          I combine marketing insights with hands-on building to create solutions that actually drive real growth.
         </p>
       </section>
 
