@@ -13,15 +13,17 @@ export default function About() {
       </Head>
       
       {/* Hero Section */}
-      <section>
+      <section className="site-about-section">
         <h1 className="site-heading-2xl">Hey, I&apos;m Kaven</h1>
-        <p className="site-about-text">
-          I&apos;m a Product Manager who&apos;s spent the last 7+ years in growth marketing, and honestly, it&apos;s made me a different kind of PM. While most product people focus on building features, I care about building things that actually help businesses grow.
-        </p>
+        <div className="site-heading-md">
+          <p>
+            I&apos;m a Product Manager who&apos;s spent the last 7+ years in growth marketing, and honestly, it&apos;s made me a different kind of PM. While most product people focus on building features, I care about building things that actually help businesses grow.
+          </p>
+        </div>
       </section>
 
       {/* Background Section */}
-      <section>
+      <section className="site-about-section">
         <div className="site-heading-md">
           <p>
             My path to product management was pretty different. I started out managing PPC campaigns and helping companies acquire customers without spending too much money. Turns out, when you spend years optimizing ad spend and conversion rates, you learn what actually works vs. what just sounds good in meetings.
@@ -36,7 +38,7 @@ export default function About() {
       </section>
 
       {/* Value Proposition Section */}
-      <section>
+      <section className="site-about-section">
         <div className="site-heading-md">
           <p>
             Years of marketing taught me to think from the customer&apos;s perspective and understand what actually drives growth. But I kept wanting to know more about the technical side - how products are built, how systems work together, and how to implement the ideas I had. That curiosity led me to coding bootcamp and eventually to product management.
@@ -54,10 +56,12 @@ export default function About() {
       </section>
 
       {/* Current Work Section */}
-      <section>
-        <p className="site-about-text">
-          Right now, I&apos;m excited about how AI can make product development faster and better. I&apos;m building small automation projects and trying to figure out how teams can work better without losing the personal touch.
-        </p>
+      <section className="site-about-section">
+        <div className="site-heading-md">
+          <p>
+            Right now, I&apos;m excited about how AI can make product development faster and better. I&apos;m building small automation projects and trying to figure out how teams can work better without losing the personal touch.
+          </p>
+        </div>
       </section>
     </Layout>
   );
