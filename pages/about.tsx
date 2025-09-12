@@ -22,7 +22,6 @@ export default function About() {
 
       {/* Background Section */}
       <section>
-        <h2 className="site-heading-lg">How I Got Here</h2>
         <div className="site-heading-md">
           <p>
             My path to product management was pretty different. I started out managing PPC campaigns and helping companies acquire customers without spending too much money. Turns out, when you spend years optimizing ad spend and conversion rates, you learn what actually works vs. what just sounds good in meetings.
@@ -38,7 +37,6 @@ export default function About() {
 
       {/* Value Proposition Section */}
       <section>
-        <h2 className="site-heading-lg">What I Bring</h2>
         <div className="site-heading-md">
           <p>
             Years of marketing taught me to think from the customer&apos;s perspective and understand what actually drives growth. But I kept wanting to know more about the technical side - how products are built, how systems work together, and how to implement the ideas I had. That curiosity led me to coding bootcamp and eventually to product management.
@@ -57,7 +55,6 @@ export default function About() {
 
       {/* Current Work Section */}
       <section>
-        <h2 className="site-heading-lg">What I&apos;m Working On</h2>
         <p className="site-about-text">
           Right now, I&apos;m excited about how AI can make product development faster and better. I&apos;m building small automation projects and trying to figure out how teams can work better without losing the personal touch.
         </p>
