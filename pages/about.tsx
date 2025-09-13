@@ -8,16 +8,16 @@ export default function About() {
         <title>{`About - ${siteTitle}`}</title>
         <meta 
           name="description" 
-          content="Learn about Kaven Kim's journey from growth marketing to product management, bridging technical execution and business growth."
+          content="Product Manager with 7+ years in growth marketing. Cut client acquisition costs 50%, learned software engineering at Flatiron School, now experimenting with AI automation tools. Customer-focused PM who understands what actually drives growth."
         />
       </Head>
       
       {/* Hero Section */}
       <section className="site-about-section">
-        <h1 className="site-heading-2xl">Hey, I&apos;m Kaven</h1>
+        <h1 className="site-heading-2xl">Hey, I'm Kaven</h1>
         <div className="site-heading-md">
           <p>
-            I&apos;m a Product Manager who&apos;s spent the last 7+ years in growth marketing, and honestly, it&apos;s made me a different kind of PM. While most product people focus on building features, I care about building things that actually help businesses grow.
+            I'm a Product Manager who spent the last 7+ years in growth marketing. Most product people focus on building features. I focused on building things that help businesses grow, which probably comes from all those years stressing about ad spend and conversion rates.
           </p>
         </div>
       </section>
@@ -26,13 +26,13 @@ export default function About() {
       <section className="site-about-section">
         <div className="site-heading-md">
           <p>
-            My path to product management was pretty different. I started out managing PPC campaigns and helping companies acquire customers without spending too much money. Turns out, when you spend years optimizing ad spend and conversion rates, you learn what actually works vs. what just sounds good in meetings.
+            My path here wasn't typical. I started managing PPC campaigns, helping companies acquire customers or increase sales while squeezing the most performance out of their budget. When you spend years watching every dollar of ad spend, you learn what works versus what just sounds good in meetings.
           </p>
           <p>
-            I&apos;ve done everything from reducing client acquisition costs by 50% to rebuilding websites that looked like they were from 2010. Along the way, I realized my favorite part wasn&apos;t just running campaigns - it was building the systems that made everything work better.
+            I've cut client acquisition costs by 50% before. I rebuilt websites that were embarrassingly outdated. But honestly, my favorite part was never the campaigns themselves; it was building the systems that made everything run smoother.
           </p>
           <p>
-            So I made the jump to product management, and it felt right. All those years of understanding funnels, talking to customers, and caring about metrics? That&apos;s exactly what good product management is.
+            Product management felt inevitable once I realized that. Understanding funnels, talking to customers, caring way too much about metrics—turns out that's exactly what good PMs do.
           </p>
         </div>
       </section>
@@ -41,16 +41,13 @@ export default function About() {
       <section className="site-about-section">
         <div className="site-heading-md">
           <p>
-            Years of marketing taught me to think from the customer&apos;s perspective and understand what actually drives growth. But I kept wanting to know more about the technical side - how products are built, how systems work together, and how to implement the ideas I had. That curiosity led me to coding bootcamp and eventually to product management.
+            Marketing taught me to think like a customer, but I kept wanting to understand how things actually got built. How systems talk to each other. How you turn good ideas into something real that people can use.
           </p>
           <p>
-            Now it&apos;s all come together. I understand how customers find and use products because I&apos;ve spent years in that world. I&apos;m comfortable diving into analytics and talking to customers without pushing them toward the answers I want. And I can tell the difference between what people say they want and what they actually need.
+            So I went to Flatiron School to learn Software Engineering. Now everything makes sense. I understand how customers find products because I lived in that world. I can dig into analytics without getting lost. And I've gotten better at hearing what customers actually need, not just what they think they want.
           </p>
           <p>
-            The technical foundation I&apos;ve built means I can work closely with engineering teams and actually implement solutions, not just strategy.
-          </p>
-          <p>
-            I also went through a coding bootcamp (shoutout to Flatiron School) and I&apos;m playing around with AI tools like Claude Code and n8n. I&apos;m not trying to be an engineer, but I like knowing how things work.
+            I'm not trying to be a developer—I just like knowing how things work under the hood. These days I'm experimenting with AI tools like Claude Code and n8n. I’m building little automation projects. I’m trying to figure out how businesses can work more efficiently without everything feeling robotic.
           </p>
         </div>
       </section>
@@ -59,7 +56,7 @@ export default function About() {
       <section className="site-about-section">
         <div className="site-heading-md">
           <p>
-            Right now, I&apos;m excited about how AI can make product development faster and better. I&apos;m building small automation projects and trying to figure out how teams can work better without losing the personal touch.
+            AI is changing how fast we can build products. Join my adventures to see where I test these tools and see where it can take us.
           </p>
         </div>
       </section>

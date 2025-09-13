@@ -16,6 +16,15 @@ export default function Home({ repositories }: HomeProps) {
     <Layout home>
       <Head>
         <title>{siteTitle}</title>
+        <meta 
+          name="description" 
+          content="Kaven Kim - Product Manager who builds growth-driven products. 7+ years in marketing, software engineering background, showcasing selected works and automation projects. Combining marketing insights with hands-on development."
+        />
+        <meta property="og:description" content="Product Manager combining marketing expertise with technical skills. Showcasing selected works and growth-focused product development." />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://kavenkim.com" />
+        <meta name="twitter:description" content="Product Manager who builds growth-driven products. Marketing expertise + software engineering background." />
+        <meta name="keywords" content="Product Manager, Growth Marketing, Software Engineering, Product Development, Marketing Analytics, Automation" />
       </Head>
 
       {/* Hero Section */}
@@ -29,7 +38,7 @@ export default function Home({ repositories }: HomeProps) {
           alt="Kaven Kim"
         />
         <div className="site-hero-content">
-          <h1 className="site-hero-title">Hey, I&apos;m Kaven!</h1>
+          <h1 className="site-hero-title">Hey, I'm Kaven!</h1>
           <p className="site-hero-subtitle">
             A <span className="site-highlight">Product Manager</span> Who Builds Products That Help Businesses Grow.
           </p>
@@ -86,7 +95,7 @@ export default function Home({ repositories }: HomeProps) {
       {/* Footer */}
       <footer className="site-footer">
         <div className="site-footer-connect">
-          Let&apos;s Connect 
+          Let's Connect 
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
           </svg>
