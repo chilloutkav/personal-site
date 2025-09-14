@@ -1,7 +1,57 @@
 @import "tailwindcss";
 
 @layer components {
-  /* Recreate exact original CSS Module styling */
+  /* CSS Custom Properties - Design System */
+  :root {
+    /* Colors */
+    --color-primary: #0070f3;
+    --color-text-dark: #1a1a1a;
+    --color-text-medium: #666;
+    --color-text-light: #999;
+    --color-text-gray: #586069;
+    --color-text-muted: #4a4a4a;
+    --color-border: #e1e4e8;
+    --color-border-light: #e5e5e5;
+    --color-bg-white: #ffffff;
+    --color-bg-light: #f8f9fa;
+    --color-bg-gray: #f5f5f5;
+    --color-bg-darker: #e5e5e5;
+    --color-bg-neutral: #f0f0f0;
+    
+    /* Typography Scale */
+    --font-xs: 0.8rem;
+    --font-sm: 0.875rem;
+    --font-base: 0.95rem;
+    --font-md: 1rem;
+    --font-lg: 1.1rem;
+    --font-xl: 1.125rem;
+    --font-2xl: 1.2rem;
+    --font-3xl: 1.25rem;
+    --font-4xl: 1.5rem;
+    --font-5xl: 1.75rem;
+    --font-6xl: 2rem;
+    --font-7xl: 2.5rem;
+    
+    /* Spacing Scale */
+    --space-xs: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 0.75rem;
+    --space-lg: 1rem;
+    --space-xl: 1.5rem;
+    --space-2xl: 2rem;
+    --space-3xl: 3rem;
+    --space-4xl: 4rem;
+    --space-5xl: 6rem;
+    
+    /* Border Radius */
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-full: 50%;
+    --radius-circle: 9999px;
+  }
+
+  /* Layout Components */
   .site-container {
     max-width: 36rem;
     padding: 0 1rem;
@@ -17,31 +67,51 @@
   /* Navigation styling */
   .site-nav {
     display: flex;
+    justify-content: center;
     gap: 2rem;
     margin-top: 1.5rem;
     padding: 0.5rem 0;
   }
 
   .site-nav-link {
-    color: #666;
+    color: #1a1a1a !important;
     text-decoration: none;
     font-weight: 500;
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    border-radius: 6px;
-    transition: color 0.2s ease, background-color 0.2s ease;
+    font-size: var(--font-md);
+    padding: var(--space-sm) var(--space-lg);
+    border-radius: var(--radius-md);
+    transition: text-decoration 0.2s ease;
   }
 
   .site-nav-link:hover {
-    color: #0070f3;
-    background-color: #f8f9fa;
-    text-decoration: none;
+    color: #1a1a1a !important;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 2px;
   }
 
   .site-nav-link--active {
-    color: #0070f3;
-    background-color: #f1f8ff;
-    border: 1px solid #c8e1ff;
+    color: #1a1a1a !important;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 2px;
+  }
+
+  /* Reusable Pattern Classes */
+  .site-underline-hover {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 2px;
+  }
+
+  .site-flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .site-transition-smooth {
+    transition: all 0.2s ease;
   }
 
   /* Typography - exact original values */
@@ -76,21 +146,9 @@
     margin-bottom: 1.5rem;
   }
 
-  .site-heading-md p:last-child {
-    margin-bottom: 0;
-  }
-
   /* Utility classes */
-  .site-border-circle {
-    border-radius: 9999px;
-  }
-
-  .site-color-inherit {
-    color: inherit;
-  }
-
   .site-light-text {
-    color: #666;
+    color: var(--color-text-medium);
   }
 
   /* Projects page styling components */
@@ -100,16 +158,16 @@
 
   .site-project-error {
     text-align: center;
-    padding: 2rem;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    margin: 2rem 0;
+    padding: var(--space-2xl);
+    background-color: var(--color-bg-light);
+    border-radius: var(--radius-lg);
+    margin: var(--space-2xl) 0;
   }
 
   .site-project-empty {
     text-align: center;
-    padding: 3rem 1rem;
-    color: #666;
+    padding: var(--space-3xl) var(--space-lg);
+    color: var(--color-text-medium);
   }
 
   /* Project grid layout */
@@ -122,15 +180,15 @@
 
   /* Project card styling */
   .site-project-card {
-    border: 1px solid #e1e4e8;
-    border-radius: 8px;
-    padding: 1.5rem;
-    background-color: #ffffff;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl);
+    background-color: var(--color-bg-white);
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   }
 
   .site-project-card:hover {
-    border-color: #0070f3;
+    border-color: var(--color-primary);
     box-shadow: 0 4px 12px rgba(0, 112, 243, 0.1);
   }
 
@@ -149,7 +207,7 @@
   }
 
   .site-project-link {
-    color: #0070f3;
+    color: var(--color-primary);
     text-decoration: none;
     word-break: break-word;
   }
@@ -160,8 +218,8 @@
 
 
   .site-project-description {
-    color: #586069;
-    margin: 0 0 1rem 0;
+    color: var(--color-text-gray);
+    margin: 0 0 var(--space-lg) 0;
     line-height: 1.5;
   }
 
@@ -173,23 +231,251 @@
     display: flex;
     align-items: center;
     font-weight: 500;
-    font-size: 0.875rem;
-    color: #586069;
+    font-size: var(--font-sm);
+    color: var(--color-text-gray);
   }
 
   .site-project-language:before {
     content: '';
     width: 12px;
     height: 12px;
-    border-radius: 50%;
-    background-color: #0070f3;
-    margin-right: 0.5rem;
+    border-radius: var(--radius-full);
+    background-color: var(--color-primary);
+    margin-right: var(--space-sm);
   }
 
-  /* Responsive design */
+
+  /* Portfolio Homepage Styles */
+  .site-hero {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1.5rem;
+    margin: 2rem 0 4rem 0;
+  }
+
+  .site-hero-image {
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .site-hero-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .site-hero-title {
+    font-size: var(--font-5xl);
+    font-weight: 700;
+    color: var(--color-text-dark);
+    margin: 0 0 var(--space-sm) 0;
+    line-height: 1.3;
+  }
+
+  .site-hero-subtitle {
+    font-size: var(--font-xl);
+    color: var(--color-text-muted);
+    margin: 0 0 var(--space-xl) 0;
+    line-height: 1.5;
+  }
+
+  .site-hero-subtitle .site-highlight {
+    color: var(--color-primary);
+    font-weight: 600;
+  }
+
+  .site-social-icons {
+    display: flex;
+    gap: 0.75rem;
+    margin: 0;
+  }
+
+  .site-social-icon {
+    width: 40px;
+    height: 40px;
+    background-color: var(--color-bg-gray);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-medium);
+    text-decoration: none;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .site-social-icon:hover {
+    background-color: var(--color-bg-darker);
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  /* Selected Works Section */
+  .site-selected-works {
+    margin: 4rem 0;
+  }
+
+  .site-selected-works-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+
+  .site-selected-works-title {
+    font-size: var(--font-4xl);
+    font-weight: 600;
+    color: var(--color-text-dark);
+    margin: 0;
+  }
+
+  .site-selected-works-link {
+    color: var(--color-primary);
+    font-size: var(--font-base);
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  .site-selected-works-link:hover {
+    text-decoration: underline;
+  }
+
+  .site-portfolio-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 0;
+  }
+
+  .site-portfolio-card {
+    background-color: var(--color-bg-white);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--color-border-light);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .site-portfolio-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .site-portfolio-image {
+    width: 100%;
+    height: 200px;
+    background-color: var(--color-bg-neutral);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-light);
+    font-size: var(--font-base);
+  }
+
+  .site-portfolio-content {
+    padding: 1.25rem;
+  }
+
+  .site-portfolio-title {
+    font-size: var(--font-lg);
+    font-weight: 600;
+    color: var(--color-text-dark);
+    margin: 0 0 var(--space-md) 0;
+  }
+
+  .site-portfolio-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .site-portfolio-tag {
+    background-color: var(--color-bg-gray);
+    color: var(--color-text-medium);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-xs);
+    font-weight: 500;
+  }
+
+  /* About Section */
+  .site-about {
+    margin: 4rem 0;
+    text-align: center;
+  }
+
+  .site-about-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .site-about-text {
+    font-size: 1.2rem;
+    line-height: 1.5;
+    color: inherit;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  /* Footer Section */
+  .site-footer {
+    margin: 4rem 0 2rem 0;
+    text-align: center;
+  }
+
+  .site-footer-connect {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-sm);
+    font-size: var(--font-lg);
+    font-weight: 500;
+    color: var(--color-text-dark);
+  }
+
+  /* Responsive Design - Mobile First Approach */
+  
+  /* Mobile (max-width: 640px) */
+  @media (max-width: 640px) {
+    .site-hero {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: var(--space-lg);
+    }
+    
+    .site-hero-content {
+      align-items: center;
+    }
+    
+    .site-hero-title {
+      font-size: var(--font-4xl);
+    }
+    
+    .site-hero-subtitle {
+      font-size: var(--font-md);
+      text-align: center;
+    }
+  }
+
+  /* Tablet (min-width: 640px) */
+  @media (min-width: 640px) {
+    .site-portfolio-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Tablet (min-width: 768px) */
   @media (min-width: 768px) {
     .site-project-grid {
       grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Desktop (min-width: 1024px) */
+  @media (min-width: 1024px) {
+    .site-portfolio-grid {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 }
@@ -202,7 +488,7 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   line-height: 1.6;
   font-size: 18px;
-  background-color: #ffffff;
+  background-color: var(--color-bg-white);
 }
 
 * {
@@ -210,7 +496,7 @@ body {
 }
 
 a {
-  color: #0070f3;
+  color: var(--color-primary);
   text-decoration: none;
 }
 
