@@ -47,7 +47,7 @@ export default function About() {
             So I went to Flatiron School to learn Software Engineering. Now everything makes sense. I understand how customers find products because I lived in that world. I can dig into analytics without getting lost. And I've gotten better at hearing what customers actually need, not just what they think they want.
           </p>
           <p>
-            I'm not trying to be a developer—I just like knowing how things work under the hood. These days I'm experimenting with AI tools like Claude Code and n8n. I’m building little automation projects. I’m trying to figure out how businesses can work more efficiently without everything feeling robotic.
+            I'm not trying to be a developer—I just like knowing how things work under the hood. These days I'm experimenting with AI tools like Claude Code and n8n. I’m building automation projects. I’m trying to figure out how businesses can work more efficiently without everything feeling robotic.
           </p>
         </div>
       </section>
