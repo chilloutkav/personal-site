@@ -115,8 +115,12 @@ Create `.env.local`:
 # Required for GitHub projects showcase
 GITHUB_USERNAME=chilloutkav
 
-# Optional: Higher API rate limits (5000/hour vs 60/hour)  
+# Optional: Higher API rate limits (5000/hour vs 60/hour)
 GITHUB_TOKEN=your_token_here
+
+# Google Tag Manager Configuration
+# Replace GTM-XXXXXXX with your actual GTM Container ID
+NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX
 ```
 
 ### GitHub Personal Access Token
