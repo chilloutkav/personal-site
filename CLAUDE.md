@@ -128,6 +128,12 @@ NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX
 - **Scope**: `public_repo` for accessing public repositories
 - **Benefits**: Higher rate limits and more reliable access
 
+### Google Tag Manager Setup
+- **Container ID**: `GTM-5CXC3C8` (configured in Netlify)
+- **Implementation**: Conditional loading in `_document.tsx`
+- **Environment**: Set `NEXT_PUBLIC_GTM_ID=GTM-5CXC3C8` in Netlify dashboard
+- **Status**: ✅ Active in production via Netlify environment variables
+
 ## Development Workflow
 
 ### Daily Development
@@ -171,6 +177,7 @@ npm run rebuild
 - **Navigation System**: Black text navigation with underline hover/active states
 - **About Page**: Compelling PM journey storytelling without H2 sections
 - **CSS Architecture**: Optimized Tailwind CSS v4 with custom components
+- **Analytics Integration**: Google Tag Manager (GTM-5CXC3C8) with conditional loading
 - **TypeScript**: Full type safety throughout
 - **Production Ready**: Clean builds, optimal performance
 
