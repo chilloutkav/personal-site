@@ -1,0 +1,74 @@
+---
+title: "Task Manager Pro"
+description: "A modern task management application with real-time collaboration features"
+techStack: ["React", "TypeScript", "Node.js", "Socket.io", "PostgreSQL"]
+demoUrl: "https://task-manager-demo.example.com"
+githubUrl: "https://github.com/chilloutkav/task-manager-pro"
+previewImage: "/images/projects/task-manager-preview.jpg"
+status: "live"
+featured: true
+createdDate: "2024-03-15"
+---
+
+# Task Manager Pro
+
+A comprehensive task management solution built for modern teams who need to stay organized and collaborate effectively.
+
+## Overview
+
+Task Manager Pro combines the simplicity of traditional to-do apps with powerful collaboration features that make team coordination seamless. Built with a focus on performance and user experience.
+
+## Key Features
+
+### Real-time Collaboration
+- Live updates as team members make changes
+- Instant notifications for task assignments
+- Collaborative editing of task descriptions
+
+### Smart Organization
+- Project-based task grouping
+- Custom tags and filtering
+- Priority-based sorting
+- Due date management with calendar integration
+
+### Performance Optimized
+- Sub-second loading times
+- Offline-first architecture
+- Progressive Web App (PWA) capabilities
+- Mobile-responsive design
+
+## Technical Implementation
+
+### Frontend Architecture
+Built with **React 18** and **TypeScript** for type safety and modern development patterns. The UI uses a custom design system built on CSS modules for maintainable styling.
+
+### Backend Services
+- **Node.js** with Express for API endpoints
+- **Socket.io** for real-time features
+- **PostgreSQL** with Prisma ORM for data management
+- **Redis** for session management and caching
+
+### Deployment & Infrastructure
+- Containerized with Docker
+- Deployed on AWS with auto-scaling
+- CI/CD pipeline with GitHub Actions
+- Monitoring with DataDog
+
+## Development Insights
+
+This project taught me the importance of planning real-time features from the ground up. Initially built as a simple CRUD app, adding real-time collaboration required significant architectural changes.
+
+**Key learnings:**
+- Socket.io event planning is crucial for scalable real-time features
+- TypeScript interfaces become critical with complex data flows
+- Database indexing strategy significantly impacts real-time update performance
+
+## Live Demo
+
+The demo includes sample data and full functionality. You can:
+- Create and manage tasks
+- Experience real-time updates (simulated with multiple browser tabs)
+- Test mobile responsiveness
+- Explore the full feature set
+
+*Note: Demo data resets every 24 hours*

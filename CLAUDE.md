@@ -37,8 +37,10 @@ npm run dev          # Causes blank pages with Tailwind v4
 ### Core Structure
 
 - **pages/**: Pages Router with file-based routing (TypeScript)
-  - `index.tsx`: Homepage with hero section and GitHub projects showcase
-  - `projects.tsx`: GitHub projects showcase with clean presentation
+  - `index.tsx`: Homepage with hero section and social links
+  - `projects.tsx`: Technical projects showcase landing page
+  - `projects/[projectName]/index.tsx`: Dynamic project detail pages
+  - `projects/[projectName]/demo/index.tsx`: Live project demo pages
   - `about.tsx`: About page with professional PM journey storytelling
   - `posts/[id].tsx`: Dynamic routes for blog posts with MDX rendering
   - `api/`: API routes
@@ -47,7 +49,7 @@ npm run dev          # Causes blank pages with Tailwind v4
   - `layout.tsx`: Main layout with navigation system and conditional profile display
 
 - **lib/**: Utility functions and data fetching (TypeScript)
-  - `github.ts`: GitHub API utilities and TypeScript interfaces
+  - `projects.ts`: Project content management and TypeScript interfaces
   - `posts.ts`: Blog management functions
 
 - **styles/**: CSS architecture with Tailwind CSS v4
@@ -90,11 +92,35 @@ npm run dev          # Causes blank pages with Tailwind v4
 
 ## Key Features
 
-### GitHub Projects Showcase
-- **File**: `pages/projects.tsx` with `lib/github.ts`
-- **API Integration**: GitHub API with comprehensive error handling
-- **ISR**: 5-minute revalidation for optimal performance
-- **Environment**: `GITHUB_USERNAME` required, `GITHUB_TOKEN` optional
+### Technical Projects Showcase
+- **Structure**: Dynamic routing with `pages/projects/[projectName]/`
+- **Content Management**: MDX-based project descriptions in `projects/` directory
+- **Demo Integration**: Live project demos at `/projects/project-name/demo/`
+- **Metadata**: Frontmatter with tech stack, status, demo URLs, and GitHub links
+
+#### Project Content Structure
+```
+projects/
+├── project-name.mdx              # Project description with frontmatter
+└── another-project.mdx           # Additional projects
+
+# Example frontmatter:
+---
+title: "Project Name"
+description: "Brief description"
+techStack: ["React", "TypeScript", "etc"]
+demoUrl: "https://demo-url.com"          # Optional
+githubUrl: "https://github.com/user/repo" # Optional
+status: "live" | "in-development" | "archived"
+featured: true | false
+createdDate: "2024-01-01"
+---
+```
+
+#### URL Structure
+- **Project Details**: `/projects/project-name/` - Full project description
+- **Live Demos**: `/projects/project-name/demo/` - Embedded or linked demos
+- **Fallback Handling**: Graceful display when no demo URL provided
 
 ### Navigation System
 - **Implementation**: `components/layout.tsx` with Next.js router
@@ -112,21 +138,10 @@ npm run dev          # Causes blank pages with Tailwind v4
 ### Required Variables
 Create `.env.local`:
 ```bash
-# Required for GitHub projects showcase
-GITHUB_USERNAME=chilloutkav
-
-# Optional: Higher API rate limits (5000/hour vs 60/hour)
-GITHUB_TOKEN=your_token_here
-
 # Google Tag Manager Configuration
 # Replace GTM-XXXXXXX with your actual GTM Container ID
 NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX
 ```
-
-### GitHub Personal Access Token
-- **Setup**: https://github.com/settings/tokens
-- **Scope**: `public_repo` for accessing public repositories
-- **Benefits**: Higher rate limits and more reliable access
 
 ### Google Tag Manager Setup
 - **Container ID**: `GTM-5CXC3C8` (configured in Netlify)
@@ -173,7 +188,9 @@ npm run rebuild
 ## Current Status ✅
 
 ### Completed Features
-- **GitHub Integration**: Dynamic repository showcase with professional presentation
+- **Technical Projects Showcase**: Dynamic routing system for project portfolios
+- **Project Demo Integration**: Live demo pages with fallback handling
+- **MDX Content Management**: Rich project descriptions with frontmatter metadata
 - **Navigation System**: Black text navigation with underline hover/active states
 - **About Page**: Compelling PM journey storytelling without H2 sections
 - **CSS Architecture**: Optimized Tailwind CSS v4 with custom components
@@ -196,15 +213,22 @@ For future Claude Code sessions:
 npm run prod
 
 # All features working:
-# - Homepage with hero and GitHub projects
-# - Projects page with repository showcase  
+# - Homepage with hero and social links
+# - Technical projects showcase with dynamic routing
+# - Project detail pages and live demos
 # - About page with professional story
 # - Navigation with black text and underline effects
 ```
 
 **Architecture Status**: Clean, production-ready with zero technical debt.
-**Next Priority**: Content enhancement for stronger PM portfolio positioning.
+**Current Branch**: `feature/technical-projects-showcase` - Technical projects routing system implemented.
+**Next Priority**: Deploy real projects and integrate with clean URL structure.
+
+## Technical Projects Implementation
+
+For detailed implementation progress and next steps, see:
+- **`TECHNICAL-PROJECTS-PROGRESS.md`** - Complete roadmap, current status, and Step 3 deployment plan
 
 ---
 
-*Updated: September 2025 - All major issues resolved, codebase in excellent condition*
+*Updated: September 2025 - Technical projects showcase architecture implemented*
