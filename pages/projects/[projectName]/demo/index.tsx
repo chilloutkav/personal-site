@@ -3,12 +3,34 @@ import { getAllProjectIds, getProjectData, ProjectWithContent } from '../../../.
 import Head from 'next/head'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Link from 'next/link'
+import { useEffect } from 'react'
 
 interface DemoProps {
   projectData: ProjectWithContent
 }
 
 export default function Demo({ projectData }: DemoProps) {
+  useEffect(() => {
+    const decorateLink = () => {
+      const demoLink = document.getElementById('demo-link') as HTMLAnchorElement
+      if (!demoLink || !projectData.demoUrl) return
+
+      const gaCookie = document.cookie
+        .split('; ')
+        .find(row => row.startsWith('_ga='))
+        ?.split('=')[1]
+
+      if (gaCookie && !demoLink.href.includes('_ga=')) {
+        const separator = demoLink.href.includes('?') ? '&' : '?'
+        demoLink.href = `${projectData.demoUrl}${separator}_ga=${gaCookie}`
+      }
+    }
+
+    decorateLink()
+    const interval = setInterval(decorateLink, 1000)
+    return () => clearInterval(interval)
+  }, [projectData.demoUrl])
+
   return (
     <Layout>
       <Head>
@@ -44,6 +66,7 @@ export default function Demo({ projectData }: DemoProps) {
               </p>
 
               <a
+                id="demo-link"
                 href={projectData.demoUrl}
                 target="_blank"
                 rel="noopener noreferrer"
