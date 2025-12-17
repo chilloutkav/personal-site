@@ -63,6 +63,9 @@ export default function Demo({ projectData }: DemoProps) {
                 {projectData.title === "Pokemon Team Creator" && (
                   <span> Search for Pokemon, build your dream team, and explore interactive features.</span>
                 )}
+                {projectData.title === "Project CRM" && (
+                  <span> Manage contacts, track deals through your sales pipeline, and experience real-time CRM functionality with demo credentials provided.</span>
+                )}
               </p>
 
               <a

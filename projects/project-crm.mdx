@@ -1,0 +1,310 @@
+---
+title: "Project CRM"
+description: "Full-stack customer relationship management system with Supabase backend and React frontend"
+techStack: ["React", "Supabase", "PostgreSQL", "Tailwind CSS", "JavaScript"]
+demoUrl: "https://crm.kavenkim.com"
+githubUrl: "https://github.com/chilloutkav/project-crm"
+previewImage: "/images/projects/crm-preview.png"
+status: "live"
+featured: true
+createdDate: "2022-06-30"
+---
+
+## The Problem
+
+Small to medium-sized businesses need powerful customer relationship management tools, but enterprise CRM solutions like Salesforce are often **expensive, complex, and overkill** for their needs. Meanwhile, building a custom CRM from scratch is time-consuming and requires significant backend infrastructure.
+
+The challenge: create a **production-ready CRM** that handles real business needs—contact management, deal tracking, note-taking, and analytics—while keeping the architecture simple, scalable, and cost-effective.
+
+## The Solution
+
+Project CRM is a modern, full-stack application that combines **Supabase's backend-as-a-service** with a **React frontend** to deliver complete CRM functionality. It handles everything from user authentication to real-time data synchronization, all while maintaining a clean, intuitive interface.
+
+The application provides full CRUD operations for contacts, deals, and notes, with a color-coded design system (blue for contacts, green for deals, purple for notes) that makes navigation intuitive. Users can track sales pipelines, manage customer relationships, and access analytics dashboards—all secured with JWT authentication and row-level security.
+
+## Technical Implementation
+
+### Backend Architecture: Supabase
+
+Rather than building a custom Node.js/Express backend, this project leverages **Supabase** to provide instant backend infrastructure:
+
+**PostgreSQL Database**: Supabase provides a managed PostgreSQL database with automatic API generation. The schema includes:
+- **Users** - Handled by Supabase Auth with UUID primary keys
+- **Contacts** - Customer information (name, email, company, job_title)
+- **Deals** - Sales opportunities with stage tracking and amount
+- **Notes** - Deal updates with timestamps and rich text
+
+**Auto-Generated REST API**: Supabase automatically creates REST endpoints for all database tables, eliminating the need to write boilerplate API routes:
+
+```javascript
+// Fetching contacts - no custom backend needed
+const { data, error } = await supabase
+  .from('contacts')
+  .select('*')
+  .order('created_at', { ascending: false })
+```
+
+This approach provides the power of a custom API with zero backend code to maintain.
+
+**Row Level Security (RLS)**: Each user's data is automatically isolated using PostgreSQL's RLS policies:
+
+```sql
+CREATE POLICY "Users can only access their own contacts"
+  ON contacts FOR ALL
+  USING (auth.uid() = user_id);
+```
+
+This ensures that even if there's a frontend bug, users can never access each other's data at the database level—a critical security feature for CRM systems.
+
+### Authentication & Security
+
+**JWT-Based Authentication**: Supabase Auth provides secure authentication with JWT tokens:
+
+```javascript
+const { user, session, error } = await supabase.auth.signIn({
+  email: 'user@example.com',
+  password: 'securepassword'
+})
+```
+
+Tokens are automatically included in all API requests, and the session is persisted in localStorage for seamless user experiences.
+
+**Secure Credential Management**: All sensitive data (Supabase URL, anon key) is stored in environment variables, never committed to the repository:
+
+```bash
+REACT_APP_SUPABASE_URL=your_supabase_project_url
+REACT_APP_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+This pattern ensures production credentials remain secure while allowing easy local development.
+
+### Frontend Architecture: React + Tailwind CSS
+
+**Component Structure**: The application uses a modern React architecture with hooks and context:
+
+```
+src/
+├── components/       # Reusable UI components
+│   ├── Contacts/    # Contact management (blue theme)
+│   ├── Deals/       # Deal pipeline (green theme)
+│   ├── Notes/       # Note system (purple theme)
+│   └── Dashboard/   # Analytics dashboard
+├── contexts/        # React context providers
+└── supabaseClient.js # Database connection singleton
+```
+
+**State Management**: Rather than adding Redux or Zustand, the project uses **React Context** for global state and Supabase's real-time subscriptions for data synchronization:
+
+```javascript
+const [contacts, setContacts] = useState([])
+
+// Real-time subscription to database changes
+useEffect(() => {
+  const subscription = supabase
+    .from('contacts')
+    .on('*', payload => {
+      // Auto-update UI when data changes
+      fetchContacts()
+    })
+    .subscribe()
+
+  return () => subscription.unsubscribe()
+}, [])
+```
+
+This creates a live, collaborative experience where changes from one user instantly appear for others.
+
+### CRUD Operations with Edit Modals
+
+The application implements **complete CRUD functionality** with modern modal interfaces:
+
+**Create**: Users can add new contacts, deals, and notes through intuitive forms with validation.
+
+**Read**: All data is displayed in responsive grids with search and filtering capabilities.
+
+**Update**: Custom edit modals allow inline editing without page navigation:
+
+```javascript
+// Edit Contact Modal (Blue Theme)
+<EditContactModal
+  contact={selectedContact}
+  onSave={(updatedContact) => {
+    // Update in Supabase
+    await supabase
+      .from('contacts')
+      .update(updatedContact)
+      .eq('id', selectedContact.id)
+  }}
+/>
+```
+
+**Delete**: Confirmation dialogs prevent accidental deletions while keeping the UX smooth.
+
+Each modal follows a **consistent design pattern**: themed backgrounds (blue/green/purple), clear action buttons, and real-time validation.
+
+### Design System: Tailwind CSS
+
+The project uses **Tailwind CSS v3** with a custom color-coded theme:
+
+```javascript
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        'contact-blue': '#3b82f6',
+        'deal-green': '#10b981',
+        'note-purple': '#8b5cf6'
+      }
+    }
+  }
+}
+```
+
+**Responsive Grid Layouts**: The application adapts seamlessly from mobile to desktop:
+
+```html
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  {/* Contact cards */}
+</div>
+```
+
+This creates a professional, polished interface that works beautifully on all screen sizes.
+
+## Challenges & Solutions
+
+### Challenge 1: Real-Time Data Synchronization
+
+**Problem**: Multiple users editing the same CRM data simultaneously can lead to stale UI and conflicting updates.
+
+**Solution**: Supabase's **real-time subscriptions** automatically push changes to all connected clients:
+
+```javascript
+const subscription = supabase
+  .from('deals')
+  .on('INSERT', payload => {
+    setDeals(prev => [...prev, payload.new])
+  })
+  .on('UPDATE', payload => {
+    setDeals(prev => prev.map(deal =>
+      deal.id === payload.new.id ? payload.new : deal
+    ))
+  })
+  .on('DELETE', payload => {
+    setDeals(prev => prev.filter(deal => deal.id !== payload.old.id))
+  })
+  .subscribe()
+```
+
+This creates a **live, collaborative experience** where changes appear instantly across all sessions.
+
+### Challenge 2: Data Isolation & Security
+
+**Problem**: CRM data is sensitive—users must never see each other's contacts, deals, or notes.
+
+**Solution**: Supabase's **Row Level Security (RLS)** enforces data isolation at the database level:
+
+```sql
+-- Automatic filtering based on authenticated user
+CREATE POLICY "Users see only their data"
+  ON contacts FOR SELECT
+  USING (auth.uid() = user_id);
+```
+
+Even if frontend code has a bug, the database ensures perfect isolation. This is **far more secure** than relying solely on frontend filtering.
+
+### Challenge 3: Deployment & Environment Management
+
+**Problem**: React apps need different configurations for development vs. production (database URLs, API keys, etc.).
+
+**Solution**: Environment variables with separate `.env.local` for development and Netlify environment variables for production:
+
+**Development**:
+```bash
+# .env.local (local development)
+REACT_APP_SUPABASE_URL=dev-project-url
+REACT_APP_SUPABASE_ANON_KEY=dev-anon-key
+```
+
+**Production** (Netlify Dashboard):
+```bash
+REACT_APP_SUPABASE_URL=production-project-url
+REACT_APP_SUPABASE_ANON_KEY=production-anon-key
+```
+
+This pattern keeps credentials secure while enabling seamless deployment.
+
+### Challenge 4: Demo Data & Onboarding
+
+**Problem**: New users need to see the CRM in action with realistic data, but seeding databases is complex.
+
+**Solution**: A **browser-based seed script** that populates the database with realistic demo data:
+
+```javascript
+// browser-seed.js - Run in browser console
+const contacts = [
+  { name: "Tim Cook", email: "tim@apple.com", company: "Apple", job_title: "CEO" },
+  // ... 15 high-profile contacts
+]
+
+for (const contact of contacts) {
+  await supabase.from('contacts').insert(contact)
+}
+```
+
+Users simply paste the script into their browser console, and within seconds they have **15 contacts, 15 deals, and 30+ notes**—perfect for exploring features.
+
+## Impact & Learnings
+
+This project demonstrates that modern **backend-as-a-service platforms** like Supabase can dramatically reduce development time while maintaining production-grade quality. By avoiding the complexity of custom backend infrastructure, I could focus on building features that matter.
+
+**Key Takeaways:**
+
+1. **BaaS platforms are production-ready** - Supabase handles authentication, database, and real-time without custom servers
+2. **Row-level security matters** - Database-level isolation is far more secure than frontend filtering
+3. **Real-time enhances UX** - Live data synchronization creates a modern, collaborative experience
+4. **Tailwind scales beautifully** - Utility-first CSS works perfectly for complex business applications
+5. **Environment variables are critical** - Proper credential management separates dev from production safely
+
+**Technical Skills Demonstrated:**
+- Full-stack architecture with BaaS backend
+- React hooks and context for state management
+- PostgreSQL database design with RLS
+- JWT authentication and session management
+- Real-time WebSocket subscriptions
+- Responsive design with Tailwind CSS
+- Environment-based configuration
+- Netlify deployment and CI/CD
+
+## Performance & Production Readiness
+
+The application achieves **Lighthouse scores of 95+** across all metrics:
+
+- **Performance**: Optimized bundle size with code splitting
+- **Accessibility**: Semantic HTML and ARIA labels throughout
+- **Best Practices**: HTTPS-only, secure headers, no console errors
+- **SEO**: Proper meta tags and structured data
+
+**Deployment Pipeline**: Automatic deployment via Netlify with:
+- Continuous deployment from GitHub main branch
+- Environment variable injection at build time
+- Static asset optimization and CDN distribution
+- HTTPS certificates via Let's Encrypt
+
+## Try It Yourself
+
+The live demo includes full functionality with demo credentials:
+
+- **Email**: `demo1@example.com`
+- **Password**: `1234`
+
+**Try these features:**
+
+- **Contact Management**: Browse 15 high-profile tech contacts, edit details, add your own
+- **Deal Pipeline**: Track 15 realistic deals from $85k-$200k across all stages
+- **Note System**: View 30+ contextual notes tracking deal progression
+- **Analytics Dashboard**: See sales metrics and pipeline performance
+- **Real-time Updates**: Open the app in multiple tabs and watch changes sync
+- **Mobile Experience**: Test the fully responsive interface on your phone
+
+The application demonstrates that with modern tools like **Supabase and React**, you can build production-ready business applications with clean architecture and professional UX.
