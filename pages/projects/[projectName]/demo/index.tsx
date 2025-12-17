@@ -59,12 +59,14 @@ export default function Demo({ projectData }: DemoProps) {
             <section className="site-demo-hero">
               <h1 className="site-heading-2xl">Try {projectData.title}</h1>
               <p className="site-demo-description">
-                Experience the live application with full functionality.
                 {projectData.title === "Pokemon Team Creator" && (
-                  <span> Search for Pokemon, build your dream team, and explore interactive features.</span>
+                  <span>Search through 1,000+ Pokemon, discover shiny variants, and build your ultimate six-Pokemon team. Fully interactive with real-time PokeAPI data and dynamic team management.</span>
                 )}
                 {projectData.title === "Project CRM" && (
-                  <span> Manage contacts, track deals through your sales pipeline, and experience real-time CRM functionality with demo credentials provided.</span>
+                  <span>Experience a production-ready CRM with full contact management, deal pipeline tracking, and real-time updates. Login with demo credentials (demo1@example.com / 1234) to explore pre-loaded data.</span>
+                )}
+                {!["Pokemon Team Creator", "Project CRM"].includes(projectData.title) && (
+                  <span>Experience the live application with full functionality.</span>
                 )}
               </p>
 
@@ -83,33 +85,6 @@ export default function Demo({ projectData }: DemoProps) {
                   Opens in a new tab at{' '}
                   <code className="site-demo-url">{projectData.demoUrl}</code>
                 </p>
-              </div>
-            </section>
-
-            <section className="site-demo-info">
-              <h2 className="site-heading-lg">What to Expect</h2>
-              <div className="site-demo-features">
-                <div className="site-demo-feature">
-                  <div className="site-demo-feature-icon">⚡</div>
-                  <div className="site-demo-feature-content">
-                    <h3>Full Functionality</h3>
-                    <p>All features are available in the live demo.</p>
-                  </div>
-                </div>
-                <div className="site-demo-feature">
-                  <div className="site-demo-feature-icon">🔄</div>
-                  <div className="site-demo-feature-content">
-                    <h3>Real-Time Updates</h3>
-                    <p>Experience the application as it would work in production.</p>
-                  </div>
-                </div>
-                <div className="site-demo-feature">
-                  <div className="site-demo-feature-icon">💻</div>
-                  <div className="site-demo-feature-content">
-                    <h3>Responsive Design</h3>
-                    <p>Try it on mobile, tablet, or desktop for the full experience.</p>
-                  </div>
-                </div>
               </div>
             </section>
 

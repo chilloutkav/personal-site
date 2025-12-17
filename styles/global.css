@@ -245,10 +245,10 @@
   .site-project-button-secondary {
     flex: 1;
     padding: 0.875rem 1.25rem;
-    background-color: #ffffff;
-    color: #000000;
+    background-color: #d4edda;
+    color: #155724;
     text-align: center;
-    border: 2px solid #000000;
+    border: 2px solid #155724;
     border-radius: var(--radius-md);
     font-weight: 600;
     font-size: 1rem;
@@ -258,11 +258,13 @@
   }
 
   .site-project-button-secondary:hover {
-    background-color: #000000;
+    background-color: #155724;
     color: #ffffff !important;
     text-decoration: none;
     opacity: 1 !important;
-    border-color: #000000;
+    border-color: #155724;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(21, 87, 36, 0.2);
   }
 
   .site-project-tech-stack {
@@ -367,6 +369,20 @@
     margin-bottom: var(--space-lg);
   }
 
+  .site-project-preview {
+    margin: var(--space-2xl) 0;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--color-border);
+  }
+
+  .site-project-preview-image {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
   .site-project-badges {
     display: flex;
     gap: var(--space-sm);
@@ -430,15 +446,34 @@
 
   .site-project-link:hover {
     background-color: var(--color-text-dark);
-    color: white;
+    color: white !important;
     border-color: var(--color-text-dark);
     text-decoration: none;
     opacity: 1;
     transform: translateX(2px);
   }
 
+  .site-project-link:hover svg {
+    color: white !important;
+  }
+
   .site-project-link svg {
     flex-shrink: 0;
+  }
+
+  .site-project-link--demo {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #155724;
+    border-width: 2px;
+    font-weight: 600;
+  }
+
+  .site-project-link--demo:hover {
+    background-color: #155724;
+    color: #ffffff !important;
+    border-color: #155724;
+    box-shadow: 0 4px 12px rgba(21, 87, 36, 0.2);
   }
 
   /* Project Content (MDX) Styling */
@@ -575,24 +610,24 @@
   .site-demo-cta {
     display: inline-block;
     padding: 1.25rem 2.5rem;
-    background-color: #ffffff;
-    color: #000000;
+    background-color: #d4edda;
+    color: #155724;
     font-size: 1.25rem;
     font-weight: 700;
-    border: 2px solid #000000;
+    border: 2px solid #155724;
     border-radius: var(--radius-md);
     text-decoration: none;
     transition: all 0.3s ease;
     margin: var(--space-xl) 0;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 16px rgba(21, 87, 36, 0.08);
     letter-spacing: 0.02em;
   }
 
   .site-demo-cta:hover {
-    background-color: #000000;
+    background-color: #155724;
     color: #ffffff !important;
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 30px rgba(21, 87, 36, 0.2);
     text-decoration: none;
     opacity: 1 !important;
   }

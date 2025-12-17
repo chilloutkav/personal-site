@@ -66,17 +66,6 @@ export default function Projects({ allProjectsData }: ProjectsProps) {
                   )}
                 </div>
 
-                <div className="mb-4">
-                  <span
-                    className={`site-project-status site-project-status--${project.status}`}
-                  >
-                    {project.status === "in-development"
-                      ? "In Development"
-                      : project.status.charAt(0).toUpperCase() +
-                        project.status.slice(1)}
-                  </span>
-                </div>
-
                 <div className="site-project-card-actions">
                   <Link
                     href={`/projects/${project.id}`}

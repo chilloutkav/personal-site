@@ -38,12 +38,16 @@ export default function Project({ projectData }: ProjectProps) {
           <h1 className="site-heading-2xl">{projectData.title}</h1>
           <p className="site-project-description">{projectData.description}</p>
 
-          {/* Project Status Badge */}
-          <div className="site-project-badges">
-            <span className={`site-project-status site-project-status--${projectData.status}`}>
-              {projectData.status.replace('-', ' ')}
-            </span>
-          </div>
+          {/* Project Preview Image */}
+          {projectData.previewImage && (
+            <div className="site-project-preview">
+              <img
+                src={projectData.previewImage}
+                alt={`${projectData.title} preview`}
+                className="site-project-preview-image"
+              />
+            </div>
+          )}
         </header>
 
         {/* Project Meta */}
