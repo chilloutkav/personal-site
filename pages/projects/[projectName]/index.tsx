@@ -43,9 +43,6 @@ export default function Project({ projectData }: ProjectProps) {
             <span className={`site-project-status site-project-status--${projectData.status}`}>
               {projectData.status.replace('-', ' ')}
             </span>
-            {projectData.featured && (
-              <span className="site-project-featured">Featured</span>
-            )}
           </div>
         </header>
 

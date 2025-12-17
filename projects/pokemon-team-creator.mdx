@@ -1,0 +1,214 @@
+---
+title: "Pokemon Team Creator"
+description: "Interactive team builder demonstrating vanilla JavaScript DOM manipulation and PokeAPI integration"
+techStack: ["JavaScript", "HTML", "CSS", "Tailwind CSS", "PokeAPI"]
+demoUrl: "https://pokemon.kavenkim.com"
+githubUrl: "https://github.com/chilloutkav/pokemon-team-creator"
+previewImage: "/images/projects/pokemon-preview.png"
+status: "live"
+featured: true
+createdDate: "2024-09-01"
+---
+
+## The Problem
+
+In a world dominated by React, Vue, and Angular, it's easy to forget that the web platform itself is incredibly powerful. New developers often jump straight to frameworks without understanding the fundamentals that make them work. I wanted to build something that showcased **vanilla JavaScript's capabilities** while creating a genuinely useful and fun application.
+
+The goal: demonstrate DOM manipulation, API integration, and state management using nothing but browser APIs—no frameworks, no libraries, just pure JavaScript.
+
+## The Solution
+
+Pokemon Team Creator is an interactive web application that lets users search for Pokemon, view their stats, and build a dream team of up to six Pokemon. It's simple in concept but rich in implementation details that showcase fundamental web development patterns.
+
+The application uses the **PokeAPI** to fetch real-time Pokemon data, dynamically generates UI elements with vanilla JavaScript DOM methods, and manages application state without any state management libraries. Users can search by name or number, get random Pokemon suggestions, and even see shiny variants on hover.
+
+## Technical Implementation
+
+### PokeAPI Integration
+
+The application integrates with PokeAPI using the Fetch API, implementing clean asynchronous patterns:
+
+```javascript
+fetch(url + searchName)
+  .then((res) => {
+    if (!res.ok) throw new Error('Pokemon not found')
+    return res.json()
+  })
+  .then((data) => displayPokeCard(data))
+  .catch((error) => alert('Pokemon not found!'))
+```
+
+This pattern demonstrates proper error handling, promise chaining, and user-friendly error messages. The API returns rich data including sprites, types, moves, and stats—all of which need to be transformed and displayed appropriately.
+
+**Data Transformation**: The API response includes nested objects and arrays. I extract relevant information using array methods like `.map()` and `.join()` to display Pokemon types cleanly:
+
+```javascript
+pokeType.textContent = data.types.map(type => type.type.name).join(', ')
+```
+
+### DOM Manipulation Patterns
+
+The core of this project is **dynamic DOM manipulation**. Instead of declaring components in JSX, everything is created programmatically using native DOM methods:
+
+```javascript
+let teamCard = document.createElement("div")
+let teamName = document.createElement("h3")
+let teamImg = document.createElement("img")
+let removeBtn = document.createElement("button")
+
+teamCard.append(teamName, teamImg, teamType, teamNumber, removeBtn)
+yourTeam.append(teamCard)
+```
+
+This approach reinforces how frameworks work under the hood. React's virtual DOM? It's ultimately manipulating real DOM nodes just like this. Understanding these fundamentals makes you a better developer even when using frameworks.
+
+**Event Delegation**: The project uses event listeners extensively—form submissions, button clicks, and even mouse hover effects:
+
+```javascript
+pokeSprite.addEventListener("mouseover", showShiny)
+pokeSprite.addEventListener("mouseout", showNormal)
+```
+
+These event handlers are properly cleaned up and reattached when new Pokemon are displayed, preventing memory leaks—a critical consideration in vanilla JavaScript applications.
+
+### State Management Without Frameworks
+
+Modern frameworks provide sophisticated state management solutions (Redux, Vuex, Zustand), but this project manages state with a simple counter variable:
+
+```javascript
+let teamCount = 0
+
+// When adding Pokemon
+teamCount++
+if (teamCount === 6) {
+  addPoke.textContent = "Team Full!"
+  addPoke.disabled = true
+}
+
+// When removing Pokemon
+removeBtn.addEventListener("click", () => {
+  teamCard.remove()
+  teamCount--
+})
+```
+
+A clever `setInterval` check ensures the "Add to Team" button re-enables when the count drops below 6, demonstrating how to keep UI synchronized with state changes without reactive frameworks.
+
+This pattern teaches an important lesson: **state management is just keeping track of data**. Frameworks add helpful abstractions, but the core concept remains the same.
+
+### UI/UX Decisions
+
+**Tailwind CSS Integration**: The project uses Tailwind CSS v4 via CDN, demonstrating that utility-first CSS works beautifully with vanilla JavaScript. Classes like `bg-gradient-to-b`, `hover:shadow-lg`, and responsive utilities create a polished interface without writing custom CSS.
+
+**Progressive Disclosure**: The Pokemon detail card starts hidden and only reveals itself after a successful search:
+
+```javascript
+pokemonDisplay.classList.remove('hidden')
+```
+
+This creates a smooth user experience where information appears exactly when needed.
+
+**Shiny Sprite Easter Egg**: Hovering over a Pokemon sprite reveals its shiny variant (if available). This delightful interaction demonstrates event-driven programming and adds personality to the application.
+
+**Responsive Grid Layout**: The team section uses Tailwind's responsive grid system:
+
+```html
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6">
+```
+
+This creates a layout that gracefully adapts from mobile (1 column) to desktop (6 columns), perfect for displaying a full Pokemon team.
+
+### Random Pokemon Feature
+
+The random Pokemon button showcases error handling in action. It generates a random ID (1-1010) and fetches that Pokemon:
+
+```javascript
+const randomId = Math.floor(Math.random() * 1010) + 1
+fetch(url + randomId)
+  .catch((error) => randomBtn.click()) // Try again if fails
+```
+
+If a Pokemon ID doesn't exist (rare, but possible), it recursively tries another random ID. This resilient approach ensures users always get a result.
+
+## Challenges & Solutions
+
+### Challenge 1: Managing Team Capacity
+
+**Problem**: How to prevent users from adding more than 6 Pokemon while allowing removal and re-addition?
+
+**Solution**: A combination of state tracking (`teamCount`) and a polling interval that continuously checks if the button should be enabled:
+
+```javascript
+function resetAddButton() {
+  if (teamCount < 6) {
+    addPoke.disabled = false
+    // Re-enable button styling
+  }
+}
+setInterval(resetAddButton, 100)
+```
+
+While a framework would handle this reactively, this approach works reliably with vanilla JS and runs efficiently at 100ms intervals.
+
+### Challenge 2: Dynamic Event Handlers
+
+**Problem**: Each time a Pokemon is displayed, the sprite needs new hover event handlers. Attaching multiple handlers causes memory leaks.
+
+**Solution**: Remove old event listeners before attaching new ones:
+
+```javascript
+pokeSprite.removeEventListener("mouseover", showShiny)
+pokeSprite.removeEventListener("mouseout", showNormal)
+pokeSprite.addEventListener("mouseover", showShiny)
+pokeSprite.addEventListener("mouseout", showNormal)
+```
+
+This pattern ensures only one set of handlers exists at any time, preventing performance degradation.
+
+### Challenge 3: API Error Handling
+
+**Problem**: Users might search for non-existent Pokemon or network requests might fail.
+
+**Solution**: Comprehensive error handling with user-friendly feedback:
+
+```javascript
+.catch((error) => {
+  alert('Pokemon not found! Please try a different name or number.')
+  pokemonDisplay.classList.add('hidden')
+})
+```
+
+The application gracefully handles errors, hides incorrect results, and guides users toward valid inputs.
+
+## Impact & Learnings
+
+This project serves as a **proof of concept that vanilla JavaScript is powerful and viable** for building interactive applications. While frameworks offer productivity benefits at scale, understanding these fundamental patterns makes you a better developer regardless of your stack.
+
+**Key Takeaways:**
+
+1. **DOM APIs are powerful** - You can build rich interfaces without frameworks
+2. **Fetch is elegant** - Modern JavaScript has built-in tools for API integration
+3. **State doesn't need libraries** - Simple variables and careful management work for many use cases
+4. **Error handling matters** - Graceful failures create better user experiences
+5. **Fundamentals transfer** - Understanding vanilla JS makes learning frameworks easier
+
+**Technical Skills Demonstrated:**
+- Asynchronous JavaScript (Promises, Fetch API)
+- DOM manipulation and event handling
+- State management patterns
+- API integration and data transformation
+- Responsive design with utility-first CSS
+- Error handling and user feedback
+
+## Try It Yourself
+
+The live demo includes full functionality with the complete PokeAPI database of 1,010+ Pokemon. Try these features:
+
+- **Search by Name**: Type "pikachu" or "charizard"
+- **Search by Number**: Try Pokemon #25 or #150
+- **Random Discovery**: Click "Random" to find new Pokemon
+- **Shiny Variants**: Hover over sprites to see rare shiny forms
+- **Team Building**: Add up to 6 Pokemon and manage your dream team
+- **Remove & Replace**: Remove Pokemon to try different combinations
+
+The application demonstrates that with clean code and solid fundamentals, you can build engaging experiences without reaching for heavy frameworks.

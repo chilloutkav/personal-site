@@ -9,13 +9,14 @@ export const siteTitle = "Kaven Kim | Product Manager";
 interface LayoutProps {
   children: ReactNode;
   home?: boolean;
+  wide?: boolean;
 }
 
-export default function Layout({ children, home }: LayoutProps) {
+export default function Layout({ children, home, wide }: LayoutProps) {
   const router = useRouter();
-  
+
   return (
-    <div className="site-container">
+    <div className={wide ? "site-container site-container--wide" : "site-container"}>
       <Head>
         <link rel="icon" href="/favicon.ico" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
