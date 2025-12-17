@@ -122,6 +122,32 @@ createdDate: "2024-01-01"
 - **Live Demos**: `/projects/project-name/demo/` - Embedded or linked demos
 - **Fallback Handling**: Graceful display when no demo URL provided
 
+### Pokemon Team Creator Subdomain
+- **Live Demo**: `https://pokemon.kavenkim.com`
+- **Showcase Page**: `https://kavenkim.com/projects/pokemon-team-creator`
+- **Repository**: `github.com/chilloutkav/pokemon-team-creator`
+- **Deployment**: Separate Netlify site with auto-deploy from main branch
+- **DNS**: Managed by Netlify DNS (automatic subdomain configuration)
+- **Analytics**: GTM container `GTM-5CXC3C8` with cross-domain tracking
+- **SSL/HTTPS**: Auto-provisioned via Netlify/Let's Encrypt
+
+**Architecture Pattern**:
+```
+Main Site (kavenkim.com)
+  ├── Project Showcase Page (/projects/pokemon-team-creator)
+  ├── Demo Gateway (/projects/pokemon-team-creator/demo)
+  └── External Link → pokemon.kavenkim.com (separate deployment)
+      └── GTM tracking with _ga parameter for session continuity
+```
+
+**Reusable for Future Projects**:
+1. Deploy project to Netlify
+2. Configure custom domain: `project-name.kavenkim.com`
+3. Add GTM code with container `GTM-5CXC3C8`
+4. Update GTM cross-domain variable to include new domain
+5. Create MDX file in `projects/` directory
+6. Auto-appears in projects showcase
+
 ### Navigation System
 - **Implementation**: `components/layout.tsx` with Next.js router
 - **Active States**: Automatic current page detection
@@ -148,6 +174,19 @@ NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX
 - **Implementation**: Conditional loading in `_document.tsx`
 - **Environment**: Set `NEXT_PUBLIC_GTM_ID=GTM-5CXC3C8` in Netlify dashboard
 - **Status**: ✅ Active in production via Netlify environment variables
+
+### Cross-Domain Tracking Configuration
+- **Domains Tracked**: `kavenkim.com`, `pokemon.kavenkim.com`
+- **GTM Variable**: `Cross Domain Linker Config` (Custom JavaScript)
+- **Google Tag Configuration**: `linker` parameter with domains array
+- **Manual Link Decoration**: JavaScript in `/projects/[projectName]/demo/index.tsx` for `target="_blank"` links
+- **Status**: ✅ Active with session continuity across domains
+
+**How It Works**:
+1. GTM automatically decorates same-window links with `_ga` parameter
+2. For `target="_blank"` links, JavaScript manually appends `_ga` cookie value
+3. Pokemon subdomain receives parameter and maintains session continuity
+4. GA4 tracks complete user journey from main site → project demo
 
 ## Development Workflow
 
@@ -189,14 +228,22 @@ npm run rebuild
 
 ### Completed Features
 - **Technical Projects Showcase**: Dynamic routing system for project portfolios
-- **Project Demo Integration**: Live demo pages with fallback handling
+- **Pokemon Team Creator**: Live at `pokemon.kavenkim.com` with full analytics integration
+- **Cross-Domain Tracking**: Unified analytics across main site and project subdomains
+- **Project Demo Integration**: Live demo pages with manual `_ga` parameter decoration
 - **MDX Content Management**: Rich project descriptions with frontmatter metadata
+- **Subdomain Architecture**: Reusable pattern for deploying future projects
 - **Navigation System**: Black text navigation with underline hover/active states
 - **About Page**: Compelling PM journey storytelling without H2 sections
 - **CSS Architecture**: Optimized Tailwind CSS v4 with custom components
-- **Analytics Integration**: Google Tag Manager (GTM-5CXC3C8) with conditional loading
+- **Analytics Integration**: Google Tag Manager (GTM-5CXC3C8) with cross-domain tracking
 - **TypeScript**: Full type safety throughout
 - **Production Ready**: Clean builds, optimal performance
+
+### Live Deployments
+- **Main Site**: `https://kavenkim.com` - Personal site with project showcase
+- **Pokemon Demo**: `https://pokemon.kavenkim.com` - Live project demo with GTM
+- **Cross-Domain**: Session continuity via `_ga` parameter decoration
 
 ### Development Environment
 - **Server**: Ready at http://localhost:3000
@@ -215,20 +262,32 @@ npm run prod
 # All features working:
 # - Homepage with hero and social links
 # - Technical projects showcase with dynamic routing
+# - Pokemon Team Creator live demo at pokemon.kavenkim.com
+# - Cross-domain analytics tracking
 # - Project detail pages and live demos
 # - About page with professional story
 # - Navigation with black text and underline effects
 ```
 
-**Architecture Status**: Clean, production-ready with zero technical debt.
-**Current Branch**: `feature/technical-projects-showcase` - Technical projects routing system implemented.
-**Next Priority**: Deploy real projects and integrate with clean URL structure.
+**Architecture Status**: Production-ready with Pokemon Team Creator deployed and cross-domain tracking active.
+**Current Branch**: `main` - Pokemon subdomain integration complete.
+**Next Priority**: Add more projects to showcase using established subdomain pattern.
 
 ## Technical Projects Implementation
 
 For detailed implementation progress and next steps, see:
-- **`TECHNICAL-PROJECTS-PROGRESS.md`** - Complete roadmap, current status, and Step 3 deployment plan
+- **`TECHNICAL-PROJECTS-PROGRESS.md`** - Complete roadmap, current status, and deployment patterns
+
+### Adding New Projects
+
+Follow the Pokemon Team Creator pattern:
+1. **Deploy**: Push project to Netlify from GitHub repo
+2. **Subdomain**: Configure `project-name.kavenkim.com` in Netlify dashboard
+3. **GTM**: Add GTM script to project HTML with container `GTM-5CXC3C8`
+4. **Cross-Domain**: Update GTM variable to include new domain in array
+5. **Showcase**: Create `projects/project-name.mdx` with frontmatter
+6. **Auto-Deploy**: Netlify rebuilds main site, project appears in showcase
 
 ---
 
-*Updated: September 2025 - Technical projects showcase architecture implemented*
+*Updated: December 2025 - Pokemon Team Creator subdomain and cross-domain tracking implemented*
