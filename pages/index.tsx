@@ -1,6 +1,5 @@
 import Head from "next/head";
 import Image from "next/image";
-// import Link from "next/link"; // Temporarily unused - for Selected Works
 import Layout, { siteTitle } from "../components/layout";
 
 export default function Home() {
@@ -26,8 +25,8 @@ export default function Home() {
           priority
           src="/images/profile.jpg"
           className="site-hero-image"
-          height={96}
-          width={96}
+          height={112}
+          width={112}
           alt="Kaven Kim"
         />
         <div className="site-hero-content">
@@ -52,39 +51,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Selected Works Section - Temporarily Hidden */}
-      {/*
-      <section className="site-selected-works">
-        <div className="site-selected-works-header">
-          <h2 className="site-selected-works-title">Selected Works.</h2>
-          <Link href="/projects" className="site-selected-works-link">
-            See All Projects →
-          </Link>
-        </div>
-
-        <div className="site-portfolio-grid">
-          {selectedRepos.map((repo) => (
-            <div key={repo.id} className="site-portfolio-card">
-              <div className="site-portfolio-image">
-                Project Preview
-              </div>
-              <div className="site-portfolio-content">
-                <h3 className="site-portfolio-title">{repo.name}</h3>
-                <div className="site-portfolio-tags">
-                  {repo.primaryLanguage && (
-                    <span className="site-portfolio-tag">{repo.primaryLanguage}</span>
-                  )}
-                  {repo.topics.slice(0, 2).map((topic) => (
-                    <span key={topic} className="site-portfolio-tag">{topic}</span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-      */}
-
       {/* About Section */}
       <section className="site-about">
         <p className="site-about-text">
@@ -95,10 +61,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="site-footer">
         <div className="site-footer-connect">
-          Let's Connect 
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-          </svg>
+          hi@kavenkim.com
         </div>
       </footer>
     </Layout>
