@@ -17,12 +17,96 @@ const components = {
 }
 
 export default function Project({ projectData }: ProjectProps) {
+  const ogImage = projectData.previewImage
+    ? `https://kavenkim.com${projectData.previewImage}`
+    : `https://kavenkim.com/api/og?title=${encodeURIComponent(projectData.title)}`;
+  const canonicalUrl = `https://kavenkim.com/projects/${projectData.id}`;
+
   return (
     <Layout>
       <Head>
-        <title>{projectData.title}</title>
+        <title>{projectData.title} - Kaven Kim | Product Manager</title>
         <meta name="description" content={projectData.description} />
+
+        {/* Open Graph */}
+        <meta property="og:title" content={`${projectData.title} - Kaven Kim`} />
+        <meta property="og:description" content={projectData.description} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:image:alt" content={`${projectData.title} preview`} />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${projectData.title} - Kaven Kim`} />
+        <meta name="twitter:description" content={projectData.description} />
+        <meta name="twitter:image" content={ogImage} />
+
+        {/* Canonical */}
+        <link rel="canonical" href={canonicalUrl} />
       </Head>
+
+      {/* SoftwareApplication Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'SoftwareApplication',
+            name: projectData.title,
+            description: projectData.description,
+            applicationCategory: 'WebApplication',
+            offers: {
+              '@type': 'Offer',
+              price: '0',
+              priceCurrency: 'USD',
+            },
+            creator: {
+              '@type': 'Person',
+              name: 'Kaven Kim',
+              url: 'https://kavenkim.com',
+            },
+            url: canonicalUrl,
+            ...(projectData.demoUrl && {
+              installUrl: typeof projectData.demoUrl === 'string' ? projectData.demoUrl : undefined
+            }),
+            ...(projectData.githubUrl && {
+              codeRepository: typeof projectData.githubUrl === 'string' ? projectData.githubUrl : undefined
+            }),
+          }),
+        }}
+      />
+
+      {/* BreadcrumbList Schema */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'BreadcrumbList',
+            itemListElement: [
+              {
+                '@type': 'ListItem',
+                position: 1,
+                name: 'Home',
+                item: 'https://kavenkim.com',
+              },
+              {
+                '@type': 'ListItem',
+                position: 2,
+                name: 'Projects',
+                item: 'https://kavenkim.com/projects',
+              },
+              {
+                '@type': 'ListItem',
+                position: 3,
+                name: projectData.title,
+                item: canonicalUrl,
+              },
+            ],
+          }),
+        }}
+      />
 
       <article className="site-project-detail">
         {/* Project Header */}

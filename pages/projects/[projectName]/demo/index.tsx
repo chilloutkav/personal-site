@@ -31,11 +31,33 @@ export default function Demo({ projectData }: DemoProps) {
     return () => clearInterval(interval)
   }, [projectData.demoUrl])
 
+  const ogImage = projectData.previewImage
+    ? `https://kavenkim.com${projectData.previewImage}`
+    : `https://kavenkim.com/api/og?title=${encodeURIComponent(projectData.title)}`;
+  const canonicalUrl = `https://kavenkim.com/projects/${projectData.id}`;
+
   return (
     <Layout>
       <Head>
-        <title>{`${projectData.title} - Demo`}</title>
-        <meta name="description" content={`Try ${projectData.title} live`} />
+        <title>{`${projectData.title} - Demo - Kaven Kim | Product Manager`}</title>
+        <meta name="description" content={`Try ${projectData.title} live. ${projectData.description}`} />
+
+        {/* Open Graph */}
+        <meta property="og:title" content={`${projectData.title} - Demo - Kaven Kim`} />
+        <meta property="og:description" content={`Try ${projectData.title} live. ${projectData.description}`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`https://kavenkim.com/projects/${projectData.id}/demo`} />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:image:alt" content={`${projectData.title} demo preview`} />
+
+        {/* Twitter Card */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${projectData.title} - Demo - Kaven Kim`} />
+        <meta name="twitter:description" content={`Try ${projectData.title} live. ${projectData.description}`} />
+        <meta name="twitter:image" content={ogImage} />
+
+        {/* Canonical - points to main project page */}
+        <link rel="canonical" href={canonicalUrl} />
       </Head>
 
       <article>
