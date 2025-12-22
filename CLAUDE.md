@@ -50,7 +50,6 @@ npm run dev          # Causes blank pages with Tailwind v4
 
 - **lib/**: Utility functions and data fetching (TypeScript)
   - `projects.ts`: Project content management and TypeScript interfaces
-  - `posts.ts`: Blog management functions
 
 - **styles/**: CSS architecture with Tailwind CSS v4
   - `global.css`: Tailwind import + custom component classes in `@layer components`
@@ -187,6 +186,16 @@ NEXT_PUBLIC_GTM_ID=GTM-XXXXXXX
 2. For `target="_blank"` links, JavaScript manually appends `_ga` cookie value
 3. Pokemon subdomain receives parameter and maintains session continuity
 4. GA4 tracks complete user journey from main site → project demo
+
+### Netlify Deployment Configuration
+
+Configure these in Netlify dashboard (Site settings → Environment variables):
+
+- **BUILD_IMAGE**: `ubuntu-24.04-noble` (Required by January 1, 2026)
+- **AWS_LAMBDA_JS_RUNTIME**: `nodejs22.x` (Aligns with build Node.js 22)
+- **NEXT_PUBLIC_GTM_ID**: `GTM-5CXC3C8` (Already configured)
+
+Note: These cannot be set in `netlify.toml` and must be configured via Netlify UI.
 
 ## Development Workflow
 

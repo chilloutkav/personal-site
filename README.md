@@ -4,9 +4,10 @@ A modern, high-performance personal portfolio website showcasing a Product Manag
 
 ## ✨ Features
 
-- **GitHub Integration**: Automatic repository showcase with professional presentation
-- **Professional Storytelling**: About page with compelling PM career narrative  
+- **Technical Projects Showcase**: Dynamic MDX-based project portfolio with live demos
+- **Professional Storytelling**: About page with compelling PM career narrative
 - **Modern Stack**: Latest Next.js, TypeScript, and Tailwind CSS v4
+- **Live Demos**: Integrated project demos via subdomain architecture
 - **Performance Optimized**: Sub-2-second builds with optimal bundle sizes
 - **Fully Responsive**: Mobile-first design with pixel-perfect styling
 - **SEO Ready**: Optimized meta tags and performance metrics
@@ -23,10 +24,6 @@ A modern, high-performance personal portfolio website showcasing a Product Manag
 # Install dependencies
 npm install
 
-# Create environment file
-cp .env.local.example .env.local
-# Edit .env.local and add your GitHub username
-
 # Start development server (REQUIRED for Tailwind CSS v4)
 npm run prod
 
@@ -37,15 +34,14 @@ npm run prod
 
 ### Environment Configuration
 
-Create `.env.local` in the project root:
+Create `.env.local` in the project root (optional for local development):
 
 ```bash
-# Required: Your GitHub username for projects showcase
-GITHUB_USERNAME=your-github-username
-
-# Optional: GitHub Personal Access Token for higher rate limits
-# GITHUB_TOKEN=your_token_here
+# Google Tag Manager (Optional - already configured in Netlify)
+NEXT_PUBLIC_GTM_ID=GTM-5CXC3C8
 ```
+
+**Note**: For production deployment on Netlify, environment variables are configured in the dashboard. Local development works without `.env.local`.
 
 ## 📋 Essential Commands
 
@@ -63,30 +59,30 @@ GITHUB_USERNAME=your-github-username
 - **Framework**: Next.js 15.5.2 with Pages Router
 - **Language**: TypeScript with strict configuration
 - **Styling**: Tailwind CSS v4 with custom components
-- **API**: GitHub API integration for dynamic project showcase
-- **Content**: MDX support for future blog expansion
+- **Content**: MDX-based project showcase and content management
 
 ### Project Structure
 ```
 ├── pages/                  # Next.js Pages Router
 │   ├── index.tsx          # Homepage with hero and projects
-│   ├── projects.tsx       # GitHub projects showcase
+│   ├── projects.tsx       # Technical projects showcase
 │   ├── about.tsx          # About page with professional story
 │   └── api/               # API routes
 ├── components/            # React components
 │   └── layout.tsx         # Main layout with navigation
-├── lib/                   # Utility functions and GitHub API
+├── lib/                   # Utility functions and content management
+├── projects/              # Project MDX content files
 ├── styles/                # Global CSS with Tailwind v4
 └── public/                # Static assets
 ```
 
 ## 🎯 Key Features
 
-### GitHub Projects Showcase
-- Automatic repository fetching from GitHub API
+### Technical Projects Showcase
+- Dynamic MDX-based project content management
+- Live project demos via subdomain architecture
 - Professional, portfolio-focused presentation
-- 5-minute cache refresh with ISR (Incremental Static Regeneration)
-- Graceful error handling and fallbacks
+- Seamless integration with Google Analytics cross-domain tracking
 
 ### Navigation System
 - Clean three-page structure (Home, Projects, About)
@@ -111,11 +107,10 @@ npm run build
 
 1. Fork the repository
 2. Create feature branch: `git checkout -b feature/amazing-feature`
-3. Set up environment variables (GitHub username required)
-4. Make changes with proper TypeScript typing
-5. Test with `npm run prod` (required for Tailwind CSS v4)
-6. Run quality checks: `npm run type-check && npm run lint`
-7. Create Pull Request
+3. Make changes with proper TypeScript typing
+4. Test with `npm run prod` (required for Tailwind CSS v4)
+5. Run quality checks: `npm run type-check && npm run lint`
+6. Create Pull Request
 
 ### Code Standards
 - Follow existing TypeScript patterns

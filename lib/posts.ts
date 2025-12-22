@@ -22,6 +22,11 @@ export interface PostId {
 }
 
 export function getSortedPostsData(): PostData[] {
+  // Return empty array if posts directory doesn't exist
+  if (!fs.existsSync(postsDirectory)) {
+    return []
+  }
+
   // Get file names under /posts (both .md and .mdx)
   const fileNames = fs.readdirSync(postsDirectory)
   const allPostsData = fileNames.map((fileName): PostData => {
@@ -52,6 +57,11 @@ export function getSortedPostsData(): PostData[] {
 }
 
 export function getAllPostIds(): PostId[] {
+  // Return empty array if posts directory doesn't exist
+  if (!fs.existsSync(postsDirectory)) {
+    return []
+  }
+
   const fileNames = fs.readdirSync(postsDirectory)
   return fileNames.map((fileName): PostId => {
     return {
