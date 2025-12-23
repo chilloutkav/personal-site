@@ -1,33 +1,14 @@
-import Head from "next/head";
-import Layout, { siteTitle } from "../components/layout";
+import Layout from "../components/layout";
+import SEOHead from "../components/seo/SEOHead";
 
 export default function About() {
-  const description = "Product Manager with 7+ years in growth marketing. Cut client acquisition costs 50%, learned software engineering at Flatiron School, now experimenting with AI automation tools. Customer-focused PM who understands what actually drives growth.";
-  const canonicalUrl = "https://kavenkim.com/about";
-  const ogImage = "https://kavenkim.com/api/og?title=About%20Kaven%20Kim";
-
   return (
     <Layout>
-      <Head>
-        <title>{`About - ${siteTitle}`}</title>
-        <meta name="description" content={description} />
-
-        {/* Open Graph */}
-        <meta property="og:title" content="About Kaven Kim - Product Manager" />
-        <meta property="og:description" content={description} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content={ogImage} />
-
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="About Kaven Kim - Product Manager" />
-        <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content={ogImage} />
-
-        {/* Canonical */}
-        <link rel="canonical" href={canonicalUrl} />
-      </Head>
+      <SEOHead
+        title="About"
+        description="Product Manager with 7+ years in growth marketing. Cut client acquisition costs 50%, learned software engineering at Flatiron School, now experimenting with AI automation tools. Customer-focused PM who understands what actually drives growth."
+        path="/about"
+      />
       
       {/* Hero Section */}
       <section className="site-about-section">

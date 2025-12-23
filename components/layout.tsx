@@ -1,7 +1,6 @@
 import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
 import { ReactNode } from "react";
+import Navigation from "./Navigation";
 
 const name = "Kav";
 export const siteTitle = "Kaven Kim | Product Manager";
@@ -13,8 +12,6 @@ interface LayoutProps {
 }
 
 export default function Layout({ children, home, wide }: LayoutProps) {
-  const router = useRouter();
-
   return (
     <div className={wide ? "site-container site-container--wide" : "site-container"}>
       <Head>
@@ -36,27 +33,8 @@ export default function Layout({ children, home, wide }: LayoutProps) {
           <h2 className="site-heading-lg">{name}</h2>
         )}
       </header>
-      
-      <nav className="site-nav">
-        <Link 
-          href="/" 
-          className={`site-nav-link ${router.pathname === '/' ? 'site-nav-link--active' : ''}`}
-        >
-          Home
-        </Link>
-        <Link 
-          href="/projects" 
-          className={`site-nav-link ${router.pathname === '/projects' ? 'site-nav-link--active' : ''}`}
-        >
-          Projects
-        </Link>
-        <Link 
-          href="/about" 
-          className={`site-nav-link ${router.pathname === '/about' ? 'site-nav-link--active' : ''}`}
-        >
-          About
-        </Link>
-      </nav>
+
+      <Navigation />
       
       <main>{children}</main>
     </div>

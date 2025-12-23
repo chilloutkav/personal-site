@@ -1,6 +1,9 @@
 import Layout from '../../../components/layout'
 import { getAllProjectIds, getProjectData, ProjectWithContent } from '../../../lib/projects'
-import Head from 'next/head'
+import SEOHead from '../../../components/seo/SEOHead'
+import StructuredData from '../../../components/seo/StructuredData'
+import Breadcrumb from '../../../components/Breadcrumb'
+import { createSoftwareApplicationSchema, createBreadcrumbSchema } from '../../../lib/schema'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import { serialize } from 'next-mdx-remote/serialize'
@@ -17,107 +20,33 @@ const components = {
 }
 
 export default function Project({ projectData }: ProjectProps) {
-  const ogImage = projectData.previewImage
-    ? `https://kavenkim.com${projectData.previewImage}`
-    : `https://kavenkim.com/api/og?title=${encodeURIComponent(projectData.title)}`;
   const canonicalUrl = `https://kavenkim.com/projects/${projectData.id}`;
 
   return (
     <Layout>
-      <Head>
-        <title>{projectData.title} - Kaven Kim | Product Manager</title>
-        <meta name="description" content={projectData.description} />
-
-        {/* Open Graph */}
-        <meta property="og:title" content={`${projectData.title} - Kaven Kim`} />
-        <meta property="og:description" content={projectData.description} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={canonicalUrl} />
-        <meta property="og:image" content={ogImage} />
-        <meta property="og:image:alt" content={`${projectData.title} preview`} />
-
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`${projectData.title} - Kaven Kim`} />
-        <meta name="twitter:description" content={projectData.description} />
-        <meta name="twitter:image" content={ogImage} />
-
-        {/* Canonical */}
-        <link rel="canonical" href={canonicalUrl} />
-      </Head>
-
-      {/* SoftwareApplication Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'SoftwareApplication',
-            name: projectData.title,
-            description: projectData.description,
-            applicationCategory: 'WebApplication',
-            offers: {
-              '@type': 'Offer',
-              price: '0',
-              priceCurrency: 'USD',
-            },
-            creator: {
-              '@type': 'Person',
-              name: 'Kaven Kim',
-              url: 'https://kavenkim.com',
-            },
-            url: canonicalUrl,
-            ...(projectData.demoUrl && {
-              installUrl: typeof projectData.demoUrl === 'string' ? projectData.demoUrl : undefined
-            }),
-            ...(projectData.githubUrl && {
-              codeRepository: typeof projectData.githubUrl === 'string' ? projectData.githubUrl : undefined
-            }),
-          }),
-        }}
+      <SEOHead
+        title={projectData.title}
+        description={projectData.description}
+        path={`/projects/${projectData.id}`}
+        ogImage={projectData.previewImage || undefined}
       />
 
-      {/* BreadcrumbList Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'BreadcrumbList',
-            itemListElement: [
-              {
-                '@type': 'ListItem',
-                position: 1,
-                name: 'Home',
-                item: 'https://kavenkim.com',
-              },
-              {
-                '@type': 'ListItem',
-                position: 2,
-                name: 'Projects',
-                item: 'https://kavenkim.com/projects',
-              },
-              {
-                '@type': 'ListItem',
-                position: 3,
-                name: projectData.title,
-                item: canonicalUrl,
-              },
-            ],
-          }),
-        }}
-      />
+      <StructuredData data={[
+        createSoftwareApplicationSchema(projectData, canonicalUrl),
+        createBreadcrumbSchema([
+          { name: 'Home', path: '/' },
+          { name: 'Projects', path: '/projects' },
+          { name: projectData.title, path: `/projects/${projectData.id}` }
+        ])
+      ]} />
 
       <article className="site-project-detail">
         {/* Project Header */}
         <header className="site-project-header">
-          <div className="site-project-breadcrumb">
-            <Link href="/projects" className="site-breadcrumb-link">
-              Projects
-            </Link>
-            <span className="site-breadcrumb-separator">→</span>
-            <span className="site-breadcrumb-current">{projectData.title}</span>
-          </div>
+          <Breadcrumb items={[
+            { label: 'Projects', href: '/projects' },
+            { label: projectData.title }
+          ]} />
 
           <h1 className="site-heading-2xl">{projectData.title}</h1>
           <p className="site-project-description">{projectData.description}</p>

@@ -1,8 +1,4 @@
-import fs from 'fs'
-import path from 'path'
-import matter from 'gray-matter'
-
-const postsDirectory = path.join(process.cwd(), 'posts')
+import { createContentLoader } from './content'
 
 export interface PostData {
   id: string
@@ -21,32 +17,11 @@ export interface PostId {
   }
 }
 
+const postLoader = createContentLoader<PostData>('posts')
+
 export function getSortedPostsData(): PostData[] {
-  // Return empty array if posts directory doesn't exist
-  if (!fs.existsSync(postsDirectory)) {
-    return []
-  }
+  const allPostsData = postLoader.getAll()
 
-  // Get file names under /posts (both .md and .mdx)
-  const fileNames = fs.readdirSync(postsDirectory)
-  const allPostsData = fileNames.map((fileName): PostData => {
-    // Remove ".md" or ".mdx" from file name to get id
-    const id = fileName.replace(/\.(md|mdx)$/, '')
-
-    // Read markdown/mdx file as string
-    const fullPath = path.join(postsDirectory, fileName)
-    const fileContents = fs.readFileSync(fullPath, 'utf8')
-
-    // Use gray-matter to parse the post metadata section
-    const matterResult = matter(fileContents)
-
-    // Combine the data with the id
-    return {
-      id,
-      ...matterResult.data
-    } as PostData
-  })
-  // Sort posts by date
   return allPostsData.sort((a, b) => {
     if (a.date < b.date) {
       return 1
@@ -57,37 +32,14 @@ export function getSortedPostsData(): PostData[] {
 }
 
 export function getAllPostIds(): PostId[] {
-  // Return empty array if posts directory doesn't exist
-  if (!fs.existsSync(postsDirectory)) {
-    return []
-  }
-
-  const fileNames = fs.readdirSync(postsDirectory)
-  return fileNames.map((fileName): PostId => {
-    return {
-      params: {
-        id: fileName.replace(/\.(md|mdx)$/, '')
-      }
-    }
-  })
+  return postLoader.getAllIds() as PostId[]
 }
 
 export async function getPostData(id: string): Promise<PostWithContent> {
-  // Try to find the file with either .mdx or .md extension
-  let fullPath = path.join(postsDirectory, `${id}.mdx`)
-  if (!fs.existsSync(fullPath)) {
-    fullPath = path.join(postsDirectory, `${id}.md`)
-  }
-  
-  const fileContents = fs.readFileSync(fullPath, 'utf8')
+  const result = await postLoader.getById(id)
 
-  // Use gray-matter to parse the post metadata section
-  const matterResult = matter(fileContents)
-
-  // For MDX, we'll return the raw content to be processed by MDX
   return {
-    id,
-    content: matterResult.content,
-    ...matterResult.data
+    content: result.content,
+    ...result.metadata
   } as PostWithContent
 }

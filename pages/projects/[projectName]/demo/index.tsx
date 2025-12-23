@@ -1,80 +1,33 @@
 import Layout from '../../../../components/layout'
 import { getAllProjectIds, getProjectData, ProjectWithContent } from '../../../../lib/projects'
-import Head from 'next/head'
+import SEOHead from '../../../../components/seo/SEOHead'
+import Breadcrumb from '../../../../components/Breadcrumb'
+import { useGALinkDecoration } from '../../../../hooks/useGALinkDecoration'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Link from 'next/link'
-import { useEffect } from 'react'
 
 interface DemoProps {
   projectData: ProjectWithContent
 }
 
 export default function Demo({ projectData }: DemoProps) {
-  useEffect(() => {
-    const decorateLink = () => {
-      const demoLink = document.getElementById('demo-link') as HTMLAnchorElement
-      if (!demoLink || !projectData.demoUrl) return
-
-      const gaCookie = document.cookie
-        .split('; ')
-        .find(row => row.startsWith('_ga='))
-        ?.split('=')[1]
-
-      if (gaCookie && !demoLink.href.includes('_ga=')) {
-        const separator = demoLink.href.includes('?') ? '&' : '?'
-        demoLink.href = `${projectData.demoUrl}${separator}_ga=${gaCookie}`
-      }
-    }
-
-    decorateLink()
-    const interval = setInterval(decorateLink, 1000)
-    return () => clearInterval(interval)
-  }, [projectData.demoUrl])
-
-  const ogImage = projectData.previewImage
-    ? `https://kavenkim.com${projectData.previewImage}`
-    : `https://kavenkim.com/api/og?title=${encodeURIComponent(projectData.title)}`;
-  const canonicalUrl = `https://kavenkim.com/projects/${projectData.id}`;
+  useGALinkDecoration('demo-link', projectData.demoUrl || undefined)
 
   return (
     <Layout>
-      <Head>
-        <title>{`${projectData.title} - Demo - Kaven Kim | Product Manager`}</title>
-        <meta name="description" content={`Try ${projectData.title} live. ${projectData.description}`} />
-
-        {/* Open Graph */}
-        <meta property="og:title" content={`${projectData.title} - Demo - Kaven Kim`} />
-        <meta property="og:description" content={`Try ${projectData.title} live. ${projectData.description}`} />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content={`https://kavenkim.com/projects/${projectData.id}/demo`} />
-        <meta property="og:image" content={ogImage} />
-        <meta property="og:image:alt" content={`${projectData.title} demo preview`} />
-
-        {/* Twitter Card */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={`${projectData.title} - Demo - Kaven Kim`} />
-        <meta name="twitter:description" content={`Try ${projectData.title} live. ${projectData.description}`} />
-        <meta name="twitter:image" content={ogImage} />
-
-        {/* Canonical - points to main project page */}
-        <link rel="canonical" href={canonicalUrl} />
-      </Head>
+      <SEOHead
+        title={`${projectData.title} - Demo`}
+        description={`Try ${projectData.title} live. ${projectData.description}`}
+        path={`/projects/${projectData.id}/demo`}
+        ogImage={projectData.previewImage || undefined}
+      />
 
       <article>
-        <div className="site-project-breadcrumb">
-          <Link href="/projects" className="site-breadcrumb-link">
-            Projects
-          </Link>
-          <span className="site-breadcrumb-separator">→</span>
-          <Link
-            href={`/projects/${projectData.id}`}
-            className="site-breadcrumb-link"
-          >
-            {projectData.title}
-          </Link>
-          <span className="site-breadcrumb-separator">→</span>
-          <span className="site-breadcrumb-current">Demo</span>
-        </div>
+        <Breadcrumb items={[
+          { label: 'Projects', href: '/projects' },
+          { label: projectData.title, href: `/projects/${projectData.id}` },
+          { label: 'Demo' }
+        ]} />
 
         {projectData.demoUrl ? (
           <>

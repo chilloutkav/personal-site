@@ -1,45 +1,21 @@
-import Head from "next/head";
 import Image from "next/image";
-import Layout, { siteTitle } from "../components/layout";
+import Layout from "../components/layout";
+import SEOHead from "../components/seo/SEOHead";
+import StructuredData from "../components/seo/StructuredData";
+import { createPersonSchema } from "../lib/schema";
 
 export default function Home() {
 
   return (
     <Layout home>
-      <Head>
-        <title>{siteTitle}</title>
-        <meta
-          name="description"
-          content="Kaven Kim - Product Manager who builds growth-driven products. 7+ years in marketing, software engineering background, showcasing selected works and automation projects. Combining marketing insights with hands-on development."
-        />
-        <meta property="og:description" content="Product Manager combining marketing expertise with technical skills. Showcasing selected works and growth-focused product development." />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://kavenkim.com" />
-        <meta name="twitter:description" content="Product Manager who builds growth-driven products. Marketing expertise + software engineering background." />
-        <meta name="keywords" content="Product Manager, Growth Marketing, Software Engineering, Product Development, Marketing Analytics, Automation" />
-
-        {/* Canonical */}
-        <link rel="canonical" href="https://kavenkim.com" />
-      </Head>
-
-      {/* Person Schema */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Person',
-            name: 'Kaven Kim',
-            jobTitle: 'Product Manager',
-            url: 'https://kavenkim.com',
-            sameAs: [
-              'https://linkedin.com/in/kavenkim',
-              'https://github.com/chilloutkav',
-            ],
-            description: 'Product manager with expertise in growth marketing, data analytics, and technical product development',
-          }),
-        }}
+      <SEOHead
+        title=""
+        description="Kaven Kim - Product Manager who builds growth-driven products. 7+ years in marketing, software engineering background, showcasing selected works and automation projects. Combining marketing insights with hands-on development."
+        path="/"
+        keywords="Product Manager, Growth Marketing, Software Engineering, Product Development, Marketing Analytics, Automation"
       />
+
+      <StructuredData data={createPersonSchema()} />
 
       {/* Hero Section */}
       <section className="site-hero">
