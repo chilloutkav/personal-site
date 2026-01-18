@@ -4,14 +4,18 @@ import { ProjectData } from "../lib/projects";
 interface ProjectCardProps {
   project: ProjectData;
   maxTechStack?: number;
+  animationIndex?: number;
 }
 
 export default function ProjectCard({
   project,
-  maxTechStack = 5
+  maxTechStack = 5,
+  animationIndex = 0
 }: ProjectCardProps) {
+  const delayClass = animationIndex > 0 ? `animation-delay-${animationIndex * 100}` : "";
+
   return (
-    <div className="site-project-card">
+    <div className={`site-project-card animate-fade-in-up ${delayClass}`}>
       <div className="site-project-card-image">
         {project.previewImage ? (
           <img

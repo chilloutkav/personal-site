@@ -18,16 +18,20 @@ export default function Projects({ allProjectsData }: ProjectsProps) {
       />
 
       <section>
-        <h1 className="site-heading-2xl">Projects</h1>
-        <p className="site-heading-md">
+        <h1 className="site-heading-2xl animate-fade-in-up">Projects</h1>
+        <p className="site-heading-md animate-fade-in-up animation-delay-100">
           Technical projects showcasing product thinking and implementation.
         </p>
       </section>
 
       <section className="site-project-content">
         <div className="site-project-grid">
-          {allProjectsData.map((project) => (
-            <ProjectCard key={project.id} project={project} />
+          {allProjectsData.map((project, index) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              animationIndex={index + 2}
+            />
           ))}
         </div>
       </section>

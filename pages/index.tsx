@@ -22,19 +22,19 @@ export default function Home() {
         <Image
           priority
           src="/images/profile.jpg"
-          className="site-hero-image"
+          className="site-hero-image animate-scale-in"
           height={112}
           width={112}
           alt="Kaven Kim"
         />
         <div className="site-hero-content">
-          <h1 className="site-hero-title">Hey, I'm Kaven!</h1>
-          <p className="site-hero-subtitle">
+          <h1 className="site-hero-title animate-fade-in-up animation-delay-100">Hey, I'm Kaven!</h1>
+          <p className="site-hero-subtitle animate-fade-in-up animation-delay-200">
             A <span className="site-highlight">Product Manager</span> Who Builds Products That Help Businesses Grow.
           </p>
-          
+
           {/* Social Media Icons */}
-          <div className="site-social-icons">
+          <div className="site-social-icons animate-fade-in-up animation-delay-300">
             <a href="https://linkedin.com/in/kavenkim" className="site-social-icon" aria-label="LinkedIn">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
@@ -50,14 +50,14 @@ export default function Home() {
       </section>
 
       {/* About Section */}
-      <section className="site-about">
+      <section className="site-about animate-fade-in-up animation-delay-400">
         <p className="site-about-text">
           I combine marketing insights with hands-on building to create solutions that actually drive real growth.
         </p>
       </section>
 
       {/* Footer */}
-      <footer className="site-footer">
+      <footer className="site-footer animate-fade-in animation-delay-500">
         <div className="site-footer-connect">
           hi@kavenkim.com
         </div>
