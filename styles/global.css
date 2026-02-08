@@ -2,7 +2,9 @@
 
 :root {
   --bg: #FAFAFA;
+  --surface: #FFFFFF;
   --text: #1A1A1A;
+  --text-inverse: #FFFFFF;
   --muted: #6B6B6B;
   --border: #E0E0E0;
   --accent: #C4616C;
@@ -27,6 +29,18 @@
   --max-width: 1200px;
 }
 
+:root[data-theme="dark"] {
+  --bg: #0F0F0F;
+  --surface: #1A1A1A;
+  --text: #E8E8E8;
+  --text-inverse: #0F0F0F;
+  --muted: #9B9B9B;
+  --border: #2A2A2A;
+  --accent: #D67580;
+  --accent-hover: #BF5F6B;
+  --accent-light: #2A1C1E;
+}
+
 @layer base {
   *,
   *::before,
@@ -46,6 +60,7 @@
     background-color: var(--bg);
     color: var(--text);
     line-height: 1.6;
+    transition: background-color 0.2s ease, color 0.2s ease;
   }
 
   img,

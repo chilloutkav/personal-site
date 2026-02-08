@@ -55,7 +55,7 @@ export default function Hero() {
           >
             <Link
               href="#contact"
-              className="inline-flex items-center rounded-[var(--radius-md)] bg-[var(--accent)] px-6 py-3 text-[14px] font-medium tracking-wide text-white transition-colors hover:bg-[var(--accent-hover)]"
+              className="inline-flex items-center rounded-[var(--radius-md)] bg-[var(--accent)] px-6 py-3 text-[14px] font-medium tracking-wide text-[var(--text-inverse)] transition-colors hover:bg-[var(--accent-hover)]"
             >
               Get in Touch
             </Link>

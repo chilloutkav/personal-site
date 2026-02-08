@@ -49,7 +49,7 @@ export default function ContactSection({
   }
 
   const inputClasses =
-    "w-full rounded-[var(--radius-md)] border border-[var(--border)] bg-white px-4 py-3 text-[14px] text-[var(--text)] outline-none transition-colors placeholder:text-[var(--muted)]/60 focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]";
+    "w-full rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-[14px] text-[var(--text)] outline-none transition-colors placeholder:text-[var(--muted)]/60 focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]";
 
   const form = (
     <form
@@ -124,7 +124,7 @@ export default function ContactSection({
       <button
         type="submit"
         disabled={state === "submitting"}
-        className="inline-flex w-full items-center justify-center rounded-[var(--radius-md)] bg-[var(--accent)] px-6 py-3 text-[14px] font-medium tracking-wide text-white transition-colors hover:bg-[var(--accent-hover)] disabled:opacity-60"
+        className="inline-flex w-full items-center justify-center rounded-[var(--radius-md)] bg-[var(--accent)] px-6 py-3 text-[14px] font-medium tracking-wide text-[var(--text-inverse)] transition-colors hover:bg-[var(--accent-hover)] disabled:opacity-60"
       >
         {state === "submitting" ? "Sending..." : "Send Message"}
       </button>

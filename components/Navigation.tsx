@@ -3,6 +3,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import ThemeToggle from "./ThemeToggle";
 
 const NAV_LINKS = [
   { label: "About", href: "/about" },
@@ -72,6 +73,7 @@ export default function Navigation() {
                 />
               </Link>
             ))}
+            <ThemeToggle />
           </div>
 
           {/* Mobile hamburger */}
@@ -156,6 +158,9 @@ export default function Navigation() {
             >
               LinkedIn &rarr;
             </a>
+            <div className="mt-4">
+              <ThemeToggle />
+            </div>
           </div>
         </div>
       </div>

@@ -33,7 +33,7 @@ export default function TestimonialCard({
                 {testimonial.role}, {testimonial.company}
               </p>
             </div>
-            <span className="rounded-full bg-white/60 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--accent)]">
+            <span className="rounded-full bg-[var(--surface)]/60 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--accent)]">
               {testimonial.discipline}
             </span>
           </div>
@@ -43,7 +43,7 @@ export default function TestimonialCard({
   }
 
   return (
-    <article className="group relative overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border)] bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg md:p-8">
+    <article className="group relative overflow-hidden rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--surface)] p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg md:p-8">
       <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--accent)]">
         {testimonial.discipline}
       </p>

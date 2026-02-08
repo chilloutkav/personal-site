@@ -9,7 +9,7 @@ interface BlogCardProps {
 export default function BlogCard({ post }: BlogCardProps) {
   return (
     <Link href={`/blog/${post.id}`} className="group block h-full">
-      <article className="flex h-full flex-col rounded-[var(--radius-lg)] border border-[var(--border)] bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg md:p-8">
+      <article className="flex h-full flex-col rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--surface)] p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg md:p-8">
         {/* Tags */}
         <div className="flex flex-wrap gap-2">
           {post.tags.map((tag) => (

@@ -7,7 +7,7 @@ interface ResultCardProps {
 
 export default function ResultCard({ study }: ResultCardProps) {
   return (
-    <article className="group rounded-[var(--radius-lg)] border border-[var(--border)] bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg md:p-8">
+    <article className="group rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--surface)] p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg md:p-8">
       {/* Discipline + Client */}
       <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--accent)]">
         {study.discipline}

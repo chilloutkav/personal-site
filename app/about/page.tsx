@@ -120,7 +120,7 @@ export default function AboutPage() {
               </p>
               <Link
                 href="/contact"
-                className="mt-4 inline-block rounded-[var(--radius-md)] bg-[var(--accent)] px-8 py-3 text-[14px] font-bold uppercase tracking-[0.15em] text-white transition-colors hover:bg-[var(--accent-hover)]"
+                className="mt-4 inline-block rounded-[var(--radius-md)] bg-[var(--accent)] px-8 py-3 text-[14px] font-bold uppercase tracking-[0.15em] text-[var(--text-inverse)] transition-colors hover:bg-[var(--accent-hover)]"
               >
                 Let&apos;s Talk
               </Link>
