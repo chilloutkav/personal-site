@@ -146,6 +146,84 @@ Session 2 will build:
 
 ---
 
-**Session Status**: Complete — Foundation layer ready for content phase
+## Session 2 — Homepage, Results, Contact
+
+### Completed
+- `lib/results.ts` — CaseStudy interface + 5 anonymized case studies + getFeaturedResults/getAllResults
+- `components/ScrollReveal.tsx` — IntersectionObserver scroll animation wrapper (client)
+- `components/ResultCard.tsx` — Editorial magazine-style case study card (server)
+- `components/Hero.tsx` — Two-column hero with staggered fadeInUp headlines + headshot (client)
+- `components/ContactSection.tsx` — Netlify Forms with compact/full variants (client)
+- `components/HomepageResults.tsx` — Client wrapper for homepage featured cards with ScrollReveal
+- `components/ResultsGrid.tsx` — Client wrapper for results page grid with ScrollReveal
+- `app/page.tsx` — Full homepage: Hero + Results preview (3 featured) + ContactSection
+- `app/results/page.tsx` — Full results page: 5 case studies in 2-col grid + ContactSection
+- `app/contact/page.tsx` — Contact page with full-variant ContactSection
+
+### Decisions Made
+- Server/client component split: data-fetching in server, interactivity (scroll, forms) in client wrappers
+- ScrollReveal pattern: reusable IntersectionObserver wrapper for staggered entrance animations
+- ContactSection has compact/full variants for reuse across pages
+
+---
+
+## Session 3 — About Page, Testimonials
+
+### Completed
+- `app/about/page.tsx` — Full editorial about page: asymmetric layout (narrative left, sticky pull-quote sidebar right), drop cap, 7 content sections with ScrollReveal, accent discipline names, CTA
+- `lib/testimonials.ts` — Testimonial interface + 3 placeholder testimonials (one per discipline)
+- `components/TestimonialCard.tsx` — Server component with featured/default variants (oversized decorative quotes, discipline pills, hover lift)
+- `app/page.tsx` — Added testimonials section between Results and Contact (featured card + 2-col grid)
+- `lib/seo.ts` — Updated siteName to "Kaven Kim", defaultDescription to three-discipline positioning
+- `lib/schema.ts` — Updated jobTitle + description to reflect PM + Growth + Ecommerce
+
+### Decisions Made
+- About page uses asymmetric layout: narrative left, sticky pull-quote sidebar right
+- Testimonials are placeholder copy (marked TODO) — real ones to come from PRD
+- Featured testimonial gets large treatment, others in 2-col grid
+
+---
+
+## Session 4 — Blog Infrastructure
+
+### Completed
+- `lib/blog.ts` — BlogPostMeta interface + blog data layer (getAllPosts, getFeaturedPosts, getLatestPosts, getAllSlugs, getPostBySlug with compileMDX)
+- `content/blog/why-pms-should-learn-growth.mdx` — Placeholder post (featured, tags: product/growth)
+- `content/blog/ecommerce-conversion-checklist.mdx` — Placeholder post (featured, tags: ecommerce/conversion)
+- `content/blog/building-this-site.mdx` — Placeholder post (not featured, tags: engineering/design)
+- `styles/global.css` — Full `.prose` typography system (headings, links, blockquotes, code, lists, tables, images)
+- `components/BlogCard.tsx` — Editorial blog card (server component, tag pills, hover lift, date+read arrow footer)
+- `components/HomepageBlog.tsx` — Client wrapper for homepage blog preview with ScrollReveal
+- `app/blog/page.tsx` — Full blog index (eyebrow, H1, description, 2-col grid, empty state, SEO metadata)
+- `app/blog/[slug]/page.tsx` — Full blog post page (generateStaticParams, generateMetadata with OG article, breadcrumb JSON-LD, back link, tag pills, prose-styled MDX content, ContactSection)
+- `app/sitemap.ts` — Dynamic sitemap (5 static pages + all blog posts)
+- `app/feed.xml/route.ts` — RSS feed route handler with XML escaping + cache headers
+- `public/robots.txt` — Updated sitemap URL from /api/sitemap.xml to /sitemap.xml
+- `app/page.tsx` — Added "Latest Writing" section between testimonials and contact (2 latest posts)
+
+### Decisions Made
+- Blog data layer wraps existing `createContentLoader` from `lib/content.ts` — no modifications to content.ts needed
+- BlogPostMeta needs `[key: string]: unknown` index signature to satisfy ContentMetadata constraint
+- compileMDX with `parseFrontmatter: false` since gray-matter already strips it in content loader
+- RSS feed as route handler (`app/feed.xml/route.ts`) with 1hr cache
+- Sitemap as Next.js native `MetadataRoute.Sitemap`
+
+### Known Issues
+- Testimonials are placeholder copy (TODO) — need real quotes from PRD
+- All blog post body copy is placeholder (TODO)
+- All page copy marked with TODO needs review
+
+### Next Session Should
+- Session 5: Phase 7 — Polish, testing, deploy
+- Visual QA all pages with `npm run prod`
+- Mobile responsiveness testing
+- Performance audit (Lighthouse)
+- Replace placeholder testimonials with real ones from PRD
+- Final copy review (all TODO comments)
+- Deploy to Netlify
+
+---
+
+**Session Status**: Session 4 complete — Blog infrastructure fully functional
 **Blockers**: None
-**Branch Status**: Ready to merge after copy review and testing
+**Branch Status**: Ready for polish phase

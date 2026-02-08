@@ -8,59 +8,73 @@ Current file structure and component organization for kavenkim.com (Next.js 15 A
 personal-site/
 ├── app/                           # Next.js 15 App Router
 │   ├── layout.tsx                 # Root layout: fonts, GTM, Navigation, Footer
-│   ├── page.tsx                   # Homepage
+│   ├── page.tsx                   # Homepage (Hero + Results + Testimonials + Blog + Contact)
+│   ├── sitemap.ts                 # Dynamic sitemap (static pages + blog posts)
 │   ├── about/
-│   │   └── page.tsx               # About page
+│   │   └── page.tsx               # About page (asymmetric layout, pull-quotes)
 │   ├── results/
-│   │   └── page.tsx               # Results/case studies page
+│   │   └── page.tsx               # Results/case studies page (5 studies, 2-col grid)
 │   ├── blog/
-│   │   ├── page.tsx               # Blog list page
+│   │   ├── page.tsx               # Blog index (2-col grid of BlogCards)
 │   │   └── [slug]/
-│   │       └── page.tsx           # Individual blog post (MDX-based)
-│   └── contact/
-│       └── page.tsx               # Contact/inquiry page
+│   │       └── page.tsx           # Blog post (MDX rendering, generateStaticParams)
+│   ├── contact/
+│   │   └── page.tsx               # Contact page (full-variant form)
+│   └── feed.xml/
+│       └── route.ts               # RSS feed route handler
 │
 ├── components/                     # Reusable React components
-│   ├── Navigation.tsx              # Sticky header + mobile drawer
-│   └── Footer.tsx                  # 3-column footer grid
+│   ├── Navigation.tsx              # Sticky header + mobile drawer (client)
+│   ├── Footer.tsx                  # 3-column footer grid (server)
+│   ├── Hero.tsx                    # Two-column hero with staggered headlines (client)
+│   ├── ResultCard.tsx              # Editorial case study card (server)
+│   ├── BlogCard.tsx                # Editorial blog card with tag pills (server)
+│   ├── TestimonialCard.tsx         # Testimonial with featured/default variants (server)
+│   ├── ContactSection.tsx          # Netlify Forms, compact/full variants (client)
+│   ├── ScrollReveal.tsx            # IntersectionObserver animation wrapper (client)
+│   ├── HomepageResults.tsx         # Homepage results grid wrapper (client)
+│   ├── HomepageBlog.tsx            # Homepage blog preview wrapper (client)
+│   └── ResultsGrid.tsx             # Results page grid wrapper (client)
 │
 ├── lib/                            # Utility functions & data
-│   ├── content.ts                  # Blog/post content loading (MDX, to be updated)
-│   ├── schema.ts                   # TypeScript interfaces & validation schemas
-│   └── seo.ts                      # SEO metadata helpers
+│   ├── blog.ts                     # Blog data layer (wraps content.ts + compileMDX)
+│   ├── content.ts                  # Generic MDX content loader factory
+│   ├── results.ts                  # Case study data (5 studies)
+│   ├── testimonials.ts             # Testimonial data (3 testimonials)
+│   ├── schema.ts                   # Structured data (Person + Breadcrumb schemas)
+│   └── seo.ts                      # SEO config + helpers
 │
 ├── styles/
-│   └── global.css                  # Tailwind v4 + custom components
+│   └── global.css                  # Tailwind v4 + design system + .prose typography
 │
 ├── content/
-│   └── blog/                       # MDX blog post files (future)
-│       └── (empty, awaiting posts)
+│   └── blog/                       # MDX blog post files
+│       ├── why-pms-should-learn-growth.mdx
+│       ├── ecommerce-conversion-checklist.mdx
+│       └── building-this-site.mdx
 │
 ├── public/
 │   ├── images/
 │   │   └── profile.jpg             # Headshot image
 │   ├── favicon.ico
-│   └── robots.txt
+│   └── robots.txt                  # Updated: sitemap → /sitemap.xml
 │
-├── .next/                          # Next.js build output (generated)
-├── node_modules/                   # Dependencies (generated)
+├── docs/                           # Project documentation
+│   ├── build-log.md
+│   ├── architecture.md
+│   ├── design-system.md
+│   ├── known-issues.md
+│   ├── component-inventory.md
+│   └── copy-review.md
 │
 ├── next.config.js                  # Next.js configuration + CSP headers
 ├── package.json                    # Dependencies & scripts
-├── package-lock.json               # Dependency lock file
 ├── tsconfig.json                   # TypeScript configuration
 ├── postcss.config.mjs              # PostCSS (Tailwind) configuration
 ├── eslint.config.mjs               # ESLint configuration
-├── tailwind.config.ts              # Tailwind configuration (if needed)
-│
 ├── netlify.toml                    # Netlify deployment configuration
-├── CLAUDE.md                       # Legacy documentation (reference only)
-├── MEMORY.md                       # Session memory and rebuild plan
-│
-├── .gitignore
-├── .git/                           # Git repository
+├── CLAUDE.md                       # Development guidance
 └── README.md                       # Project readme
-
 ```
 
 ## Component Hierarchy
@@ -88,12 +102,14 @@ app/layout.tsx (root)
 
 | Route | File | Purpose | Status |
 |-------|------|---------|--------|
-| `/` | `app/page.tsx` | Homepage hero + intro | Stub (Session 2) |
-| `/about` | `app/about/page.tsx` | Professional background | Stub (Session 3) |
-| `/results` | `app/results/page.tsx` | Case studies showcase | Stub (Session 2) |
-| `/blog` | `app/blog/page.tsx` | Blog post list | Stub (Session 4) |
-| `/blog/[slug]` | `app/blog/[slug]/page.tsx` | Individual post (MDX) | Stub (Session 4) |
-| `/contact` | `app/contact/page.tsx` | Contact form | Stub (Session 5) |
+| `/` | `app/page.tsx` | Homepage (Hero + Results + Testimonials + Blog + Contact) | Complete |
+| `/about` | `app/about/page.tsx` | Professional background (asymmetric, pull-quotes) | Complete |
+| `/results` | `app/results/page.tsx` | Case studies (5 studies, 2-col grid) | Complete |
+| `/blog` | `app/blog/page.tsx` | Blog index (2-col grid, SEO metadata) | Complete |
+| `/blog/[slug]` | `app/blog/[slug]/page.tsx` | Blog post (MDX, generateStaticParams, JSON-LD) | Complete |
+| `/contact` | `app/contact/page.tsx` | Contact form (full-variant Netlify Forms) | Complete |
+| `/sitemap.xml` | `app/sitemap.ts` | Dynamic sitemap (static pages + blog posts) | Complete |
+| `/feed.xml` | `app/feed.xml/route.ts` | RSS feed | Complete |
 
 ## Key Implementation Details
 
@@ -132,19 +148,27 @@ app/layout.tsx (root)
 
 - **Client Components** (with "use client"):
   - `components/Navigation.tsx` — scroll detection, mobile drawer state
+  - `components/Hero.tsx` — staggered fadeInUp headline animations
+  - `components/ContactSection.tsx` — form state management
+  - `components/ScrollReveal.tsx` — IntersectionObserver scroll animation
+  - `components/HomepageResults.tsx` — wraps server ResultCards with ScrollReveal
+  - `components/HomepageBlog.tsx` — wraps server BlogCards with ScrollReveal
+  - `components/ResultsGrid.tsx` — wraps server ResultCards with ScrollReveal
 
 ### GTM Integration
 - Conditional script loading in `app/layout.tsx`
 - Uses `NEXT_PUBLIC_GTM_ID` environment variable
 - Fallback noscript iframe for browsers without JavaScript
 
-### Content Model (Future)
+### Content Model
 
-**Blog Posts** (to be implemented):
+**Blog Posts** (implemented):
 - Location: `content/blog/*.mdx`
-- Frontmatter: title, date, excerpt, tags, author
-- Loaded and parsed by `lib/content.ts`
-- Rendered as `app/blog/[slug]/page.tsx`
+- Frontmatter: title, date, excerpt, tags (string[]), featured (boolean)
+- Loaded by `lib/blog.ts` via `lib/content.ts` content loader factory
+- MDX compiled at build time via `next-mdx-remote/rsc` `compileMDX`
+- Rendered in `app/blog/[slug]/page.tsx` with `.prose` typography styles
+- Static params generated via `generateStaticParams()` for SSG
 
 ## Build & Output
 
@@ -199,5 +223,5 @@ See `package.json` for full dependency list.
 
 ---
 
-**Last Updated**: Session 1 (February 7, 2025)
-**Status**: Foundation complete, ready for content phase
+**Last Updated**: Session 4
+**Status**: All pages and routes functional. Ready for polish phase (Session 5).

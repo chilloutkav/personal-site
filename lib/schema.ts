@@ -10,12 +10,12 @@ export function createPersonSchema() {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: 'Kaven Kim',
-    jobTitle: 'Product Manager',
+    jobTitle: 'Product Manager, Growth Marketer & Ecommerce Operator',
     url: SITE_CONFIG.domain,
     sameAs: [
       'https://linkedin.com/in/kavenkim',
     ],
-    description: 'Product manager with expertise in growth marketing, data analytics, and technical product development',
+    description: 'Product manager, growth marketer, and ecommerce operator with 12+ years driving measurable results across all three disciplines',
   }
 }
 

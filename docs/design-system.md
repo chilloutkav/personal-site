@@ -19,9 +19,9 @@ All colors defined as CSS custom properties in `styles/global.css`. Apply via `v
 
 | Variable | Value | Purpose | Usage |
 |----------|-------|---------|-------|
-| `--accent` | `#E85D3A` | Primary accent (burnt orange) | Links, buttons, hover states |
-| `--accent-hover` | `#D14D2A` | Darker accent (hover state) | Button press, active state |
-| `--accent-light` | `#FFF0EB` | Light accent tint | Backgrounds for accent elements |
+| `--accent` | `#C4616C` | Primary accent (dusty rose) | Links, buttons, hover states |
+| `--accent-hover` | `#A84F58` | Darker accent (hover state) | Button press, active state |
+| `--accent-light` | `#FDF0F1` | Light accent tint | Tag pills, blockquote bg |
 
 ### Color Application Examples
 
@@ -344,5 +344,22 @@ className={isActive ? "text-[var(--accent)]" : "text-[var(--text)]"}
 
 ---
 
-**Last Updated**: Session 1 (February 7, 2025)
-**Status**: Complete for current implementation
+## Prose Typography (Blog Content)
+
+Added in Session 4 for MDX blog post rendering. Applied via `.prose` class.
+
+| Element | Font | Size | Weight | Color | Notes |
+|---------|------|------|--------|-------|-------|
+| H2 | Space Grotesk | clamp(1.5rem, 3vw, 2rem) | 700 | --text | -0.02em tracking |
+| H3 | Space Grotesk | clamp(1.15rem, 2.5vw, 1.4rem) | 600 | --text | -0.01em tracking |
+| Body | DM Sans | 1rem | 400 | --text | 1.75 line-height |
+| Links | inherit | inherit | inherit | --accent | underline, hover to --accent-hover |
+| Blockquotes | inherit | inherit | inherit | --muted | 4px left border --accent, --accent-light bg, italic |
+| Inline code | monospace | 0.875em | 500 | --accent-hover | --accent-light bg |
+| Code blocks | monospace | 0.875em | 400 | --bg | --text bg (dark), rounded |
+| Tables | inherit | 0.9375em | - | --text | th: Space Grotesk 600, --border borders |
+
+---
+
+**Last Updated**: Session 4
+**Status**: Complete — design system covers all current components and prose typography

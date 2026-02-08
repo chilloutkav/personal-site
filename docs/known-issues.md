@@ -40,61 +40,38 @@ This document tracks known issues, limitations, and workarounds during the kaven
 
 ---
 
-### 2. Outdated Library Configuration Files
+### 2. Placeholder Copy Throughout Site
 
-**Status**: Known, will be addressed in Session 2
-**Severity**: Low-to-medium
-**Affected**: Type checking, content loading
+**Status**: Active — needs review before deploy
+**Severity**: Medium
+**Affected**: All pages
 
 **Problem**:
-The following files still contain old configurations from the Pages Router era and need updates:
+All generated copy is marked with `{/* TODO: Review and finalize copy */}` and needs Kaven's review before shipping to production.
 
-| File | Issue | Solution |
-|------|-------|----------|
-| `lib/schema.ts` | Old Person schema, project-related schemas | Update for new content model (Session 2) |
-| `lib/seo.ts` | SITE_CONFIG uses old site description | Update metadata helpers (Session 2) |
-| `lib/content.ts` | Project-based content loading logic | Rewrite for MDX blog posts (Session 4) |
+**Affected Areas**:
+- Homepage: hero headlines, section headings, results descriptions
+- About page: full narrative content, pull-quotes
+- Results page: all 5 case study narratives (anonymized)
+- Testimonials: 3 placeholder testimonials with fake names (need real quotes from PRD)
+- Blog posts: 3 placeholder posts with generated content
+- Footer: tagline
+- Various metadata descriptions
 
-**Workaround**:
-- These files are not currently imported by any app/ routes
-- They won't cause runtime errors
-- TypeScript strict mode catches unused imports
-
-**Resolution Timeline**:
-- `lib/schema.ts` and `lib/seo.ts`: Session 2
-- `lib/content.ts`: Session 4 (when blog infrastructure added)
+**Resolution**: Session 5 — final copy review pass
 
 ---
 
-### 3. Blog Infrastructure Not Yet Implemented
+### 3. Testimonials Need Real Content
 
-**Status**: Expected, placeholder in place
-**Severity**: Low (feature incomplete, not broken)
-**Affected**: Blog system (pages, MDX parsing, content loading)
+**Status**: Active — placeholder data
+**Severity**: Medium
+**Affected**: `lib/testimonials.ts`, homepage testimonials section
 
 **Problem**:
-- `content/blog/` directory exists but is empty
-- No MDX loader configured
-- `app/blog/page.tsx` is a stub
-- `app/blog/[slug]/page.tsx` has no dynamic route handling
+Testimonials use fabricated quotes/names as placeholders. The PRD reportedly has actual testimonials that should replace them.
 
-**What's Missing**:
-- MDX parsing library integration (`next-mdx-remote` or similar)
-- Content frontmatter extraction
-- Blog post listing logic
-- Meta tag generation for individual posts
-- Archive/filtering functionality
-
-**Why It's Not Critical**:
-- Blog feature is Phase 4 (Session 4)
-- Stubs are in place to prevent 404s
-- No content exists to be lost
-- Plan is clear (see MEMORY.md)
-
-**Implementation Plan**:
-- Session 2: Finalize content model and schema
-- Session 3: Integrate MDX loader
-- Session 4: Build blog list page and dynamic post pages
+**Resolution**: Session 5 — replace with real testimonials from PRD
 
 ---
 
@@ -286,8 +263,8 @@ When logging new issues:
 
 ---
 
-**Last Updated**: Session 1 (February 7, 2025)
+**Last Updated**: Session 4
 **Critical Issues**: 1 (Tailwind dev mode — workaround in place)
-**Medium Issues**: 1 (lib config files — planned fix)
-**Low Issues**: 1+ (blog infrastructure — planned feature)
-**Status**: All known issues have clear paths to resolution
+**Medium Issues**: 2 (placeholder copy, placeholder testimonials)
+**Low Issues**: 0
+**Status**: All features functional. Polish and content review needed in Session 5.

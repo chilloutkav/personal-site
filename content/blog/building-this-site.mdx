@@ -1,0 +1,88 @@
+---
+title: "Building This Site: Next.js, Tailwind v4, and Editorial Design"
+date: "2025-11-10"
+excerpt: "A behind-the-scenes look at the technical and design decisions behind this personal site — from App Router to editorial typography."
+tags: ["engineering", "design"]
+featured: false
+---
+
+{/* TODO: Review and finalize copy */}
+
+I rebuilt my personal site from scratch recently. Not because the old one was broken — it worked fine. But it didn't *feel* like me. It was generic. Another developer portfolio that looked like every other developer portfolio.
+
+So I started over with a clear goal: **make it feel like a magazine, not a template.**
+
+## The Stack
+
+Here's what I landed on:
+
+- **Next.js 15** with the App Router
+- **Tailwind CSS v4** for styling
+- **TypeScript** throughout
+- **MDX** for blog content
+- **Netlify** for deployment
+
+Nothing exotic. The magic isn't in the stack — it's in the design decisions.
+
+## Why Editorial Design?
+
+Most personal sites fall into one of two camps: the *minimal developer portfolio* (white background, system font, barely any styling) or the *over-designed agency site* (parallax everywhere, loading animations, style over substance).
+
+I wanted something in between. Something that felt intentional and distinctive without being distracting. Magazine editorial design gave me that:
+
+> Editorial design treats every element as deliberate. The whitespace, the typography scale, the rhythm of content sections — nothing is accidental.
+
+### Typography as Architecture
+
+The single biggest lever in editorial design is typography. I chose two fonts:
+
+- **Space Grotesk** for headings — geometric, modern, a little unexpected
+- **DM Sans** for body text — clean and readable at any size
+
+The heading scale uses `clamp()` for fluid sizing:
+
+```css
+font-size: clamp(2rem, 5vw, 3.5rem);
+```
+
+This means headings look proportional on every screen size without a single media query.
+
+### The Color Constraint
+
+I limited myself to essentially three colors:
+
+1. `#FAFAFA` — Off-white background (warmer than pure white)
+2. `#1A1A1A` — Near-black text (softer than pure black)
+3. `#C4616C` — Dusty rose accent (used sparingly)
+
+**Constraining the palette forces better design decisions.** When you can't rely on color to differentiate elements, you have to use spacing, typography weight, and layout more thoughtfully.
+
+## Lessons Learned
+
+### Tailwind v4 Quirks
+
+Tailwind CSS v4 is a significant rewrite. The biggest gotcha I hit: **it doesn't work with Next.js dev mode.** The `@import "tailwindcss"` directive fails to process in development, resulting in completely unstyled pages.
+
+The workaround is simple — use `npm run build && npm start` instead of `npm run dev`. Not ideal for hot reload, but production builds are fast enough that it hasn't slowed me down.
+
+### App Router Patterns
+
+The Next.js App Router changes how you think about components. The key mental model shift:
+
+1. **Server components are the default** — fetch data, render HTML, zero client JavaScript
+2. **Client components are opt-in** — only for interactivity (scroll observers, form state, etc.)
+3. **Composition over configuration** — wrap server components in thin client shells when you need both
+
+### MDX for Content
+
+Using MDX for blog posts gives me the best of both worlds — write in Markdown for speed, drop in React components when I need something richer. The `next-mdx-remote` library handles compilation at build time, so there's no runtime cost.
+
+## What's Next
+
+The site is live and functional, but it's not done. A few things still on the list:
+
+- **More case studies** with deeper narrative
+- **Interactive project demos** embedded directly in pages
+- **Dark mode** (maybe — I'm not convinced it's necessary)
+
+For now, I'm happy with where it landed. It feels like *mine*, which is the whole point.

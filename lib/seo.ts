@@ -12,11 +12,11 @@ export interface SEOConfig {
 
 export const SITE_CONFIG = {
   domain: 'https://kavenkim.com',
-  siteName: 'Kaven Kim | Product Manager',
+  siteName: 'Kaven Kim',
   siteTitle: 'Kaven Kim',
   author: 'Kaven Kim',
   twitterHandle: '@kavenkim',
-  defaultDescription: 'Product Manager and growth marketing leader building user-focused solutions.',
+  defaultDescription: 'Product manager, growth marketer, and ecommerce operator — three disciplines, one approach to driving measurable results.',
   defaultOGImage: '/images/og-default.jpg',
 } as const
 
