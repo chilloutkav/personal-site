@@ -29,15 +29,12 @@ export default function BlogPage() {
     <>
       <section className="mx-auto max-w-[1200px] px-6 pt-16 pb-4 md:px-8 md:pt-20 lg:px-10">
         <p className="text-[12px] font-bold uppercase tracking-[0.25em] text-[var(--muted)]">
-          {/* TODO: Review and finalize copy */}
           Writing
         </p>
         <h1 className="mt-3 font-[family-name:var(--font-heading)] text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.1] tracking-tight text-[var(--text)]">
-          {/* TODO: Review and finalize copy */}
           Blog
         </h1>
         <p className="mt-4 max-w-[560px] text-[16px] leading-relaxed text-[var(--muted)]">
-          {/* TODO: Review and finalize copy */}
           Thoughts on product management, growth marketing, ecommerce
           operations, and the messy overlap between all three.
         </p>

@@ -20,7 +20,6 @@ export default function Hero() {
             className="mb-6 text-[12px] font-bold uppercase tracking-[0.25em] text-[var(--muted)]"
             style={{ animation: "fadeIn 0.6s ease-out both" }}
           >
-            {/* TODO: Review and finalize copy */}
             Kaven Kim
           </p>
 
@@ -44,7 +43,6 @@ export default function Hero() {
             className="mt-6 max-w-[480px] text-[16px] leading-relaxed text-[var(--muted)] md:text-[17px]"
             style={{ animation: "fadeInUp 0.7s ease-out 900ms both" }}
           >
-            {/* TODO: Review and finalize copy */}
             I build products, scale brands, and turn growth loops into revenue.
             From zero-to-one launches to full-funnel optimization — I get things
             across the finish line.
@@ -80,7 +78,7 @@ export default function Hero() {
           <div className="relative aspect-[3/4] w-full max-w-[320px] overflow-hidden rounded-[var(--radius-lg)] md:max-w-none">
             <Image
               src="/images/profile.jpg"
-              alt="Kaven Kim"
+              alt="Kaven Kim — Product Manager, Growth Marketer, and Ecommerce Operator"
               fill
               priority
               className="object-cover"

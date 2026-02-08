@@ -10,7 +10,6 @@ export interface CaseStudy {
   featured: boolean;
 }
 
-/* TODO: Review and finalize copy */
 const CASE_STUDIES: CaseStudy[] = [
   {
     id: "dtc-roas",

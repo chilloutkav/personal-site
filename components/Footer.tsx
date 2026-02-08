@@ -19,7 +19,6 @@ export default function Footer() {
           >
             Kaven Kim
           </Link>
-          {/* TODO: Review and finalize copy */}
           <p className="mt-4 max-w-[260px] text-[14px] leading-relaxed text-[var(--muted)]">
             Building products, scaling brands, and turning growth loops into
             revenue.

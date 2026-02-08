@@ -130,12 +130,12 @@ export default function ContactSection({
       </button>
 
       {state === "success" && (
-        <p className="text-center text-[14px] text-green-600">
+        <p role="alert" className="text-center text-[14px] text-green-600">
           Message sent! I&apos;ll get back to you soon.
         </p>
       )}
       {state === "error" && (
-        <p className="text-center text-[14px] text-red-600">
+        <p role="alert" className="text-center text-[14px] text-red-600">
           Something went wrong. Please try again or email me directly.
         </p>
       )}
@@ -146,15 +146,12 @@ export default function ContactSection({
     return (
       <section id={id} className="mx-auto max-w-[560px] px-6 py-20 md:px-8">
         <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.25em] text-[var(--muted)]">
-          {/* TODO: Review and finalize copy */}
           Get in Touch
         </p>
         <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.75rem,4vw,2.5rem)] font-bold leading-[1.1] tracking-tight text-[var(--text)]">
-          {/* TODO: Review and finalize copy */}
           Let&apos;s Work Together
         </h2>
         <p className="mt-4 mb-8 text-[15px] leading-relaxed text-[var(--muted)]">
-          {/* TODO: Review and finalize copy */}
           Have a project in mind or want to chat about product, growth, or
           ecommerce? Drop me a line.
         </p>
@@ -193,11 +190,9 @@ export default function ContactSection({
         {/* Form */}
         <div>
           <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.25em] text-[var(--muted)]">
-            {/* TODO: Review and finalize copy */}
             Get in Touch
           </p>
           <h2 className="mb-6 font-[family-name:var(--font-heading)] text-[clamp(1.5rem,3vw,2rem)] font-bold leading-[1.1] tracking-tight text-[var(--text)]">
-            {/* TODO: Review and finalize copy */}
             Let&apos;s Work Together
           </h2>
           {form}
@@ -226,7 +221,6 @@ export default function ContactSection({
           </div>
           <div className="mt-8 rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--accent-light)] p-5">
             <p className="text-[14px] leading-relaxed text-[var(--text)]">
-              {/* TODO: Review and finalize copy */}
               I typically respond within 24 hours. For urgent inquiries, email is
               the fastest way to reach me.
             </p>

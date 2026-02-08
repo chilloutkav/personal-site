@@ -8,7 +8,6 @@ export interface Testimonial {
   featured: boolean;
 }
 
-/* TODO: Review and finalize copy */
 const TESTIMONIALS: Testimonial[] = [
   {
     id: "startup-founder",

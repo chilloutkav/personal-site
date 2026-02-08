@@ -25,7 +25,6 @@ export const metadata: Metadata = {
     template: "%s | Kaven Kim",
     default: "Kaven Kim \u2014 PM, Growth Marketer, Ecommerce Operator",
   },
-  /* TODO: Review and finalize copy */
   description:
     "I build products, scale brands, and turn growth loops into revenue. Product management, growth marketing, and ecommerce operations.",
   openGraph: {
@@ -34,16 +33,23 @@ export const metadata: Metadata = {
     url: "https://kavenkim.com",
     siteName: "Kaven Kim",
     title: "Kaven Kim \u2014 PM, Growth Marketer, Ecommerce Operator",
-    /* TODO: Review and finalize copy */
     description:
       "I build products, scale brands, and turn growth loops into revenue. Product management, growth marketing, and ecommerce operations.",
+    images: [
+      {
+        url: "/images/og-default.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Kaven Kim — PM, Growth Marketer, Ecommerce Operator",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Kaven Kim \u2014 PM, Growth Marketer, Ecommerce Operator",
-    /* TODO: Review and finalize copy */
     description:
       "I build products, scale brands, and turn growth loops into revenue. Product management, growth marketing, and ecommerce operations.",
+    images: ["/images/og-default.jpg"],
   },
   robots: {
     index: true,

@@ -10,8 +10,6 @@ export const metadata: Metadata = {
 export default function AboutPage() {
   return (
     <section className="mx-auto max-w-[1200px] px-6 py-16 md:px-8 md:py-24 lg:px-10">
-      {/* TODO: Review and finalize copy */}
-
       <div className="lg:grid lg:grid-cols-[1fr_300px] lg:gap-16">
 
         {/* Left Column: Main Narrative */}

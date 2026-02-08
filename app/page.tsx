@@ -26,12 +26,10 @@ export default function HomePage() {
       <section className="border-t border-[var(--border)]">
         <div className="mx-auto max-w-[1200px] px-6 py-16 md:px-8 md:py-20 lg:px-10">
           <p className="text-[12px] font-bold uppercase tracking-[0.25em] text-[var(--muted)]">
-            {/* TODO: Review and finalize copy */}
             Selected Results
           </p>
           <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
             <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.75rem,4vw,2.5rem)] font-bold leading-[1.1] tracking-tight text-[var(--text)]">
-              {/* TODO: Review and finalize copy */}
               How I&apos;ve Helped
             </h2>
             <Link
@@ -51,11 +49,9 @@ export default function HomePage() {
         <div className="mx-auto max-w-[1200px] px-6 py-16 md:px-8 md:py-20 lg:px-10">
           <ScrollReveal>
             <p className="text-[12px] font-bold uppercase tracking-[0.25em] text-[var(--muted)]">
-              {/* TODO: Review and finalize copy */}
               Testimonials
             </p>
             <h2 className="mt-3 font-[family-name:var(--font-heading)] text-[clamp(1.75rem,4vw,2.5rem)] font-bold leading-[1.1] tracking-tight text-[var(--text)]">
-              {/* TODO: Review and finalize copy */}
               What People Say
             </h2>
           </ScrollReveal>
@@ -85,12 +81,10 @@ export default function HomePage() {
           <div className="mx-auto max-w-[1200px] px-6 py-16 md:px-8 md:py-20 lg:px-10">
             <ScrollReveal>
               <p className="text-[12px] font-bold uppercase tracking-[0.25em] text-[var(--muted)]">
-                {/* TODO: Review and finalize copy */}
                 From the Blog
               </p>
               <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
                 <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.75rem,4vw,2.5rem)] font-bold leading-[1.1] tracking-tight text-[var(--text)]">
-                  {/* TODO: Review and finalize copy */}
                   Latest Writing
                 </h2>
                 <Link
