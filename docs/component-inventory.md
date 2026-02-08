@@ -17,6 +17,7 @@ Complete status tracking of UI components and their implementation phase. This d
 | TestimonialCard | `components/TestimonialCard.tsx` | DONE | 3 |
 | BlogCard | `components/BlogCard.tsx` | DONE | 4 |
 | HomepageBlog | `components/HomepageBlog.tsx` | DONE | 4 |
+| ThemeToggle | `components/ThemeToggle.tsx` | DONE | 6 |
 
 ---
 
@@ -397,7 +398,7 @@ All components must follow:
 
 ---
 
-**Last Updated**: Session 4
-**Completed Components**: 11 (all planned components built)
+**Last Updated**: Session 6
+**Completed Components**: 12 (all planned components built)
 **Pending Components**: 0
-**Status**: All components complete. Ready for polish phase.
+**Status**: All components complete. Dark mode added in Session 6.

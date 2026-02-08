@@ -14,6 +14,8 @@ All colors defined as CSS custom properties in `styles/global.css`. Apply via `v
 | `--text` | `#1A1A1A` | Primary text (near-black) | Headlines, body copy |
 | `--muted` | `#6B6B6B` | Muted text (gray) | Secondary text, timestamps |
 | `--border` | `#E0E0E0` | Borders (light gray) | Dividers, input borders |
+| `--surface` | `#FFFFFF` | Surface (pure white) | Cards, elevated containers |
+| `--text-inverse` | `#FFFFFF` | Inverse text | Text on accent backgrounds |
 
 ### Accent Colors
 
@@ -22,6 +24,24 @@ All colors defined as CSS custom properties in `styles/global.css`. Apply via `v
 | `--accent` | `#C4616C` | Primary accent (dusty rose) | Links, buttons, hover states |
 | `--accent-hover` | `#A84F58` | Darker accent (hover state) | Button press, active state |
 | `--accent-light` | `#FDF0F1` | Light accent tint | Tag pills, blockquote bg |
+
+### Dark Mode
+
+Dark mode is enabled via `data-theme="dark"` attribute on `<html>`. This approach uses CSS variable overrides rather than Tailwind's `dark:` prefix, so all existing `var(--property)` references automatically adapt.
+
+| Variable | Light | Dark | Notes |
+|----------|-------|------|-------|
+| `--bg` | `#FAFAFA` | `#0F0F0F` | Near-black background |
+| `--surface` | `#FFFFFF` | `#1A1A1A` | Elevated surface |
+| `--text` | `#1A1A1A` | `#E8E8E8` | Off-white text |
+| `--text-inverse` | `#FFFFFF` | `#0F0F0F` | Flipped for contrast |
+| `--muted` | `#6B6B6B` | `#9B9B9B` | Lighter muted in dark |
+| `--border` | `#E0E0E0` | `#2A2A2A` | Subtle dark borders |
+| `--accent` | `#C4616C` | `#D67580` | Slightly lighter rose |
+| `--accent-hover` | `#A84F58` | `#BF5F6B` | Slightly lighter hover |
+| `--accent-light` | `#FDF0F1` | `#2A1C1E` | Dark tinted background |
+
+**Implementation**: The `ThemeToggle` component reads `localStorage.theme` on mount and falls back to `prefers-color-scheme`. A blocking `<script>` in `<head>` prevents flash of unstyled content (FOUC) by setting `data-theme` before first paint.
 
 ### Color Application Examples
 
@@ -361,5 +381,5 @@ Added in Session 4 for MDX blog post rendering. Applied via `.prose` class.
 
 ---
 
-**Last Updated**: Session 4
-**Status**: Complete — design system covers all current components and prose typography
+**Last Updated**: Session 6
+**Status**: Complete — design system covers all current components, prose typography, and dark mode

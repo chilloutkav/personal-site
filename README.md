@@ -9,6 +9,7 @@ A modern, high-performance personal portfolio website showcasing a Product Manag
 - **Modern Stack**: Latest Next.js, TypeScript, and Tailwind CSS v4
 - **Live Demos**: Integrated project demos via subdomain architecture
 - **Performance Optimized**: Sub-2-second builds with optimal bundle sizes
+- **Dark Mode**: System-aware theme toggle with localStorage persistence and FOUC prevention
 - **Fully Responsive**: Mobile-first design with pixel-perfect styling
 - **SEO Ready**: Optimized meta tags and performance metrics
 

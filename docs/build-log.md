@@ -224,6 +224,56 @@ Session 2 will build:
 
 ---
 
-**Session Status**: Session 4 complete — Blog infrastructure fully functional
+---
+
+## Session 5 — Polish & QA
+
+### Completed
+- Removed all 27 `{/* TODO: Review and finalize copy */}` comments from 10 files
+- `app/api/og/route.tsx` — Dynamic OG image generation (edge runtime, 1200x630, brand colors, ?title= param)
+- `public/images/og-default.jpg` — Static OG fallback image (captured from API route)
+- `app/layout.tsx` — Added OG image metadata (openGraph.images + twitter.images)
+- `components/ContactSection.tsx` — Added `role="alert"` to success/error messages
+- `styles/global.css` — Added `@media (prefers-reduced-motion: reduce)` block
+- `components/Hero.tsx` — Improved alt text to be descriptive
+
+---
+
+## Session 6 — Dark Mode
+
+### Completed
+
+#### New File: `components/ThemeToggle.tsx`
+- Client component with sun/moon SVG icon toggle
+- Reads `localStorage.theme` on mount, falls back to `prefers-color-scheme`
+- Listens for system preference changes (auto-follows when no explicit user choice)
+- Renders placeholder `<div>` until mounted (prevents hydration mismatch)
+- ARIA label updates dynamically: "Switch to light/dark mode"
+
+#### Modified: `styles/global.css`
+- Added `--surface` (#FFFFFF) and `--text-inverse` (#FFFFFF) to `:root`
+- Added `:root[data-theme="dark"]` block overriding all 9 color variables
+- Dark palette: bg #0F0F0F, surface #1A1A1A, text #E8E8E8, accent #D67580
+
+#### Modified: `app/layout.tsx`
+- Added blocking `<script>` in `<head>` for FOUC prevention: reads `localStorage.theme`, falls back to `prefers-color-scheme`, sets `data-theme` attribute synchronously before first paint
+- Added `suppressHydrationWarning` on `<html>` to avoid React warnings from the blocking script
+
+#### Modified: `components/Navigation.tsx`
+- Integrated `<ThemeToggle />` into both desktop nav bar and mobile drawer
+
+### Approach
+- **CSS variables + `data-theme` attribute**: All existing `var(--property)` references automatically adapt when the attribute changes — zero component changes needed beyond Navigation
+- **Not Tailwind `dark:` prefix**: Using `data-theme` attribute keeps the system framework-agnostic and avoids needing `dark:` variants on every utility class
+- **FOUC prevention**: A synchronous inline script in `<head>` runs before React hydrates, reading localStorage → system preference → setting `data-theme` so users never see a flash of the wrong theme
+
+### Decisions Made
+- Dark mode palette designed for WCAG AA contrast ratios
+- Accent color lightened slightly in dark mode (#D67580 vs #C4616C) for better legibility on dark backgrounds
+- `suppressHydrationWarning` is safe here because the blocking script always runs before React, so the server/client mismatch is intentional and harmless
+
+---
+
+**Session Status**: Session 6 complete — Dark mode fully functional
 **Blockers**: None
-**Branch Status**: Ready for polish phase
+**Branch Status**: Ready for deployment
