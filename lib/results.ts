@@ -14,7 +14,7 @@ const CASE_STUDIES: CaseStudy[] = [
   {
     id: "dtc-roas",
     discipline: "Growth Marketing",
-    clientDescriptor: "A DTC Home Goods Brand",
+    clientDescriptor: "A DTC Streetwear Brand",
     problem:
       "Paid media was burning cash with a sub-2X return on ad spend. The creative was stale, targeting was broad, and there was no measurement framework to guide decisions.",
     action:
@@ -28,7 +28,7 @@ const CASE_STUDIES: CaseStudy[] = [
   {
     id: "ecom-conversion",
     discipline: "Ecommerce",
-    clientDescriptor: "A Premium Art & Framing Company",
+    clientDescriptor: "A Premium Denim Label",
     problem:
       "The Shopify storefront had a conversion rate under 0.5%. Product pages were confusing, checkout was leaky, and there was zero post-purchase experience.",
     action:
@@ -56,7 +56,7 @@ const CASE_STUDIES: CaseStudy[] = [
   {
     id: "shopify-rebuild",
     discipline: "Ecommerce",
-    clientDescriptor: "A Lifestyle Apparel Brand",
+    clientDescriptor: "A Streetwear Denim Brand",
     problem:
       "The brand was stuck on an outdated Shopify theme with poor mobile performance, slow load times, and a fragmented tech stack that made updates painful.",
     action:

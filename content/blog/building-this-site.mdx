@@ -1,43 +1,32 @@
 ---
-title: "Building This Site: Next.js, Tailwind v4, and Editorial Design"
-date: "2025-11-10"
-excerpt: "A behind-the-scenes look at the technical and design decisions behind this personal site — from App Router to editorial typography."
+title: "How I Designed This Site (and Why It Looks Like a Magazine)"
+date: "2025-12-16"
+excerpt: "I rebuilt my personal site from scratch because the old one looked like every other developer portfolio. Here's the design philosophy behind the new one."
 tags: ["engineering", "design"]
 featured: false
 ---
 
-{/* TODO: Review and finalize copy */}
+My old site was fine. It loaded fast. It was responsive. It had all the right sections. It also looked exactly like every other personal site on the internet — white background, system font, minimal styling, zero personality.
 
-I rebuilt my personal site from scratch recently. Not because the old one was broken — it worked fine. But it didn't *feel* like me. It was generic. Another developer portfolio that looked like every other developer portfolio.
+The problem wasn't technical. The problem was that it didn't feel like anything. You could have swapped my name for anyone else's and nothing would have changed.
 
-So I started over with a clear goal: **make it feel like a magazine, not a template.**
+So I tore it down and started with a question: what should a personal site *feel* like?
 
-## The Stack
+## The Magazine Answer
 
-Here's what I landed on:
+Most personal sites land in one of two camps. The minimal developer portfolio — barely styled, because styling is supposedly frivolous. Or the over-designed agency showcase — parallax scrolling, loading animations, every trendy effect stacked on top of each other.
 
-- **Next.js 15** with the App Router
-- **Tailwind CSS v4** for styling
-- **TypeScript** throughout
-- **MDX** for blog content
-- **Netlify** for deployment
+I wanted neither. I wanted something that felt intentional without being distracting. Something where every design choice had a reason.
 
-Nothing exotic. The magic isn't in the stack — it's in the design decisions.
+Magazine editorial design gave me that. In editorial design, nothing is accidental. The whitespace is deliberate. The typography scale is structured. The rhythm between sections is planned. Content drives layout, not the other way around.
 
-## Why Editorial Design?
+## Typography Is the Entire Game
 
-Most personal sites fall into one of two camps: the *minimal developer portfolio* (white background, system font, barely any styling) or the *over-designed agency site* (parallax everywhere, loading animations, style over substance).
+The single biggest design decision was choosing two fonts and being disciplined about how I used them.
 
-I wanted something in between. Something that felt intentional and distinctive without being distracting. Magazine editorial design gave me that:
+**Space Grotesk** for headings — geometric, modern, a little unexpected. It has personality without being gimmicky.
 
-> Editorial design treats every element as deliberate. The whitespace, the typography scale, the rhythm of content sections — nothing is accidental.
-
-### Typography as Architecture
-
-The single biggest lever in editorial design is typography. I chose two fonts:
-
-- **Space Grotesk** for headings — geometric, modern, a little unexpected
-- **DM Sans** for body text — clean and readable at any size
+**DM Sans** for body text — clean and readable at any size. It disappears, which is exactly what body text should do.
 
 The heading scale uses `clamp()` for fluid sizing:
 
@@ -45,44 +34,40 @@ The heading scale uses `clamp()` for fluid sizing:
 font-size: clamp(2rem, 5vw, 3.5rem);
 ```
 
-This means headings look proportional on every screen size without a single media query.
+Headings look proportional on every screen size without a single media query. This one line of CSS replaced what used to be four breakpoints.
 
-### The Color Constraint
+## The Three-Color Constraint
 
-I limited myself to essentially three colors:
+I limited the entire palette to three values:
 
-1. `#FAFAFA` — Off-white background (warmer than pure white)
-2. `#1A1A1A` — Near-black text (softer than pure black)
-3. `#C4616C` — Dusty rose accent (used sparingly)
+1. `#FAFAFA` — off-white background, warmer than pure white
+2. `#1A1A1A` — near-black text, softer than pure black
+3. `#C4616C` — dusty rose accent, used sparingly
 
-**Constraining the palette forces better design decisions.** When you can't rely on color to differentiate elements, you have to use spacing, typography weight, and layout more thoughtfully.
+This constraint was the best design decision I made. When you can't rely on color to differentiate elements, you have to get better at spacing, weight, and layout. Every hierarchy has to come from typography and whitespace alone. The accent color only appears on things that matter — interactive elements, key highlights, the occasional decorative touch.
 
-## Lessons Learned
+The dark mode version flips the background and text values while shifting the accent slightly warmer. Same three-color philosophy, just inverted.
 
-### Tailwind v4 Quirks
+## The Stack (and the Tailwind v4 War Story)
 
-Tailwind CSS v4 is a significant rewrite. The biggest gotcha I hit: **it doesn't work with Next.js dev mode.** The `@import "tailwindcss"` directive fails to process in development, resulting in completely unstyled pages.
+The technical choices were straightforward:
 
-The workaround is simple — use `npm run build && npm start` instead of `npm run dev`. Not ideal for hot reload, but production builds are fast enough that it hasn't slowed me down.
+- **Next.js 15** with the App Router
+- **Tailwind CSS v4** for styling
+- **TypeScript** throughout
+- **MDX** for blog content
+- **Netlify** for deployment
 
-### App Router Patterns
+The interesting story is Tailwind v4. It's a major rewrite with a new engine, and at the time I built this site, it had a showstopper bug with Next.js: the `@import "tailwindcss"` directive fails to process in development mode. Pages load completely unstyled. Blank white screen.
 
-The Next.js App Router changes how you think about components. The key mental model shift:
+The workaround is to skip `npm run dev` entirely and build for production every time. `npm run build && npm start` instead of `npm run dev`. Not ideal for hot reload, but production builds are fast enough that it didn't slow me down. I got used to it within a day.
 
-1. **Server components are the default** — fetch data, render HTML, zero client JavaScript
-2. **Client components are opt-in** — only for interactivity (scroll observers, form state, etc.)
-3. **Composition over configuration** — wrap server components in thin client shells when you need both
-
-### MDX for Content
-
-Using MDX for blog posts gives me the best of both worlds — write in Markdown for speed, drop in React components when I need something richer. The `next-mdx-remote` library handles compilation at build time, so there's no runtime cost.
+The App Router also changed how I think about components. Server components are the default — fetch data, render HTML, ship zero JavaScript. Client components are opt-in, only for things that genuinely need interactivity: scroll animations, form state, the theme toggle. Most of the site sends no JavaScript to the browser at all.
 
 ## What's Next
 
-The site is live and functional, but it's not done. A few things still on the list:
+The site is live and I'm happy with how it turned out. It feels like mine, which was the whole point.
 
-- **More case studies** with deeper narrative
-- **Interactive project demos** embedded directly in pages
-- **Dark mode** (maybe — I'm not convinced it's necessary)
+What comes next is content. Real case studies with actual numbers, not placeholder summaries. More writing about the intersection of product, growth, and ecommerce. Maybe some interactive pieces where I can show work instead of just describing it.
 
-For now, I'm happy with where it landed. It feels like *mine*, which is the whole point.
+The foundation is solid. Now it's about filling it with things worth reading.

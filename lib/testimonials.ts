@@ -10,33 +10,33 @@ export interface Testimonial {
 
 const TESTIMONIALS: Testimonial[] = [
   {
-    id: "startup-founder",
+    id: "wilbur-labs",
     quote:
-      "Kaven doesn't just manage products — he understands how growth, revenue, and user experience connect. He rebuilt our onboarding flow and cut our CAC in half. Most PMs talk about impact. He actually delivers it.",
-    author: "Sarah Chen",
-    role: "CEO & Co-Founder",
-    company: "A Series B SaaS Startup",
-    discipline: "Product Management",
+      "It was a great pleasure working with Kaven. Not only he delivered great quality product, but also helped us find additional human resources on a short notice. Having someone you can rely one and trust that the job will be done on time and with outstanding quality is incredibly important with dealing with a high-growth start up. Ready to hire him for another project.",
+    author: "Wilbur Labs",
+    role: "Search Engine Marketing",
+    company: "Wilbur Labs",
+    discipline: "Growth Marketing",
     featured: true,
   },
   {
-    id: "dtc-cmo",
+    id: "akkadia-project",
     quote:
-      "We hired Kaven to fix our paid media. Within 6 months he took our ROAS from 2X to 8X — and he did it while scaling spend, not cutting it. He thinks like a CFO and executes like a performance marketer.",
-    author: "Marcus Rivera",
-    role: "CMO",
-    company: "A DTC Home Goods Brand",
+      "Kaven is an exceptionally talented and wonderful SEM / PPC Manager. I have nothing but the highest regard for him and the quality of his work.",
+    author: "Akkadia Project",
+    role: "Paid Ads & PPC Management",
+    company: "Akkadia Project",
     discipline: "Growth Marketing",
     featured: false,
   },
   {
-    id: "ecom-director",
+    id: "meyers-printing",
     quote:
-      "Kaven transformed our Shopify store from a liability into our best revenue channel. Conversion rate up 400%, AOV up 22%, and our ops team can finally manage everything themselves. He builds things that last.",
-    author: "Jamie Okafor",
-    role: "Director of Operations",
-    company: "A Premium Art & Framing Company",
-    discipline: "Ecommerce",
+      "Kaven really helped us rebuild and improve our Google Ads account! He was very responsive, easy to work with, and met all of our expectations. I would definitely recommend him!",
+    author: "Meyers Printing",
+    role: "Paid Media Setup & Optimization",
+    company: "Meyers Printing",
+    discipline: "Growth Marketing",
     featured: false,
   },
 ];
