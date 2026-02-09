@@ -44,12 +44,12 @@ const nextConfig = {
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
+              "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://www.googletagmanager.com",
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https:",
               "font-src 'self' https://fonts.gstatic.com",
-              "connect-src 'self' https://fonts.gstatic.com",
-              "frame-src 'none'"
+              "connect-src 'self' https://fonts.gstatic.com https://www.google-analytics.com https://analytics.google.com https://www.googletagmanager.com",
+              "frame-src https://www.googletagmanager.com"
             ].join('; ')
           }
         ]
