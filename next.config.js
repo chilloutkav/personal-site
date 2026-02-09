@@ -16,18 +16,6 @@ const nextConfig = {
   pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
 
   /**
-   * Experimental Features
-   * Note: mdxRs (Rust MDX compiler) is disabled for stability.
-   * The experimental Rust compiler caused webpack vendor-chunks conflicts
-   * in development mode. Standard @next/mdx provides all needed functionality.
-   */
-  experimental: {
-    // mdxRs EXPLICITLY DISABLED - createMDX auto-enables it, so we must force disable
-    // The experimental Rust compiler causes webpack vendor-chunks conflicts
-    mdxRs: false,
-  },
-  
-  /**
    * Security Headers Configuration
    * Implements comprehensive security headers for production deployment
    */
@@ -81,19 +69,8 @@ const nextConfig = {
 /**
  * MDX Configuration
  * Enhanced markdown processing with React component support
- * IMPORTANT: Explicitly disable mdxRs to prevent webpack vendor-chunks conflicts
  */
-const withMDX = createMDX({
-  /**
-   * MDX options can be configured here:
-   * - Custom remark/rehype plugins
-   * - Syntax highlighting
-   * - Custom components
-   */
-  experimental: {
-    mdxRs: false  // Force disable mdxRs in MDX config to prevent override
-  }
-})
+const withMDX = createMDX({})
 
 /**
  * Export the combined configuration
