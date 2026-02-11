@@ -17,17 +17,17 @@ export default function AboutPage() {
 
           {/* Hero Heading Area */}
           <ScrollReveal delay={0}>
-            <p className="text-[12px] font-bold uppercase tracking-[0.25em] text-[var(--muted)]">
+            <p className="font-[family-name:var(--font-heading)] text-[14px] uppercase tracking-[0.25em] text-[var(--muted)]">
               About
             </p>
-            <h1 className="mt-3 font-[family-name:var(--font-heading)] text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.1] tracking-tight text-[var(--text)]">
+            <h1 className="mt-3 font-[family-name:var(--font-heading)] text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.1] tracking-tight text-[var(--text)]">
               Three Disciplines. One Approach.
             </h1>
           </ScrollReveal>
 
-          {/* Opening Paragraph with Drop Cap */}
+          {/* Opening Paragraph with Drop Cap — periwinkle accent */}
           <ScrollReveal delay={100}>
-            <p className="mt-10 text-[16px] leading-relaxed text-[var(--text)] first-letter:float-left first-letter:mr-2 first-letter:mt-1 first-letter:font-[family-name:var(--font-heading)] first-letter:text-[3.5rem] first-letter:font-bold first-letter:leading-[0.8] first-letter:text-[var(--accent)]">
+            <p className="mt-10 text-[16px] leading-relaxed text-[var(--text)] first-letter:float-left first-letter:mr-2 first-letter:mt-1 first-letter:font-[family-name:var(--font-heading)] first-letter:text-[4rem] first-letter:leading-[0.8] first-letter:text-[var(--accent)]">
               Most people pick a lane. Product management, growth marketing, or ecommerce. I&apos;ve spent 12+ years refusing to choose — because every time I got good at one, I realized the next one was the bottleneck.
             </p>
           </ScrollReveal>
@@ -35,7 +35,7 @@ export default function AboutPage() {
           {/* Origin Story */}
           <div className="mt-8">
             <ScrollReveal delay={200}>
-              <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.25rem,3vw,1.75rem)] font-bold text-[var(--text)]">
+              <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.5rem,3vw,2rem)] text-[var(--text)]">
                 Where It Started
               </h2>
             </ScrollReveal>
@@ -49,23 +49,23 @@ export default function AboutPage() {
           {/* How It All Connects */}
           <div className="mt-8">
             <ScrollReveal delay={400}>
-              <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.25rem,3vw,1.75rem)] font-bold text-[var(--text)]">
+              <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.5rem,3vw,2rem)] text-[var(--text)]">
                 How It All Connects
               </h2>
             </ScrollReveal>
             <ScrollReveal delay={500}>
               <p className="mt-3 text-[15px] leading-relaxed text-[var(--muted)]">
-                I&apos;ve scaled ad spend from $5K to $80K/month and kept it profitable the whole way. 4-8X ROAS across DTC and B2B. <span className="font-bold text-[var(--accent)]">Growth marketing</span> is the discipline, but the real skill is knowing when to pour fuel on something and when to fix the thing you&apos;re pouring fuel on.
+                I&apos;ve scaled ad spend from $5K to $80K/month and kept it profitable the whole way. 4-8X ROAS across DTC and B2B. <span className="font-bold text-[var(--text)]">Growth marketing</span> is the discipline, but the real skill is knowing when to pour fuel on something and when to fix the thing you&apos;re pouring fuel on.
               </p>
             </ScrollReveal>
             <ScrollReveal delay={600}>
               <p className="mt-3 text-[15px] leading-relaxed text-[var(--muted)]">
-                Cut customer acquisition costs by 50%. Doubled activation rates by redesigning onboarding. Built lead scoring models that actually made sales teams want to use the CRM. <span className="font-bold text-[var(--accent)]">Product management</span> is where all the leverage is — one good decision at the product level is worth ten campaigns.
+                Cut customer acquisition costs by 50%. Doubled activation rates by redesigning onboarding. Built lead scoring models that actually made sales teams want to use the CRM. <span className="font-bold text-[var(--text)]">Product management</span> is where all the leverage is — one good decision at the product level is worth ten campaigns.
               </p>
             </ScrollReveal>
             <ScrollReveal delay={700}>
               <p className="mt-3 text-[15px] leading-relaxed text-[var(--muted)]">
-                Took a Shopify store from $800K to $2M+ in annual revenue. Lifted conversion rates by 400%. Built post-purchase flows that turned one-time buyers into repeat customers. <span className="font-bold text-[var(--accent)]">Ecommerce</span> is where theory meets the cash register — every decision shows up in the numbers the same week.
+                Took a Shopify store from $800K to $2M+ in annual revenue. Lifted conversion rates by 400%. Built post-purchase flows that turned one-time buyers into repeat customers. <span className="font-bold text-[var(--text)]">Ecommerce</span> is where theory meets the cash register — every decision shows up in the numbers the same week.
               </p>
             </ScrollReveal>
           </div>
@@ -73,7 +73,7 @@ export default function AboutPage() {
           {/* Why It Matters */}
           <div className="mt-8">
             <ScrollReveal delay={800}>
-              <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.25rem,3vw,1.75rem)] font-bold text-[var(--text)]">
+              <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.5rem,3vw,2rem)] text-[var(--text)]">
                 Why It Matters
               </h2>
             </ScrollReveal>
@@ -87,7 +87,7 @@ export default function AboutPage() {
           {/* Technical Background */}
           <div className="mt-8">
             <ScrollReveal delay={1000}>
-              <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.25rem,3vw,1.75rem)] font-bold text-[var(--text)]">
+              <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.5rem,3vw,2rem)] text-[var(--text)]">
                 The Technical Edge
               </h2>
             </ScrollReveal>
@@ -101,7 +101,7 @@ export default function AboutPage() {
           {/* Personal Touch */}
           <div className="mt-8">
             <ScrollReveal delay={1200}>
-              <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.25rem,3vw,1.75rem)] font-bold text-[var(--text)]">
+              <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.5rem,3vw,2rem)] text-[var(--text)]">
                 Off the Clock
               </h2>
             </ScrollReveal>
@@ -113,14 +113,14 @@ export default function AboutPage() {
           </div>
 
           {/* CTA */}
-          <div className="mt-12 border-t border-[var(--border)] pt-10">
+          <div className="mt-12 border-t-2 border-dashed border-[var(--border-light)] pt-10">
             <ScrollReveal delay={1400}>
               <p className="text-[15px] leading-relaxed text-[var(--muted)]">
                 Have a product that needs to grow, a store that needs to convert, or a growth engine that needs building? Let&apos;s talk.
               </p>
               <Link
                 href="/contact"
-                className="mt-4 inline-block rounded-[var(--radius-md)] bg-[var(--accent)] px-8 py-3 text-[14px] font-bold uppercase tracking-[0.15em] text-[var(--text-inverse)] transition-colors hover:bg-[var(--accent-hover)]"
+                className="mt-4 inline-block bg-[var(--accent)] px-8 py-3 font-[family-name:var(--font-heading)] text-[16px] uppercase tracking-[0.15em] text-[var(--text-inverse)] transition-colors hover:bg-[var(--accent-hover)]"
               >
                 Let&apos;s Talk
               </Link>
@@ -134,8 +134,8 @@ export default function AboutPage() {
           <div className="space-y-6">
 
             <ScrollReveal delay={200}>
-              <div className="rounded-[var(--radius-lg)] border-l-4 border-[var(--accent)] bg-[var(--accent-light)] p-5">
-                <div className="font-[family-name:var(--font-heading)] text-[2rem] font-bold text-[var(--text)]">
+              <div className="border-l-4 border-[var(--border)] p-5">
+                <div className="font-[family-name:var(--font-heading)] text-[2.5rem] text-[var(--accent)]">
                   12+
                 </div>
                 <div className="text-[13px] text-[var(--muted)]">
@@ -145,8 +145,8 @@ export default function AboutPage() {
             </ScrollReveal>
 
             <ScrollReveal delay={300}>
-              <div className="rounded-[var(--radius-lg)] border-l-4 border-[var(--accent)] bg-[var(--accent-light)] p-5">
-                <div className="font-[family-name:var(--font-heading)] text-[2rem] font-bold text-[var(--text)]">
+              <div className="border-l-4 border-[var(--border)] p-5">
+                <div className="font-[family-name:var(--font-heading)] text-[2.5rem] text-[var(--accent)]">
                   3
                 </div>
                 <div className="text-[13px] text-[var(--muted)]">

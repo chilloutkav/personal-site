@@ -45,14 +45,14 @@ export default function Navigation() {
       <header
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           scrolled
-            ? "bg-[var(--bg)]/90 backdrop-blur-md border-b border-[var(--border)]"
+            ? "bg-[var(--bg)]/90 backdrop-blur-md border-b border-dashed border-[var(--border-light)]"
             : "bg-transparent"
         }`}
       >
         <nav className="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-5 md:px-8 lg:px-10">
           <Link
             href="/"
-            className="font-[family-name:var(--font-heading)] text-[15px] font-bold uppercase tracking-[0.2em] text-[var(--text)] transition-colors hover:text-[var(--accent)]"
+            className="font-[family-name:var(--font-heading)] text-[20px] uppercase tracking-[0.2em] text-[var(--text)]"
           >
             Kaven Kim
           </Link>
@@ -63,7 +63,7 @@ export default function Navigation() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="group relative py-1 text-[14px] font-medium tracking-wide text-[var(--text)] transition-colors hover:text-[var(--accent)]"
+                className="group relative py-1 text-[14px] font-medium tracking-wide text-[var(--text)] transition-colors hover:text-[var(--text)]"
               >
                 {link.label}
                 <span
@@ -121,7 +121,7 @@ export default function Navigation() {
             <Link
               key={link.href}
               href={link.href}
-              className={`block border-b border-[var(--border)] py-4 text-[20px] font-medium tracking-wide transition-colors ${
+              className={`block border-b border-dashed border-[var(--border-light)] py-4 text-[20px] font-medium tracking-wide transition-colors ${
                 isActive(link.href)
                   ? "text-[var(--accent)]"
                   : "text-[var(--text)]"

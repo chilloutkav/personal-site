@@ -7,18 +7,18 @@ interface ResultCardProps {
 
 export default function ResultCard({ study }: ResultCardProps) {
   return (
-    <article className="group rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--surface)] p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg md:p-8">
+    <article className="group flex h-full flex-col border-2 border-dashed border-[var(--border-light)] bg-[var(--surface)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--border)] md:p-8">
       {/* Discipline + Client */}
-      <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--accent)]">
+      <p className="font-[family-name:var(--font-heading)] text-[14px] uppercase tracking-[0.2em] text-[var(--text)]">
         {study.discipline}
       </p>
       <p className="mt-1 text-[14px] italic text-[var(--muted)]">
         {study.clientDescriptor}
       </p>
 
-      {/* Metric */}
+      {/* Metric — periwinkle accent pop */}
       <div className="mt-6">
-        <p className="font-[family-name:var(--font-heading)] text-[clamp(2.5rem,5vw,3.5rem)] font-bold leading-none tracking-tight text-[var(--text)]">
+        <p className="font-[family-name:var(--font-heading)] text-[clamp(3rem,6vw,4.5rem)] leading-none tracking-tight text-[var(--accent)]">
           {study.metric}
         </p>
         <p className="mt-1 text-[13px] tracking-wide text-[var(--muted)]">
@@ -26,13 +26,13 @@ export default function ResultCard({ study }: ResultCardProps) {
         </p>
       </div>
 
-      {/* Divider */}
-      <div className="my-6 border-t border-[var(--border)]" />
+      {/* Dashed divider */}
+      <div className="my-6 border-t-2 border-dashed border-[var(--border-light)]" />
 
       {/* Narrative */}
-      <div className="space-y-5">
+      <div className="flex-1 space-y-5">
         <div>
-          <p className="mb-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--muted)]">
+          <p className="mb-1.5 font-[family-name:var(--font-heading)] text-[12px] uppercase tracking-[0.2em] text-[var(--muted)]">
             The Challenge
           </p>
           <p className="text-[14px] leading-relaxed text-[var(--text)]">
@@ -40,7 +40,7 @@ export default function ResultCard({ study }: ResultCardProps) {
           </p>
         </div>
         <div>
-          <p className="mb-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--muted)]">
+          <p className="mb-1.5 font-[family-name:var(--font-heading)] text-[12px] uppercase tracking-[0.2em] text-[var(--muted)]">
             The Approach
           </p>
           <p className="text-[14px] leading-relaxed text-[var(--text)]">
@@ -48,7 +48,7 @@ export default function ResultCard({ study }: ResultCardProps) {
           </p>
         </div>
         <div>
-          <p className="mb-1.5 text-[10px] font-bold uppercase tracking-[0.2em] text-[var(--muted)]">
+          <p className="mb-1.5 font-[family-name:var(--font-heading)] text-[12px] uppercase tracking-[0.2em] text-[var(--muted)]">
             The Outcome
           </p>
           <p className="text-[14px] leading-relaxed text-[var(--text)]">

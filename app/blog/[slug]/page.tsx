@@ -87,7 +87,7 @@ export default async function BlogPostPage({ params }: Props) {
             {post.meta.tags.map((tag) => (
               <span
                 key={tag}
-                className="rounded-full bg-[var(--accent-light)] px-3 py-0.5 text-[11px] font-bold uppercase tracking-[0.15em] text-[var(--accent)]"
+                className="border border-dashed border-[var(--border-light)] px-3 py-0.5 font-[family-name:var(--font-heading)] text-[12px] uppercase tracking-[0.15em] text-[var(--text)]"
               >
                 {tag}
               </span>
@@ -95,7 +95,7 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
 
           {/* Title */}
-          <h1 className="mt-5 font-[family-name:var(--font-heading)] text-[clamp(1.75rem,5vw,2.75rem)] font-bold leading-[1.1] tracking-tight text-[var(--text)]">
+          <h1 className="mt-5 font-[family-name:var(--font-heading)] text-[clamp(2rem,5vw,3.5rem)] leading-[1.1] tracking-tight text-[var(--text)]">
             {post.meta.title}
           </h1>
 
@@ -111,14 +111,14 @@ export default async function BlogPostPage({ params }: Props) {
           </div>
         </header>
 
-        {/* Divider */}
-        <div className="my-10 border-t border-[var(--border)]" />
+        {/* Dashed divider */}
+        <div className="my-10 border-t-2 border-dashed border-[var(--border-light)]" />
 
         {/* MDX content */}
         <div className="prose">{post.content}</div>
       </article>
 
-      <section className="border-t border-[var(--border)]">
+      <section className="border-t-2 border-dashed border-[var(--border-light)]">
         <ContactSection variant="compact" />
       </section>
     </>

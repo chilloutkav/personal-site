@@ -13,18 +13,16 @@ export default function Hero() {
   return (
     <section className="mx-auto flex min-h-[calc(100vh-76px)] max-w-[1200px] items-center px-6 py-16 md:px-8 md:py-20 lg:px-10">
       <div className="grid w-full items-center gap-12 md:grid-cols-[1fr_0.7fr] md:gap-16 lg:gap-20">
-        {/* Text column — shows second on mobile (order-2), first on desktop (md:order-1) */}
+        {/* Text column */}
         <div className="order-2 md:order-1">
-          {/* Label */}
           <p
-            className="mb-6 text-[12px] font-bold uppercase tracking-[0.25em] text-[var(--muted)]"
+            className="mb-6 font-[family-name:var(--font-heading)] text-[14px] uppercase tracking-[0.25em] text-[var(--muted)]"
             style={{ animation: "fadeIn 0.6s ease-out both" }}
           >
             Kaven Kim
           </p>
 
-          {/* Staggered headline */}
-          <h1 className="font-[family-name:var(--font-heading)] text-[clamp(2rem,6vw,4.5rem)] font-bold leading-[1.05] tracking-tight text-[var(--text)]">
+          <h1 className="font-[family-name:var(--font-heading)] text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.05] tracking-tight text-[var(--text)]">
             {TITLES.map((title, i) => (
               <span
                 key={title}
@@ -38,7 +36,6 @@ export default function Hero() {
             ))}
           </h1>
 
-          {/* Subtext */}
           <p
             className="mt-6 max-w-[480px] text-[16px] leading-relaxed text-[var(--muted)] md:text-[17px]"
             style={{ animation: "fadeInUp 0.7s ease-out 900ms both" }}
@@ -48,14 +45,13 @@ export default function Hero() {
             across the finish line.
           </p>
 
-          {/* CTAs */}
           <div
             className="mt-8 flex flex-wrap items-center gap-4"
             style={{ animation: "fadeInUp 0.7s ease-out 1100ms both" }}
           >
             <Link
               href="#contact"
-              className="inline-flex items-center rounded-[var(--radius-md)] bg-[var(--accent)] px-6 py-3 text-[14px] font-medium tracking-wide text-[var(--text-inverse)] transition-colors hover:bg-[var(--accent-hover)]"
+              className="inline-flex items-center bg-[var(--accent)] px-6 py-3 text-[14px] font-medium tracking-wide text-[var(--text-inverse)] transition-colors hover:bg-[var(--accent-hover)]"
             >
               Get in Touch
             </Link>
@@ -70,12 +66,12 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Headshot column — shows first on mobile (order-1), second on desktop (md:order-2) */}
+        {/* Headshot column */}
         <div
           className="order-1 flex justify-center md:order-2 md:justify-end"
           style={{ animation: "scaleIn 0.8s ease-out 300ms both" }}
         >
-          <div className="relative aspect-[3/4] w-full max-w-[320px] overflow-hidden rounded-[var(--radius-lg)] md:max-w-none">
+          <div className="relative aspect-[3/4] w-full max-w-[320px] overflow-hidden md:max-w-none">
             <Image
               src="/images/profile.jpg"
               alt="Kaven Kim — Product Manager, Growth Marketer, and Ecommerce Operator"

@@ -23,18 +23,18 @@ export default function HomePage() {
       <Hero />
 
       {/* Results preview */}
-      <section className="border-t border-[var(--border)]">
+      <section className="border-t-2 border-dashed border-[var(--border-light)]">
         <div className="mx-auto max-w-[1200px] px-6 py-16 md:px-8 md:py-20 lg:px-10">
-          <p className="text-[12px] font-bold uppercase tracking-[0.25em] text-[var(--muted)]">
+          <p className="font-[family-name:var(--font-heading)] text-[14px] uppercase tracking-[0.25em] text-[var(--muted)]">
             Selected Results
           </p>
           <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
-            <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.75rem,4vw,2.5rem)] font-bold leading-[1.1] tracking-tight text-[var(--text)]">
+            <h2 className="font-[family-name:var(--font-heading)] text-[clamp(2rem,4vw,3rem)] leading-[1.1] tracking-tight text-[var(--text)]">
               How I&apos;ve Helped
             </h2>
             <Link
               href="/results"
-              className="text-[14px] font-medium tracking-wide text-[var(--muted)] transition-colors hover:text-[var(--accent)]"
+              className="text-[14px] font-medium tracking-wide text-[var(--text)] transition-colors hover:text-[var(--accent)]"
             >
               View all results &rarr;
             </Link>
@@ -45,13 +45,13 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials */}
-      <section className="border-t border-[var(--border)]">
+      <section className="border-t-2 border-dashed border-[var(--border-light)]">
         <div className="mx-auto max-w-[1200px] px-6 py-16 md:px-8 md:py-20 lg:px-10">
           <ScrollReveal>
-            <p className="text-[12px] font-bold uppercase tracking-[0.25em] text-[var(--muted)]">
+            <p className="font-[family-name:var(--font-heading)] text-[14px] uppercase tracking-[0.25em] text-[var(--muted)]">
               Testimonials
             </p>
-            <h2 className="mt-3 font-[family-name:var(--font-heading)] text-[clamp(1.75rem,4vw,2.5rem)] font-bold leading-[1.1] tracking-tight text-[var(--text)]">
+            <h2 className="mt-3 font-[family-name:var(--font-heading)] text-[clamp(2rem,4vw,3rem)] leading-[1.1] tracking-tight text-[var(--text)]">
               What People Say
             </h2>
           </ScrollReveal>
@@ -77,19 +77,19 @@ export default function HomePage() {
 
       {/* Latest Writing */}
       {latestPosts.length > 0 && (
-        <section className="border-t border-[var(--border)]">
+        <section className="border-t-2 border-dashed border-[var(--border-light)]">
           <div className="mx-auto max-w-[1200px] px-6 py-16 md:px-8 md:py-20 lg:px-10">
             <ScrollReveal>
-              <p className="text-[12px] font-bold uppercase tracking-[0.25em] text-[var(--muted)]">
+              <p className="font-[family-name:var(--font-heading)] text-[14px] uppercase tracking-[0.25em] text-[var(--muted)]">
                 From the Blog
               </p>
               <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
-                <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.75rem,4vw,2.5rem)] font-bold leading-[1.1] tracking-tight text-[var(--text)]">
+                <h2 className="font-[family-name:var(--font-heading)] text-[clamp(2rem,4vw,3rem)] leading-[1.1] tracking-tight text-[var(--text)]">
                   Latest Writing
                 </h2>
                 <Link
                   href="/blog"
-                  className="text-[14px] font-medium tracking-wide text-[var(--muted)] transition-colors hover:text-[var(--accent)]"
+                  className="text-[14px] font-medium tracking-wide text-[var(--text)] transition-colors hover:text-[var(--accent)]"
                 >
                   All posts &rarr;
                 </Link>
@@ -102,7 +102,7 @@ export default function HomePage() {
       )}
 
       {/* Contact */}
-      <section className="border-t border-[var(--border)]">
+      <section className="border-t-2 border-dashed border-[var(--border-light)]">
         <ContactSection variant="compact" id="contact" />
       </section>
     </>

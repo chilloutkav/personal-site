@@ -16,12 +16,12 @@ export async function GET(request: NextRequest) {
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
-          backgroundColor: "#FAFAFA",
+          backgroundColor: "#FFFFFF",
           padding: "60px 80px",
           position: "relative",
         }}
       >
-        {/* Accent bar at top */}
+        {/* Dashed accent bar at top */}
         <div
           style={{
             position: "absolute",
@@ -29,7 +29,7 @@ export async function GET(request: NextRequest) {
             left: 0,
             right: 0,
             height: "6px",
-            backgroundColor: "#C4616C",
+            backgroundColor: "#000000",
           }}
         />
 
@@ -38,9 +38,10 @@ export async function GET(request: NextRequest) {
           style={{
             fontSize: title ? "36px" : "48px",
             fontWeight: 700,
-            color: "#1A1A1A",
-            letterSpacing: "-0.02em",
+            color: "#000000",
+            letterSpacing: "0.15em",
             lineHeight: 1.1,
+            textTransform: "uppercase" as const,
           }}
         >
           Kaven Kim
@@ -51,7 +52,7 @@ export async function GET(request: NextRequest) {
           style={{
             fontSize: title ? "56px" : "32px",
             fontWeight: title ? 700 : 400,
-            color: title ? "#1A1A1A" : "#6B6B6B",
+            color: title ? "#000000" : "#666666",
             marginTop: title ? "20px" : "12px",
             lineHeight: 1.2,
             letterSpacing: "-0.01em",
@@ -68,7 +69,7 @@ export async function GET(request: NextRequest) {
             bottom: "40px",
             right: "60px",
             fontSize: "20px",
-            color: "#C4616C",
+            color: "#8C91FA",
             fontWeight: 500,
           }}
         >

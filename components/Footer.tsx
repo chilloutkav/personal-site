@@ -9,13 +9,13 @@ const FOOTER_LINKS = [
 
 export default function Footer() {
   return (
-    <footer className="border-t border-[var(--border)] bg-[var(--bg)]">
+    <footer className="border-t-2 border-dashed border-[var(--border-light)] bg-[var(--bg)]">
       <div className="mx-auto grid max-w-[1200px] gap-12 px-6 py-16 md:grid-cols-3 md:gap-8 md:px-8 md:py-20 lg:px-10">
         {/* Brand column */}
         <div>
           <Link
             href="/"
-            className="font-[family-name:var(--font-heading)] text-[15px] font-bold uppercase tracking-[0.2em] text-[var(--text)]"
+            className="font-[family-name:var(--font-heading)] text-[20px] uppercase tracking-[0.2em] text-[var(--text)]"
           >
             Kaven Kim
           </Link>
@@ -27,7 +27,7 @@ export default function Footer() {
 
         {/* Navigation column */}
         <div>
-          <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--muted)]">
+          <p className="mb-4 font-[family-name:var(--font-heading)] text-[14px] uppercase tracking-[0.2em] text-[var(--muted)]">
             Navigate
           </p>
           <div className="flex flex-col gap-3">
@@ -45,7 +45,7 @@ export default function Footer() {
 
         {/* Connect column */}
         <div>
-          <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.2em] text-[var(--muted)]">
+          <p className="mb-4 font-[family-name:var(--font-heading)] text-[14px] uppercase tracking-[0.2em] text-[var(--muted)]">
             Connect
           </p>
           <div className="flex flex-col gap-3">
@@ -68,7 +68,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-[var(--border)]">
+      <div className="border-t border-dashed border-[var(--border-light)]">
         <div className="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-5 md:px-8 lg:px-10">
           <p className="text-[12px] text-[var(--muted)]">
             &copy; {new Date().getFullYear()} Kaven Kim

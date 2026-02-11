@@ -1,15 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #FAFAFA;
-  --surface: #FFFFFF;
-  --text: #1A1A1A;
+  --bg: #FFFFFF;
+  --surface: #F5F5F5;
+  --text: #000000;
   --text-inverse: #FFFFFF;
-  --muted: #6B6B6B;
-  --border: #E0E0E0;
-  --accent: #C4616C;
-  --accent-hover: #A84F58;
-  --accent-light: #FDF0F1;
+  --muted: #666666;
+  --border: #000000;
+  --border-light: #CCCCCC;
+  --accent: #8C91FA;
+  --accent-hover: #7075E0;
+  --accent-light: #EEEFFE;
+  --hover-bg: #F0F0F0;
 
   --space-xs: 0.25rem;
   --space-sm: 0.5rem;
@@ -30,15 +32,17 @@
 }
 
 :root[data-theme="dark"] {
-  --bg: #0F0F0F;
-  --surface: #1A1A1A;
-  --text: #E8E8E8;
-  --text-inverse: #0F0F0F;
-  --muted: #9B9B9B;
-  --border: #2A2A2A;
-  --accent: #D67580;
-  --accent-hover: #BF5F6B;
-  --accent-light: #2A1C1E;
+  --bg: #000000;
+  --surface: #111111;
+  --text: #FFFFFF;
+  --text-inverse: #000000;
+  --muted: #999999;
+  --border: #FFFFFF;
+  --border-light: #333333;
+  --accent: #A0A5FF;
+  --accent-hover: #8C91FA;
+  --accent-light: #1A1A2E;
+  --hover-bg: #111111;
 }
 
 @layer base {
@@ -52,14 +56,14 @@
 
   html {
     scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
   }
 
   body {
     background-color: var(--bg);
     color: var(--text);
     line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     transition: background-color 0.2s ease, color 0.2s ease;
   }
 
@@ -74,6 +78,15 @@
   a {
     color: inherit;
     text-decoration: none;
+  }
+
+  ::selection {
+    background-color: var(--accent-light);
+    color: var(--text);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading), sans-serif;
   }
 }
 
@@ -154,6 +167,12 @@
     transform: translateY(0);
   }
 
+  /* Dashed divider utility */
+  .dashed-divider {
+    border: none;
+    border-top: 2px dashed var(--border-light);
+  }
+
   /* Prose — editorial typography for MDX content */
   .prose {
     font-size: 1rem;
@@ -166,8 +185,8 @@
   }
 
   .prose h2 {
-    font-family: var(--font-heading);
-    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-family: var(--font-heading), sans-serif;
+    font-size: clamp(1.75rem, 3vw, 2.25rem);
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: -0.02em;
@@ -177,8 +196,8 @@
   }
 
   .prose h3 {
-    font-family: var(--font-heading);
-    font-size: clamp(1.15rem, 2.5vw, 1.4rem);
+    font-family: var(--font-heading), sans-serif;
+    font-size: clamp(1.35rem, 2.5vw, 1.75rem);
     font-weight: 600;
     line-height: 1.3;
     letter-spacing: -0.01em;
@@ -198,7 +217,7 @@
   }
 
   .prose a {
-    color: var(--accent);
+    color: var(--text);
     text-decoration: underline;
     text-underline-offset: 3px;
     text-decoration-thickness: 1px;
@@ -206,7 +225,7 @@
   }
 
   .prose a:hover {
-    color: var(--accent-hover);
+    color: var(--accent);
   }
 
   .prose strong {
@@ -219,14 +238,14 @@
   }
 
   .prose blockquote {
-    border-left: 4px solid var(--accent);
+    border-left: 2px dashed var(--border);
     padding: 0.75em 1.25em;
     margin-top: 1.5em;
     margin-bottom: 1.5em;
     font-style: italic;
     color: var(--muted);
-    background: var(--accent-light);
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    background: transparent;
+    border-radius: 0;
   }
 
   .prose blockquote p {
@@ -261,8 +280,8 @@
   }
 
   .prose code {
-    background: var(--accent-light);
-    color: var(--accent-hover);
+    background: var(--text);
+    color: var(--bg);
     padding: 0.15em 0.4em;
     border-radius: var(--radius-sm);
     font-size: 0.875em;
@@ -292,7 +311,7 @@
 
   .prose hr {
     border: none;
-    border-top: 1px solid var(--border);
+    border-top: 2px dashed var(--border-light);
     margin: 2.5em 0;
   }
 
@@ -305,16 +324,16 @@
   }
 
   .prose th {
-    font-family: var(--font-heading);
+    font-family: var(--font-heading), sans-serif;
     font-weight: 600;
     text-align: left;
     padding: 0.625em 1em;
-    border-bottom: 2px solid var(--border);
+    border-bottom: 2px dashed var(--border);
   }
 
   .prose td {
     padding: 0.625em 1em;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px dashed var(--border-light);
   }
 
   .prose img {

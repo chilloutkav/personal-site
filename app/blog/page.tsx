@@ -28,10 +28,10 @@ export default function BlogPage() {
   return (
     <>
       <section className="mx-auto max-w-[1200px] px-6 pt-16 pb-4 md:px-8 md:pt-20 lg:px-10">
-        <p className="text-[12px] font-bold uppercase tracking-[0.25em] text-[var(--muted)]">
+        <p className="font-[family-name:var(--font-heading)] text-[14px] uppercase tracking-[0.25em] text-[var(--muted)]">
           Writing
         </p>
-        <h1 className="mt-3 font-[family-name:var(--font-heading)] text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.1] tracking-tight text-[var(--text)]">
+        <h1 className="mt-3 font-[family-name:var(--font-heading)] text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.1] tracking-tight text-[var(--text)]">
           Blog
         </h1>
         <p className="mt-4 max-w-[560px] text-[16px] leading-relaxed text-[var(--muted)]">
@@ -56,7 +56,7 @@ export default function BlogPage() {
         )}
       </section>
 
-      <section className="border-t border-[var(--border)]">
+      <section className="border-t-2 border-dashed border-[var(--border-light)]">
         <ContactSection variant="compact" />
       </section>
     </>

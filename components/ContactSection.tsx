@@ -49,7 +49,7 @@ export default function ContactSection({
   }
 
   const inputClasses =
-    "w-full rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--surface)] px-4 py-3 text-[14px] text-[var(--text)] outline-none transition-colors placeholder:text-[var(--muted)]/60 focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]";
+    "w-full border-2 border-dashed border-[var(--border-light)] bg-[var(--bg)] px-4 py-3 text-[14px] text-[var(--text)] outline-none transition-colors placeholder:text-[var(--muted)]/60 focus:border-[var(--accent)] focus:ring-1 focus:ring-[var(--accent)]";
 
   const form = (
     <form
@@ -124,13 +124,13 @@ export default function ContactSection({
       <button
         type="submit"
         disabled={state === "submitting"}
-        className="inline-flex w-full items-center justify-center rounded-[var(--radius-md)] bg-[var(--accent)] px-6 py-3 text-[14px] font-medium tracking-wide text-[var(--text-inverse)] transition-colors hover:bg-[var(--accent-hover)] disabled:opacity-60"
+        className="inline-flex w-full items-center justify-center bg-[var(--accent)] px-6 py-3 text-[14px] font-medium tracking-wide text-[var(--text-inverse)] transition-colors hover:bg-[var(--accent-hover)] disabled:opacity-60"
       >
         {state === "submitting" ? "Sending..." : "Send Message"}
       </button>
 
       {state === "success" && (
-        <p role="alert" className="text-center text-[14px] text-green-600">
+        <p role="alert" className="text-center text-[14px] text-[var(--accent)]">
           Message sent! I&apos;ll get back to you soon.
         </p>
       )}
@@ -145,10 +145,10 @@ export default function ContactSection({
   if (variant === "full") {
     return (
       <section id={id} className="mx-auto max-w-[560px] px-6 py-20 md:px-8">
-        <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.25em] text-[var(--muted)]">
+        <p className="mb-3 font-[family-name:var(--font-heading)] text-[14px] uppercase tracking-[0.25em] text-[var(--muted)]">
           Get in Touch
         </p>
-        <h2 className="font-[family-name:var(--font-heading)] text-[clamp(1.75rem,4vw,2.5rem)] font-bold leading-[1.1] tracking-tight text-[var(--text)]">
+        <h2 className="font-[family-name:var(--font-heading)] text-[clamp(2rem,4vw,3rem)] leading-[1.1] tracking-tight text-[var(--text)]">
           Let&apos;s Work Together
         </h2>
         <p className="mt-4 mb-8 text-[15px] leading-relaxed text-[var(--muted)]">
@@ -156,8 +156,8 @@ export default function ContactSection({
           ecommerce? Drop me a line.
         </p>
         {form}
-        <div className="mt-10 flex flex-col items-center gap-3 border-t border-[var(--border)] pt-8">
-          <p className="text-[12px] font-bold uppercase tracking-[0.2em] text-[var(--muted)]">
+        <div className="mt-10 flex flex-col items-center gap-3 border-t border-dashed border-[var(--border-light)] pt-8">
+          <p className="font-[family-name:var(--font-heading)] text-[14px] uppercase tracking-[0.2em] text-[var(--muted)]">
             Or reach out directly
           </p>
           <div className="flex gap-6">
@@ -189,10 +189,10 @@ export default function ContactSection({
       <div className="grid gap-12 md:grid-cols-[1fr_0.8fr] md:items-start md:gap-16">
         {/* Form */}
         <div>
-          <p className="mb-3 text-[12px] font-bold uppercase tracking-[0.25em] text-[var(--muted)]">
+          <p className="mb-3 font-[family-name:var(--font-heading)] text-[14px] uppercase tracking-[0.25em] text-[var(--muted)]">
             Get in Touch
           </p>
-          <h2 className="mb-6 font-[family-name:var(--font-heading)] text-[clamp(1.5rem,3vw,2rem)] font-bold leading-[1.1] tracking-tight text-[var(--text)]">
+          <h2 className="mb-6 font-[family-name:var(--font-heading)] text-[clamp(1.75rem,3vw,2.5rem)] leading-[1.1] tracking-tight text-[var(--text)]">
             Let&apos;s Work Together
           </h2>
           {form}
@@ -200,7 +200,7 @@ export default function ContactSection({
 
         {/* Direct contact info */}
         <div className="md:pt-14">
-          <p className="mb-4 text-[12px] font-bold uppercase tracking-[0.2em] text-[var(--muted)]">
+          <p className="mb-4 font-[family-name:var(--font-heading)] text-[14px] uppercase tracking-[0.2em] text-[var(--muted)]">
             Or reach out directly
           </p>
           <div className="space-y-4">
@@ -219,7 +219,7 @@ export default function ContactSection({
               LinkedIn &rarr;
             </a>
           </div>
-          <div className="mt-8 rounded-[var(--radius-md)] border border-[var(--border)] bg-[var(--accent-light)] p-5">
+          <div className="mt-8 border-2 border-dashed border-[var(--border-light)] p-5">
             <p className="text-[14px] leading-relaxed text-[var(--text)]">
               I typically respond within 24 hours. For urgent inquiries, email is
               the fastest way to reach me.

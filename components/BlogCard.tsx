@@ -9,13 +9,13 @@ interface BlogCardProps {
 export default function BlogCard({ post }: BlogCardProps) {
   return (
     <Link href={`/blog/${post.id}`} className="group block h-full">
-      <article className="flex h-full flex-col rounded-[var(--radius-lg)] border border-[var(--border)] bg-[var(--surface)] p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg md:p-8">
+      <article className="flex h-full flex-col border-2 border-dashed border-[var(--border-light)] bg-[var(--surface)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--border)] md:p-8">
         {/* Tags */}
         <div className="flex flex-wrap gap-2">
           {post.tags.map((tag) => (
             <span
               key={tag}
-              className="rounded-full bg-[var(--accent-light)] px-3 py-0.5 text-[11px] font-bold uppercase tracking-[0.15em] text-[var(--accent)]"
+              className="border border-dashed border-[var(--border-light)] px-3 py-0.5 font-[family-name:var(--font-heading)] text-[12px] uppercase tracking-[0.15em] text-[var(--text)]"
             >
               {tag}
             </span>
@@ -23,7 +23,7 @@ export default function BlogCard({ post }: BlogCardProps) {
         </div>
 
         {/* Title */}
-        <h3 className="mt-4 font-[family-name:var(--font-heading)] text-[clamp(1.15rem,2.5vw,1.35rem)] font-bold leading-[1.2] tracking-tight text-[var(--text)] transition-colors duration-200 group-hover:text-[var(--accent)]">
+        <h3 className="mt-4 font-[family-name:var(--font-heading)] text-[clamp(1.35rem,2.5vw,1.6rem)] leading-[1.2] tracking-tight text-[var(--text)]">
           {post.title}
         </h3>
 
@@ -33,7 +33,7 @@ export default function BlogCard({ post }: BlogCardProps) {
         </p>
 
         {/* Footer divider */}
-        <div className="mt-6 border-t border-[var(--border)] pt-4">
+        <div className="mt-6 border-t border-dashed border-[var(--border-light)] pt-4">
           <div className="flex items-center justify-between">
             <time
               dateTime={post.date}
@@ -41,7 +41,7 @@ export default function BlogCard({ post }: BlogCardProps) {
             >
               {format(new Date(post.date), "MMM d, yyyy")}
             </time>
-            <span className="text-[13px] font-medium tracking-wide text-[var(--accent)] transition-transform duration-200 group-hover:translate-x-1">
+            <span className="text-[13px] font-medium tracking-wide text-[var(--text)] transition-all duration-200 group-hover:translate-x-1 group-hover:text-[var(--accent)]">
               Read &rarr;
             </span>
           </div>
