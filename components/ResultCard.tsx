@@ -18,7 +18,7 @@ export default function ResultCard({ study }: ResultCardProps) {
 
       {/* Metric — periwinkle accent pop */}
       <div className="mt-6">
-        <p className="font-[family-name:var(--font-heading)] text-[clamp(3rem,6vw,4.5rem)] leading-none tracking-tight text-[var(--accent)]">
+        <p className={`font-[family-name:var(--font-heading)] leading-none tracking-tight text-[var(--accent)] ${study.metric.length > 5 ? 'text-[clamp(2rem,4vw,3rem)]' : 'text-[clamp(3rem,6vw,4.5rem)]'}`}>
           {study.metric}
         </p>
         <p className="mt-1 text-[13px] tracking-wide text-[var(--muted)]">
