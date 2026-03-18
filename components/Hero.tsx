@@ -6,7 +6,7 @@ import Link from "next/link";
 const TITLES = [
   "Product Manager.",
   "Growth Marketer.",
-  "Ecommerce Operator.",
+  "Builder.",
 ] as const;
 
 export default function Hero() {
@@ -40,9 +40,8 @@ export default function Hero() {
             className="mt-6 max-w-[480px] text-[16px] leading-relaxed text-[var(--muted)] md:text-[17px]"
             style={{ animation: "fadeInUp 0.7s ease-out 900ms both" }}
           >
-            I build products, scale brands, and turn growth loops into revenue.
-            From zero-to-one launches to full-funnel optimization — I get things
-            across the finish line.
+            I build products and growth systems, from strategy to working
+            prototype. Not just decks and specs. I ship things that run.
           </p>
 
           <div
@@ -74,7 +73,7 @@ export default function Hero() {
           <div className="relative aspect-[3/4] w-full max-w-[320px] overflow-hidden md:max-w-none">
             <Image
               src="/images/profile.jpg"
-              alt="Kaven Kim — Product Manager, Growth Marketer, and Ecommerce Operator"
+              alt="Kaven Kim, Product Manager, Growth Marketer, and Builder"
               fill
               priority
               className="object-cover"

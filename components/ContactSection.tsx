@@ -41,9 +41,11 @@ export default function ContactSection({
         setState("success");
         setFormData({ name: "", email: "", message: "" });
       } else {
+        console.error(`Contact form error: ${response.status} ${response.statusText}`);
         setState("error");
       }
-    } catch {
+    } catch (error) {
+      console.error("Contact form submission failed:", error);
       setState("error");
     }
   }

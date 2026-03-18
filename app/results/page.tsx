@@ -6,7 +6,7 @@ import { getAllResults } from "@/lib/results";
 export const metadata: Metadata = {
   title: "Results",
   description:
-    "Real results from product management, growth marketing, and ecommerce work by Kaven Kim.",
+    "Real results from product management, growth marketing, ecommerce, and hands-on building by Kaven Kim.",
 };
 
 export default function ResultsPage() {
@@ -22,8 +22,8 @@ export default function ResultsPage() {
           How I&apos;ve Helped
         </h1>
         <p className="mt-4 max-w-[560px] text-[16px] leading-relaxed text-[var(--muted)]">
-          A selection of results across product management, growth marketing, and
-          ecommerce operations. Each engagement is different — here&apos;s what
+          A selection of results across product management, growth marketing,
+          ecommerce, and hands-on building. Each engagement is different. Here&apos;s what
           the outcomes looked like.
         </p>
       </section>

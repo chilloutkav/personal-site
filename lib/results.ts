@@ -1,6 +1,8 @@
+import type { Discipline } from "@/lib/types";
+
 export interface CaseStudy {
   id: string;
-  discipline: "Product Management" | "Growth Marketing" | "Ecommerce";
+  discipline: Discipline;
   clientDescriptor: string;
   problem: string;
   action: string;
@@ -18,7 +20,7 @@ const CASE_STUDIES: CaseStudy[] = [
     problem:
       "Paid media was burning cash with a sub-2X return on ad spend. The creative was stale, targeting was broad, and there was no measurement framework to guide decisions.",
     action:
-      "Rebuilt the paid media program from scratch — new creative testing framework, audience segmentation strategy, and a full-funnel attribution model tied to actual revenue.",
+      "Rebuilt the paid media program from scratch. New creative testing framework, audience segmentation strategy, and a full-funnel attribution model tied to actual revenue.",
     result:
       "Scaled from 2X to 8X ROAS within 6 months while increasing total spend. The brand went from questioning paid media to making it their primary growth channel.",
     metric: "8X",
@@ -32,9 +34,9 @@ const CASE_STUDIES: CaseStudy[] = [
     problem:
       "The Shopify storefront had a conversion rate under 0.5%. Product pages were confusing, checkout was leaky, and there was zero post-purchase experience.",
     action:
-      "Led a full CRO overhaul — redesigned product pages with clearer value props, streamlined checkout to 2 steps, and built automated post-purchase email flows.",
+      "Led a full CRO overhaul. Redesigned product pages with clearer value props, streamlined checkout to 2 steps, and built automated post-purchase email flows.",
     result:
-      "Conversion rate jumped to 2.5% within 90 days — a 400% improvement. Average order value also increased 22% from better cross-sell placement.",
+      "Conversion rate jumped to 2.5% within 90 days, a 400% improvement. Average order value also increased 22% from better cross-sell placement.",
     metric: "400%",
     metricLabel: "Conversion Rate Lift",
     featured: true,
@@ -48,7 +50,7 @@ const CASE_STUDIES: CaseStudy[] = [
     action:
       "Redesigned the onboarding flow with activation milestones, built a lead scoring model based on product usage signals, and aligned sales outreach to high-intent users.",
     result:
-      "Cut CAC by 50% while increasing trial-to-paid conversion. Sales pipeline quality improved dramatically — reps were closing faster with fewer touches.",
+      "Cut CAC by 50% while increasing trial-to-paid conversion. Sales pipeline quality improved dramatically. Reps were closing faster with fewer touches.",
     metric: "50%",
     metricLabel: "CAC Reduction",
     featured: true,
@@ -72,7 +74,7 @@ const CASE_STUDIES: CaseStudy[] = [
     discipline: "Growth Marketing",
     clientDescriptor: "A B2B Industrial Supplier",
     problem:
-      "The company was spending $5K/month on Google Ads with no structure — one campaign, broad match everything, no conversion tracking, and zero visibility into what was working.",
+      "The company was spending $5K/month on Google Ads with no structure. One campaign, broad match everything, no conversion tracking, and zero visibility into what was working.",
     action:
       "Built a proper account architecture with SKAGs, implemented offline conversion tracking tied to their CRM, and developed a keyword expansion strategy based on search term data.",
     result:
@@ -80,6 +82,20 @@ const CASE_STUDIES: CaseStudy[] = [
     metric: "$5K→$80K",
     metricLabel: "Monthly Ad Spend Scaled",
     featured: false,
+  },
+  {
+    id: "parts-catalog-pipeline",
+    discipline: "Building & Automation",
+    clientDescriptor: "An Electronic Components Distributor",
+    problem:
+      "An 80,000-listing product catalog was AI-generated junk. Fabricated part numbers, missing manufacturers, no real specs. The sales team was fielding RFQs on parts that didn't exist.",
+    action:
+      "Built a Python pipeline that authenticates against a major distributor API, batch-enriches and deduplicates by real MPN, and exports verified Shopify-ready CSVs. Then built a 23,079-ad-group Google Ads campaign with AI-generated copy per product.",
+    result:
+      "Replaced the junk catalog with 23,079 verified products across 63 manufacturers. Campaign went live in 3 days, not the weeks a manual build would have taken. Cost per lead dropped from $200 to $17.",
+    metric: "$200→$17",
+    metricLabel: "Cost Per Lead",
+    featured: true,
   },
 ];
 

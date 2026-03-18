@@ -11,21 +11,22 @@ function escapeXml(str: string): string {
 }
 
 export function GET() {
-  const posts = getAllPosts();
+  try {
+    const posts = getAllPosts();
 
-  const items = posts
-    .map(
-      (post) => `    <item>
+    const items = posts
+      .map(
+        (post) => `    <item>
       <title>${escapeXml(post.title)}</title>
       <link>${SITE_CONFIG.domain}/blog/${post.id}</link>
       <guid isPermaLink="true">${SITE_CONFIG.domain}/blog/${post.id}</guid>
       <description>${escapeXml(post.excerpt)}</description>
       <pubDate>${new Date(post.date).toUTCString()}</pubDate>
     </item>`
-    )
-    .join("\n");
+      )
+      .join("\n");
 
-  const xml = `<?xml version="1.0" encoding="UTF-8"?>
+    const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>${escapeXml(SITE_CONFIG.siteName)}</title>
@@ -37,10 +38,14 @@ ${items}
   </channel>
 </rss>`;
 
-  return new Response(xml, {
-    headers: {
-      "Content-Type": "application/rss+xml; charset=utf-8",
-      "Cache-Control": "s-maxage=3600, stale-while-revalidate",
-    },
-  });
+    return new Response(xml, {
+      headers: {
+        "Content-Type": "application/rss+xml; charset=utf-8",
+        "Cache-Control": "s-maxage=3600, stale-while-revalidate",
+      },
+    });
+  } catch (error) {
+    console.error("RSS feed generation failed:", error);
+    return new Response("Failed to generate feed", { status: 500 });
+  }
 }

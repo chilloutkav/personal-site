@@ -16,7 +16,7 @@ export const SITE_CONFIG = {
   siteTitle: 'Kaven Kim',
   author: 'Kaven Kim',
   twitterHandle: '@kavenkim',
-  defaultDescription: 'Product manager, growth marketer, and ecommerce operator — three disciplines, one approach to driving measurable results.',
+  defaultDescription: 'Product manager, growth marketer, and builder. Three disciplines, one approach to driving measurable results.',
   defaultOGImage: '/images/og-default.jpg',
 } as const
 

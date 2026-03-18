@@ -40,7 +40,7 @@ export const metadata: Metadata = {
         url: "/images/og-default.jpg",
         width: 1200,
         height: 630,
-        alt: "Kaven Kim — PM, Growth Marketer, Ecommerce Operator",
+        alt: "Kaven Kim, Product Manager, Growth Marketer, and Builder",
       },
     ],
   },

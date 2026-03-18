@@ -1,10 +1,12 @@
+import type { Discipline } from "@/lib/types";
+
 export interface Testimonial {
   id: string;
   quote: string;
   author: string;
   role: string;
   company: string;
-  discipline: "Product Management" | "Growth Marketing" | "Ecommerce";
+  discipline: Discipline;
   featured: boolean;
 }
 

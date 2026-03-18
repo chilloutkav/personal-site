@@ -12,7 +12,7 @@ export default function BlogCard({ post }: BlogCardProps) {
       <article className="flex h-full flex-col border-2 border-dashed border-[var(--border-light)] bg-[var(--surface)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--border)] md:p-8">
         {/* Tags */}
         <div className="flex flex-wrap gap-2">
-          {post.tags.map((tag) => (
+          {post.tags?.map((tag) => (
             <span
               key={tag}
               className="border border-dashed border-[var(--border-light)] px-3 py-0.5 font-[family-name:var(--font-heading)] text-[12px] uppercase tracking-[0.15em] text-[var(--text)]"

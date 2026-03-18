@@ -6,7 +6,7 @@ tags: ["engineering", "design"]
 featured: false
 ---
 
-My old site was fine. It loaded fast. It was responsive. It had all the right sections. It also looked exactly like every other personal site on the internet — white background, system font, minimal styling, zero personality.
+My old site was fine. It loaded fast. It was responsive. It had all the right sections. It also looked exactly like every other personal site on the internet. White background, system font, minimal styling, zero personality.
 
 The problem wasn't technical. The problem was that it didn't feel like anything. You could have swapped my name for anyone else's and nothing would have changed.
 
@@ -14,7 +14,7 @@ So I tore it down and started with a question: what should a personal site *feel
 
 ## The Magazine Answer
 
-Most personal sites land in one of two camps. The minimal developer portfolio — barely styled, because styling is supposedly frivolous. Or the over-designed agency showcase — parallax scrolling, loading animations, every trendy effect stacked on top of each other.
+Most personal sites land in one of two camps. The minimal developer portfolio, barely styled, because styling is supposedly frivolous. Or the over-designed agency showcase, parallax scrolling, loading animations, every trendy effect stacked on top of each other.
 
 I wanted neither. I wanted something that felt intentional without being distracting. Something where every design choice had a reason.
 
@@ -24,9 +24,9 @@ Magazine editorial design gave me that. In editorial design, nothing is accident
 
 The single biggest design decision was choosing two fonts and being disciplined about how I used them.
 
-**Space Grotesk** for headings — geometric, modern, a little unexpected. It has personality without being gimmicky.
+**Space Grotesk** for headings. Geometric, modern, a little unexpected. It has personality without being gimmicky.
 
-**DM Sans** for body text — clean and readable at any size. It disappears, which is exactly what body text should do.
+**DM Sans** for body text. Clean and readable at any size. It disappears, which is exactly what body text should do.
 
 The heading scale uses `clamp()` for fluid sizing:
 
@@ -40,11 +40,11 @@ Headings look proportional on every screen size without a single media query. Th
 
 I limited the entire palette to three values:
 
-1. `#FAFAFA` — off-white background, warmer than pure white
-2. `#1A1A1A` — near-black text, softer than pure black
-3. `#C4616C` — dusty rose accent, used sparingly
+1. `#FAFAFA` off-white background, warmer than pure white
+2. `#1A1A1A` near-black text, softer than pure black
+3. `#C4616C` dusty rose accent, used sparingly
 
-This constraint was the best design decision I made. When you can't rely on color to differentiate elements, you have to get better at spacing, weight, and layout. Every hierarchy has to come from typography and whitespace alone. The accent color only appears on things that matter — interactive elements, key highlights, the occasional decorative touch.
+This constraint was the best design decision I made. When you can't rely on color to differentiate elements, you have to get better at spacing, weight, and layout. Every hierarchy has to come from typography and whitespace alone. The accent color only appears on things that matter: interactive elements, key highlights, the occasional decorative touch.
 
 The dark mode version flips the background and text values while shifting the accent slightly warmer. Same three-color philosophy, just inverted.
 
@@ -62,7 +62,7 @@ The interesting story is Tailwind v4. It's a major rewrite with a new engine, an
 
 The workaround is to skip `npm run dev` entirely and build for production every time. `npm run build && npm start` instead of `npm run dev`. Not ideal for hot reload, but production builds are fast enough that it didn't slow me down. I got used to it within a day.
 
-The App Router also changed how I think about components. Server components are the default — fetch data, render HTML, ship zero JavaScript. Client components are opt-in, only for things that genuinely need interactivity: scroll animations, form state, the theme toggle. Most of the site sends no JavaScript to the browser at all.
+The App Router also changed how I think about components. Server components are the default. Fetch data, render HTML, ship zero JavaScript. Client components are opt-in, only for things that genuinely need interactivity: scroll animations, form state, the theme toggle. Most of the site sends no JavaScript to the browser at all.
 
 ## What's Next
 

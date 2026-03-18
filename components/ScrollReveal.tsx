@@ -2,6 +2,26 @@
 
 import { useRef, useEffect, type ReactNode } from "react";
 
+const THRESHOLD = 0.15;
+
+let sharedObserver: IntersectionObserver | null = null;
+const callbacks = new Map<Element, (entry: IntersectionObserverEntry) => void>();
+
+function getSharedObserver(): IntersectionObserver {
+  if (!sharedObserver) {
+    sharedObserver = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          const cb = callbacks.get(entry.target);
+          if (cb) cb(entry);
+        }
+      },
+      { threshold: THRESHOLD }
+    );
+  }
+  return sharedObserver;
+}
+
 interface ScrollRevealProps {
   children: ReactNode;
   className?: string;
@@ -21,22 +41,25 @@ export default function ScrollReveal({
     const el = ref.current;
     if (!el) return;
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          if (delay > 0) {
-            setTimeout(() => el.classList.add("is-visible"), delay);
-          } else {
-            el.classList.add("is-visible");
-          }
-          observer.unobserve(el);
+    const observer = getSharedObserver();
+
+    callbacks.set(el, (entry) => {
+      if (entry.isIntersecting) {
+        if (delay > 0) {
+          setTimeout(() => el.classList.add("is-visible"), delay);
+        } else {
+          el.classList.add("is-visible");
         }
-      },
-      { threshold: 0.15 }
-    );
+        observer.unobserve(el);
+        callbacks.delete(el);
+      }
+    });
 
     observer.observe(el);
-    return () => observer.disconnect();
+    return () => {
+      observer.unobserve(el);
+      callbacks.delete(el);
+    };
   }, [delay]);
 
   return (

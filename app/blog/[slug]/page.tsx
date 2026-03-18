@@ -43,7 +43,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         images: [{ url: buildOGImageUrl(meta.title) }],
       },
     };
-  } catch {
+  } catch (error) {
+    console.error(`Failed to generate metadata for blog/${slug}:`, error);
     return { title: buildPageTitle("Post Not Found") };
   }
 }
@@ -54,7 +55,8 @@ export default async function BlogPostPage({ params }: Props) {
   let post;
   try {
     post = await getPostBySlug(slug);
-  } catch {
+  } catch (error) {
+    console.error(`Failed to load blog post "${slug}":`, error);
     notFound();
   }
 
@@ -84,7 +86,7 @@ export default async function BlogPostPage({ params }: Props) {
         <header className="mt-8">
           {/* Tags */}
           <div className="flex flex-wrap gap-2">
-            {post.meta.tags.map((tag) => (
+            {post.meta.tags?.map((tag) => (
               <span
                 key={tag}
                 className="border border-dashed border-[var(--border-light)] px-3 py-0.5 font-[family-name:var(--font-heading)] text-[12px] uppercase tracking-[0.15em] text-[var(--text)]"
