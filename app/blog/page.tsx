@@ -1,21 +1,20 @@
 import type { Metadata } from "next";
 import { getAllPosts } from "@/lib/blog";
 import BlogCard from "@/components/BlogCard";
-import ScrollReveal from "@/components/ScrollReveal";
-import ContactSection from "@/components/ContactSection";
-import { buildCanonicalUrl, buildPageTitle, SITE_CONFIG } from "@/lib/seo";
+import PageHeader from "@/components/PageHeader";
+import BottomPrompt from "@/components/BottomPrompt";
+import AsciiDivider from "@/components/AsciiDivider";
+import { buildCanonicalUrl, SITE_CONFIG } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: buildPageTitle("Blog"),
+  title: "Dispatches",
   description:
-    "Writing about product management, growth marketing, ecommerce, and the work in between.",
-  alternates: {
-    canonical: buildCanonicalUrl("/blog"),
-  },
+    "Dispatches from Kav. Mostly about what I'm playing with. Sometimes useful.",
+  alternates: { canonical: buildCanonicalUrl("/blog") },
   openGraph: {
-    title: buildPageTitle("Blog"),
+    title: "Dispatches",
     description:
-      "Writing about product management, growth marketing, ecommerce, and the work in between.",
+      "Dispatches from Kav. Mostly about what I'm playing with. Sometimes useful.",
     url: buildCanonicalUrl("/blog"),
     siteName: SITE_CONFIG.siteName,
     type: "website",
@@ -26,39 +25,36 @@ export default function BlogPage() {
   const posts = getAllPosts();
 
   return (
-    <>
-      <section className="mx-auto max-w-[1200px] px-6 pt-16 pb-4 md:px-8 md:pt-20 lg:px-10">
-        <p className="font-[family-name:var(--font-heading)] text-[14px] uppercase tracking-[0.25em] text-[var(--muted)]">
-          Writing
-        </p>
-        <h1 className="mt-3 font-[family-name:var(--font-heading)] text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.1] tracking-tight text-[var(--text)]">
-          Blog
-        </h1>
-        <p className="mt-4 max-w-[560px] text-[16px] leading-relaxed text-[var(--muted)]">
-          Thoughts on product management, growth marketing, ecommerce
-          operations, and the messy overlap between all three.
-        </p>
-      </section>
+    <section>
+      <PageHeader
+        path="~/writing"
+        cmd="ls -lat *.md"
+        title="Dispatches"
+        subtitle="Mostly about what I'm playing with. Sometimes useful."
+      />
 
-      <section className="mx-auto max-w-[1200px] px-6 pb-16 md:px-8 md:pb-20 lg:px-10">
-        {posts.length > 0 ? (
-          <div className="mt-10 grid gap-6 sm:grid-cols-2">
-            {posts.map((post, i) => (
-              <ScrollReveal key={post.id} delay={i * 150}>
-                <BlogCard post={post} />
-              </ScrollReveal>
-            ))}
-          </div>
-        ) : (
-          <p className="mt-10 text-[16px] text-[var(--muted)]">
-            No posts yet. Check back soon.
-          </p>
-        )}
-      </section>
+      <AsciiDivider title="log: tail -f ~/writing" />
 
-      <section className="border-t-2 border-dashed border-[var(--border-light)]">
-        <ContactSection variant="compact" />
-      </section>
-    </>
+      {posts.length > 0 ? (
+        <div className="feed">
+          {posts.map((post) => (
+            <BlogCard key={post.id} post={post} />
+          ))}
+        </div>
+      ) : (
+        <p className="prose-md" style={{ color: "var(--fg-muted)" }}>
+          No posts yet. Check back soon.
+        </p>
+      )}
+
+      {posts.length > 0 ? (
+        <p className="rss-note">
+          Infrequent by design. Subscribe via <a href="/feed.xml">RSS</a> if you
+          don&apos;t want to check back.
+        </p>
+      ) : null}
+
+      <BottomPrompt path="~/writing" />
+    </section>
   );
 }

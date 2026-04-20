@@ -14,7 +14,6 @@ Development guidance for Claude Code when working on kavenkim.com.
 - `npm run type-check` - TypeScript type checking
 - `npm run lint` - ESLint checks
 - `npm run clean` - Clear .next directory
-- `npm run build-analyze` - Build with bundle analysis
 
 ### Tailwind CSS v4 Compatibility
 **IMPORTANT**: Tailwind CSS v4 has compatibility issues with Next.js development mode.
@@ -25,11 +24,11 @@ Development guidance for Claude Code when working on kavenkim.com.
 
 ### App Router Structure
 
-- **app/**: Next.js App Router (TypeScript)
-  - `page.tsx`: Homepage with hero, results preview, testimonials, blog preview, contact
-  - `about/page.tsx`: About page with professional journey and "How I Build Now" section
+- **app/**: Next.js App Router (TypeScript). Every page is wrapped by `TerminalShell` via `app/layout.tsx`.
+  - `page.tsx`: Homepage with hero, results preview, testimonials, blog preview
+  - `about/page.tsx`: About page with "The short version" narrative and "Sysinfo" key/value block (plus Barry ASCII)
   - `results/page.tsx`: Case studies across PM, growth marketing, ecommerce, and building & automation
-  - `blog/page.tsx`: Blog index
+  - `blog/page.tsx`: Blog index (dispatches feed)
   - `blog/[slug]/page.tsx`: Dynamic blog post pages with MDX
   - `contact/page.tsx`: Full contact form page
   - `api/og/route.tsx`: OG image generation (edge runtime)
@@ -40,25 +39,23 @@ Development guidance for Claude Code when working on kavenkim.com.
   - `not-found.tsx`: Custom 404 page
 
 - **components/**: React components
-  - `Navigation.tsx`: Site navigation with scroll-aware styling
-  - `Hero.tsx`: Homepage hero with animated titles ("Product Manager. Growth Marketer. Builder.")
-  - `Footer.tsx`: Site footer with tagline and links
-  - `ContactSection.tsx`: Contact form (Netlify Forms) with compact/full variants
-  - `ScrollReveal.tsx`: Intersection Observer-based scroll animations (shared singleton observer)
-  - `ResultCard.tsx`, `ResultsGrid.tsx`: Case study display
+  - `TerminalShell.tsx`: Terminal-window chrome (title bar with macOS dots + theme toggle, tab bar, status bar, keyboard tab navigation, 12-hour NY clock). Wraps every page.
+  - `Hero.tsx`: Homepage hero — boot log (analytics state gated on `NEXT_PUBLIC_GTM_ID`), ASCII banner, H1 + dek, badges, `ls`-style nav grid
+  - `TopPrompt.tsx`, `BottomPrompt.tsx`: Prompt-line markers at the top and bottom of each page section
+  - `AsciiDivider.tsx`: Dashed visual separator; optional inline title
+  - `ContactSection.tsx`: Contact form (Netlify Forms)
+  - `ResultCard.tsx`, `ResultsGrid.tsx`: Case study display (ResultsGrid accepts a `detailed` flag)
+  - `PageHeader.tsx`: Shared page opener (TopPrompt + optional divider + h2 + subtitle)
   - `TestimonialCard.tsx`: Testimonial cards with featured variant
   - `BlogCard.tsx`, `HomepageBlog.tsx`: Blog post cards
-  - `ThemeToggle.tsx`: Light/dark mode toggle
-  - `HomepageResults.tsx`: Homepage results preview
 
 - **lib/**: Utilities and data
-  - `results.ts`: Case study data with `Discipline` type (PM, Growth Marketing, Ecommerce, Building & Automation)
-  - `testimonials.ts`: Testimonial data
-  - `blog.ts`: Blog post loading and MDX compilation
-  - `content.ts`: Shared content file reading utilities
-  - `seo.ts`: SEO config and helpers (`SITE_CONFIG`, canonical URLs, OG image URLs)
-  - `schema.ts`: JSON-LD structured data
-  - `types.ts`: Shared types (`Discipline` union type)
+  - `results.ts`: Case study data (headline, blurb, problem/action/result narrative, metric + sparkline)
+  - `testimonials.ts`: Testimonial data (verbatim quotes — never edit)
+  - `blog.ts`: MDX blog loader (reads `content/blog/*.mdx` via gray-matter, compiles via `next-mdx-remote/rsc`)
+  - `seo.ts`: `SITE_CONFIG`, `buildCanonicalUrl`, `buildOGImageUrl`
+  - `schema.ts`: JSON-LD structured data (BreadcrumbList)
+  - `icon.tsx`: Shared JSX for `app/icon.tsx` and `app/apple-icon.tsx` OG-route icons
 
 - **content/**: MDX content files
   - `blog/`: Blog posts with frontmatter (title, date, excerpt, tags, featured)
@@ -68,12 +65,12 @@ Development guidance for Claude Code when working on kavenkim.com.
 
 ### Design System
 
-- **Fonts**: Space Grotesk (headings, `--font-heading`) + DM Sans (body, `--font-body`)
-- **Colors (light)**: bg `#FFFFFF`, text `#000000`, accent `#8C91FA` (periwinkle)
-- **Colors (dark)**: bg `#000000`, text `#FFFFFF`, accent `#A0A5FF`
-- **Dark mode**: `data-theme="dark"` attribute on `<html>`, not Tailwind `dark:` prefix
-- **Borders**: Dashed style throughout (dividers, cards, inputs)
-- **Accent usage**: Sparingly on link hovers, CTA buttons, focus rings, nav underlines, metrics
+- **Fonts**: Inter (headings + prose, `var(--font-sans)`) + JetBrains Mono (chrome, prompts, boot log, body default, `var(--font-mono)`)
+- **Colors (dark, default)**: bg `#0F1411`, fg `#E4E6DF`, accent `#8C91FA` (periwinkle)
+- **Colors (light "paper")**: bg `#F5F3E8`, fg `#1C1F18`, accent `#5055C9`
+- **Theme switch**: `data-theme="light"` attribute on `<html>` for the paper theme; dark is the default (no attribute), not Tailwind `dark:` prefix
+- **Borders**: Dashed style throughout (dividers, card separators, inputs)
+- **Accent usage**: Sparingly on link hovers, CTA buttons, focus rings, nav active dot, metrics, selection
 
 ### Positioning
 
@@ -118,4 +115,4 @@ NEXT_PUBLIC_GTM_ID=GTM-5CXC3C8
 
 ---
 
-*Updated: March 2026 - Builder positioning, production audit fixes, shared ScrollReveal observer*
+*Updated: April 2026 - Terminal-shell redesign, builder positioning, production audit fixes*

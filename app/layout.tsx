@@ -1,21 +1,22 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, DM_Sans } from "next/font/google";
+import { JetBrains_Mono, Inter } from "next/font/google";
 import Script from "next/script";
-import Navigation from "../components/Navigation";
-import Footer from "../components/Footer";
+import { cookies } from "next/headers";
+import TerminalShell from "../components/TerminalShell";
+import CookieConsent from "../components/CookieConsent";
 import "../styles/global.css";
 
-const spaceGrotesk = Space_Grotesk({
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
-  weight: ["500", "700"],
-  variable: "--font-heading",
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-mono",
   display: "swap",
 });
 
-const dmSans = DM_Sans({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  variable: "--font-body",
+  weight: ["400", "500", "600"],
+  variable: "--font-sans",
   display: "swap",
 });
 
@@ -23,60 +24,64 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://kavenkim.com"),
   title: {
     template: "%s | Kaven Kim",
-    default: "Kaven Kim \u2014 PM, Growth Marketer, Ecommerce Operator",
+    default: "Kaven Kim \u2014 product builder, using AI",
   },
   description:
-    "I build products, scale brands, and turn growth loops into revenue. Product management, growth marketing, and ecommerce operations.",
+    "I ship products with AI in the loop. Twelve years across product, paid media, and Shopify. Now freelancing and building small things end-to-end.",
   openGraph: {
     type: "website",
     locale: "en_US",
     url: "https://kavenkim.com",
     siteName: "Kaven Kim",
-    title: "Kaven Kim \u2014 PM, Growth Marketer, Ecommerce Operator",
+    title: "Kaven Kim \u2014 product builder, using AI",
     description:
-      "I build products, scale brands, and turn growth loops into revenue. Product management, growth marketing, and ecommerce operations.",
+      "I ship products with AI in the loop. Twelve years across product, paid media, and Shopify. Now freelancing and building small things end-to-end.",
     images: [
       {
         url: "/images/og-default.jpg",
         width: 1200,
         height: 630,
-        alt: "Kaven Kim, Product Manager, Growth Marketer, and Builder",
+        alt: "Kaven Kim \u2014 product builder, using AI",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Kaven Kim \u2014 PM, Growth Marketer, Ecommerce Operator",
+    title: "Kaven Kim \u2014 product builder, using AI",
     description:
-      "I build products, scale brands, and turn growth loops into revenue. Product management, growth marketing, and ecommerce operations.",
+      "I ship products with AI in the loop. Twelve years across product, paid media, and Shopify. Now freelancing and building small things end-to-end.",
     images: ["/images/og-default.jpg"],
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
+  robots: { index: true, follow: true },
 };
 
 const gtmId = process.env.NEXT_PUBLIC_GTM_ID;
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const cookieStore = await cookies();
+  const consent = cookieStore.get("analytics_consent")?.value;
+  // Soft opt-in: GA4 loads by default unless the visitor has explicitly opted out.
+  const analyticsAllowed = Boolean(gtmId) && consent !== "declined";
+  // First-time visitors see a short notice with an opt-out button.
+  const needsConsent = Boolean(gtmId) && !consent;
+
   return (
     <html
       lang="en"
-      className={`${spaceGrotesk.variable} ${dmSans.variable}`}
+      className={`${jetbrainsMono.variable} ${inter.variable}`}
       suppressHydrationWarning
     >
       <head>
         <script
           dangerouslySetInnerHTML={{
-            __html: `(function(){var s=localStorage.getItem('theme');var p=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';document.documentElement.setAttribute('data-theme',s||p);})();`,
+            __html: `(function(){var s=localStorage.getItem('theme');if(s==='light'){document.documentElement.setAttribute('data-theme','light');}})();`,
           }}
         />
-        {gtmId && (
+        {analyticsAllowed && (
           <Script
             id="gtm-script"
             strategy="afterInteractive"
@@ -90,8 +95,8 @@ export default function RootLayout({
           />
         )}
       </head>
-      <body className={`${dmSans.className} antialiased`}>
-        {gtmId && (
+      <body>
+        {analyticsAllowed && (
           <noscript>
             <iframe
               src={`https://www.googletagmanager.com/ns.html?id=${gtmId}`}
@@ -101,9 +106,8 @@ export default function RootLayout({
             />
           </noscript>
         )}
-        <Navigation />
-        <main className="min-h-[calc(100vh-160px)]">{children}</main>
-        <Footer />
+        <TerminalShell>{children}</TerminalShell>
+        {needsConsent && <CookieConsent />}
       </body>
     </html>
   );

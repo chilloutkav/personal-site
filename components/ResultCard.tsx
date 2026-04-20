@@ -1,61 +1,50 @@
 import type { CaseStudy } from "@/lib/results";
+import { sparklineColor } from "@/lib/results";
 
-interface ResultCardProps {
+export interface ResultCardProps {
   study: CaseStudy;
-  index?: number;
+  /** When true, renders full problem/action/result narrative. Otherwise, headline + blurb only. */
+  detailed?: boolean;
 }
 
-export default function ResultCard({ study }: ResultCardProps) {
+export default function ResultCard({ study, detailed = false }: ResultCardProps) {
   return (
-    <article className="group flex h-full flex-col border-2 border-dashed border-[var(--border-light)] bg-[var(--surface)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--border)] md:p-8">
-      {/* Discipline + Client */}
-      <p className="font-[family-name:var(--font-heading)] text-[14px] uppercase tracking-[0.2em] text-[var(--text)]">
-        {study.discipline}
-      </p>
-      <p className="mt-1 text-[14px] italic text-[var(--muted)]">
-        {study.clientDescriptor}
-      </p>
-
-      {/* Metric — periwinkle accent pop */}
-      <div className="mt-6">
-        <p className={`font-[family-name:var(--font-heading)] leading-none tracking-tight text-[var(--accent)] ${study.metric.length > 5 ? 'text-[clamp(2rem,4vw,3rem)]' : 'text-[clamp(3rem,6vw,4.5rem)]'}`}>
+    <article className="receipt">
+      <div className="r-head">
+        <span className="id">[{study.receiptId}]</span>
+        <span>{study.category}</span>
+      </div>
+      <h3>{study.headline}</h3>
+      <p>{study.blurb}</p>
+      <div className="r-chart">
+        <div
+          className="ascii-sparkline"
+          style={{ color: sparklineColor(study.sparklineTone) }}
+          aria-hidden="true"
+        >
+          {study.sparkline}
+        </div>
+        <div className="val">
           {study.metric}
-        </p>
-        <p className="mt-1 text-[13px] tracking-wide text-[var(--muted)]">
-          {study.metricLabel}
-        </p>
-      </div>
-
-      {/* Dashed divider */}
-      <div className="my-6 border-t-2 border-dashed border-[var(--border-light)]" />
-
-      {/* Narrative */}
-      <div className="flex-1 space-y-5">
-        <div>
-          <p className="mb-1.5 font-[family-name:var(--font-heading)] text-[12px] uppercase tracking-[0.2em] text-[var(--muted)]">
-            The Challenge
-          </p>
-          <p className="text-[14px] leading-relaxed text-[var(--text)]">
-            {study.problem}
-          </p>
-        </div>
-        <div>
-          <p className="mb-1.5 font-[family-name:var(--font-heading)] text-[12px] uppercase tracking-[0.2em] text-[var(--muted)]">
-            The Approach
-          </p>
-          <p className="text-[14px] leading-relaxed text-[var(--text)]">
-            {study.action}
-          </p>
-        </div>
-        <div>
-          <p className="mb-1.5 font-[family-name:var(--font-heading)] text-[12px] uppercase tracking-[0.2em] text-[var(--muted)]">
-            The Outcome
-          </p>
-          <p className="text-[14px] leading-relaxed text-[var(--text)]">
-            {study.result}
-          </p>
+          <small>{study.metricLabel}</small>
         </div>
       </div>
+      {detailed ? (
+        <div className="r-body">
+          <div className="r-section">
+            <span className="k">challenge</span>
+            <p>{study.problem}</p>
+          </div>
+          <div className="r-section">
+            <span className="k">approach</span>
+            <p>{study.action}</p>
+          </div>
+          <div className="r-section">
+            <span className="k">outcome</span>
+            <p>{study.result}</p>
+          </div>
+        </div>
+      ) : null}
     </article>
   );
 }

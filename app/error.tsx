@@ -9,25 +9,26 @@ export default function Error({
   reset: () => void;
 }) {
   return (
-    <section className="mx-auto flex min-h-[60vh] max-w-[560px] flex-col items-center justify-center px-6 py-20 text-center md:px-8">
-      <h1 className="font-[family-name:var(--font-heading)] text-[clamp(2rem,5vw,3.5rem)] leading-[1.1] tracking-tight text-[var(--text)]">
-        Something went wrong.
-      </h1>
-      <p className="mt-4 text-[15px] leading-relaxed text-[var(--muted)]">
-        An unexpected error occurred. Try again or head back to the homepage.
-      </p>
-      <div className="mt-8 flex gap-4">
-        <button
-          onClick={reset}
-          className="inline-flex items-center bg-[var(--accent)] px-6 py-3 text-[14px] font-medium tracking-wide text-[var(--text-inverse)] transition-colors hover:bg-[var(--accent-hover)]"
-        >
-          Try Again
+    <section>
+      <div className="boot" aria-label="error log">
+        <span className="line">
+          <span className="err">[ ERR ]</span> unhandled exception
+        </span>
+      </div>
+
+      <h2 className="sh">Something broke</h2>
+      <p className="sh-sub">An unexpected error occurred.</p>
+
+      <div className="about-body">
+        <p>Try rerunning the command or head back home.</p>
+      </div>
+
+      <div className="btn-row">
+        <button type="button" onClick={reset} className="btn">
+          retry
         </button>
-        <Link
-          href="/"
-          className="inline-flex items-center border-2 border-dashed border-[var(--border-light)] px-6 py-3 text-[14px] font-medium tracking-wide text-[var(--text)] transition-colors hover:border-[var(--border)]"
-        >
-          Go Home
+        <Link href="/" className="btn-ghost">
+          cd ~
         </Link>
       </div>
     </section>

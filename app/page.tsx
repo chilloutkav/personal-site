@@ -1,10 +1,9 @@
 import Link from "next/link";
 import Hero from "@/components/Hero";
-import HomepageResults from "@/components/HomepageResults";
+import ResultsGrid from "@/components/ResultsGrid";
 import HomepageBlog from "@/components/HomepageBlog";
-import ScrollReveal from "@/components/ScrollReveal";
 import TestimonialCard from "@/components/TestimonialCard";
-import ContactSection from "@/components/ContactSection";
+import AsciiDivider from "@/components/AsciiDivider";
 import { getFeaturedResults } from "@/lib/results";
 import { getLatestPosts } from "@/lib/blog";
 import {
@@ -14,7 +13,7 @@ import {
 
 export default function HomePage() {
   const featured = getFeaturedResults();
-  const latestPosts = getLatestPosts(2);
+  const latestPosts = getLatestPosts(3);
   const featuredTestimonial = getFeaturedTestimonial();
   const otherTestimonials = getNonFeaturedTestimonials();
 
@@ -22,89 +21,43 @@ export default function HomePage() {
     <>
       <Hero />
 
-      {/* Results preview */}
-      <section className="border-t-2 border-dashed border-[var(--border-light)]">
-        <div className="mx-auto max-w-[1200px] px-6 py-16 md:px-8 md:py-20 lg:px-10">
-          <p className="font-[family-name:var(--font-heading)] text-[14px] uppercase tracking-[0.25em] text-[var(--muted)]">
-            Selected Results
+      <AsciiDivider />
+
+      <h2 className="sh">Receipts</h2>
+      <p className="sh-sub">Case studies. Real numbers, metrics verified. Some clients under NDA.</p>
+      <ResultsGrid studies={featured} />
+      <div style={{ marginTop: 4 }}>
+        <Link href="/results">view all &rarr;</Link>
+      </div>
+
+      <AsciiDivider />
+
+      <h2 className="sh">What clients say</h2>
+      <p className="sh-sub">On paid media work. Unedited, from Upwork and direct engagements.</p>
+      {featuredTestimonial ? (
+        <TestimonialCard testimonial={featuredTestimonial} variant="featured" />
+      ) : null}
+      {otherTestimonials.length > 0 ? (
+        <div className="tm-grid">
+          {otherTestimonials.map((t) => (
+            <TestimonialCard key={t.id} testimonial={t} variant="default" />
+          ))}
+        </div>
+      ) : null}
+
+      {latestPosts.length > 0 ? (
+        <>
+          <AsciiDivider />
+          <h2 className="sh">Dispatches</h2>
+          <p className="sh-sub">
+            Mostly about what I&apos;m playing with. Sometimes useful.
           </p>
-          <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
-            <h2 className="font-[family-name:var(--font-heading)] text-[clamp(2rem,4vw,3rem)] leading-[1.1] tracking-tight text-[var(--text)]">
-              How I&apos;ve Helped
-            </h2>
-            <Link
-              href="/results"
-              className="text-[14px] font-medium tracking-wide text-[var(--text)] transition-colors hover:text-[var(--accent)]"
-            >
-              View all results &rarr;
-            </Link>
+          <HomepageBlog posts={latestPosts} />
+          <div style={{ marginTop: 4 }}>
+            <Link href="/blog">all posts &rarr;</Link>
           </div>
-
-          <HomepageResults studies={featured} />
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="border-t-2 border-dashed border-[var(--border-light)]">
-        <div className="mx-auto max-w-[1200px] px-6 py-16 md:px-8 md:py-20 lg:px-10">
-          <ScrollReveal>
-            <p className="font-[family-name:var(--font-heading)] text-[14px] uppercase tracking-[0.25em] text-[var(--muted)]">
-              Testimonials
-            </p>
-            <h2 className="mt-3 font-[family-name:var(--font-heading)] text-[clamp(2rem,4vw,3rem)] leading-[1.1] tracking-tight text-[var(--text)]">
-              What People Say
-            </h2>
-          </ScrollReveal>
-
-          {featuredTestimonial && (
-            <ScrollReveal className="mt-10" delay={100}>
-              <TestimonialCard
-                testimonial={featuredTestimonial}
-                variant="featured"
-              />
-            </ScrollReveal>
-          )}
-
-          <div className="mt-6 grid gap-6 md:grid-cols-2">
-            {otherTestimonials.map((testimonial, i) => (
-              <ScrollReveal key={testimonial.id} delay={150 * (i + 1)}>
-                <TestimonialCard testimonial={testimonial} variant="default" />
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Latest Writing */}
-      {latestPosts.length > 0 && (
-        <section className="border-t-2 border-dashed border-[var(--border-light)]">
-          <div className="mx-auto max-w-[1200px] px-6 py-16 md:px-8 md:py-20 lg:px-10">
-            <ScrollReveal>
-              <p className="font-[family-name:var(--font-heading)] text-[14px] uppercase tracking-[0.25em] text-[var(--muted)]">
-                From the Blog
-              </p>
-              <div className="mt-3 flex flex-wrap items-end justify-between gap-4">
-                <h2 className="font-[family-name:var(--font-heading)] text-[clamp(2rem,4vw,3rem)] leading-[1.1] tracking-tight text-[var(--text)]">
-                  Latest Writing
-                </h2>
-                <Link
-                  href="/blog"
-                  className="text-[14px] font-medium tracking-wide text-[var(--text)] transition-colors hover:text-[var(--accent)]"
-                >
-                  All posts &rarr;
-                </Link>
-              </div>
-            </ScrollReveal>
-
-            <HomepageBlog posts={latestPosts} />
-          </div>
-        </section>
-      )}
-
-      {/* Contact */}
-      <section className="border-t-2 border-dashed border-[var(--border-light)]">
-        <ContactSection variant="compact" id="contact" />
-      </section>
+        </>
+      ) : null}
     </>
   );
 }

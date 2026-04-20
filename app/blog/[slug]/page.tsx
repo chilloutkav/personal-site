@@ -3,10 +3,10 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { format } from "date-fns";
 import { getAllSlugs, getPostBySlug } from "@/lib/blog";
-import ContactSection from "@/components/ContactSection";
+import TopPrompt from "@/components/TopPrompt";
+import BottomPrompt from "@/components/BottomPrompt";
 import {
   buildCanonicalUrl,
-  buildPageTitle,
   buildOGImageUrl,
   SITE_CONFIG,
 } from "@/lib/seo";
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     const { meta } = await getPostBySlug(slug);
 
     return {
-      title: buildPageTitle(meta.title),
+      title: meta.title,
       description: meta.excerpt,
       alternates: {
         canonical: buildCanonicalUrl(`/blog/${meta.id}`),
@@ -45,7 +45,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     };
   } catch (error) {
     console.error(`Failed to generate metadata for blog/${slug}:`, error);
-    return { title: buildPageTitle("Post Not Found") };
+    return { title: "Post Not Found" };
   }
 }
 
@@ -66,63 +66,40 @@ export default async function BlogPostPage({ params }: Props) {
     { name: post.meta.title, path: `/blog/${post.meta.id}` },
   ]);
 
+  const primaryTag = post.meta.tags?.[0] ?? "note";
+
   return (
-    <>
+    <section>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
 
-      <article className="mx-auto max-w-[720px] px-6 pt-16 pb-16 md:px-8 md:pt-20 md:pb-20">
-        {/* Back link */}
-        <Link
-          href="/blog"
-          className="inline-block text-[14px] font-medium text-[var(--muted)] transition-colors hover:text-[var(--accent)]"
-        >
-          &larr; All posts
-        </Link>
+      <TopPrompt path="~/writing" cmd={`cat ${post.meta.id}.md`} />
 
-        {/* Header */}
-        <header className="mt-8">
-          {/* Tags */}
-          <div className="flex flex-wrap gap-2">
-            {post.meta.tags?.map((tag) => (
-              <span
-                key={tag}
-                className="border border-dashed border-[var(--border-light)] px-3 py-0.5 font-[family-name:var(--font-heading)] text-[12px] uppercase tracking-[0.15em] text-[var(--text)]"
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+      <Link href="/blog" className="back-link">
+        &larr; all dispatches
+      </Link>
 
-          {/* Title */}
-          <h1 className="mt-5 font-[family-name:var(--font-heading)] text-[clamp(2rem,5vw,3.5rem)] leading-[1.1] tracking-tight text-[var(--text)]">
-            {post.meta.title}
-          </h1>
+      <header className="post-header">
+        <div className="post-meta">
+          <span>{format(new Date(post.meta.date), "yyyy-MM-dd")}</span>
+          <span>·</span>
+          <span className={`tag ${primaryTag.toLowerCase()}`}>
+            {primaryTag}
+          </span>
+        </div>
+        <h1>{post.meta.title}</h1>
+        <p className="post-byline">by {SITE_CONFIG.author}</p>
+      </header>
 
-          {/* Author + Date */}
-          <div className="mt-5 flex items-center gap-3 text-[14px] text-[var(--muted)]">
-            <span className="font-medium text-[var(--text)]">
-              {SITE_CONFIG.author}
-            </span>
-            <span aria-hidden="true">&middot;</span>
-            <time dateTime={post.meta.date}>
-              {format(new Date(post.meta.date), "MMMM d, yyyy")}
-            </time>
-          </div>
-        </header>
+      <hr className="rule" />
 
-        {/* Dashed divider */}
-        <div className="my-10 border-t-2 border-dashed border-[var(--border-light)]" />
+      <div className="prose" style={{ maxWidth: "68ch" }}>
+        {post.content}
+      </div>
 
-        {/* MDX content */}
-        <div className="prose">{post.content}</div>
-      </article>
-
-      <section className="border-t-2 border-dashed border-[var(--border-light)]">
-        <ContactSection variant="compact" />
-      </section>
-    </>
+      <BottomPrompt path="~/writing" />
+    </section>
   );
 }

@@ -11,36 +11,52 @@ export default function GlobalError({
       <body
         style={{
           margin: 0,
-          fontFamily: "system-ui, sans-serif",
+          fontFamily: "'JetBrains Mono', ui-monospace, monospace",
           display: "flex",
           minHeight: "100vh",
           alignItems: "center",
           justifyContent: "center",
-          backgroundColor: "#FFFFFF",
-          color: "#000000",
+          backgroundColor: "var(--bg, #0F1411)",
+          color: "var(--fg, #E4E6DF)",
         }}
       >
-        <div style={{ textAlign: "center", padding: "2rem" }}>
-          <h1 style={{ fontSize: "2rem", fontWeight: 700 }}>
+        <div style={{ textAlign: "center", padding: "2rem", maxWidth: 520 }}>
+          <p
+            style={{
+              color: "var(--red, #E87560)",
+              fontSize: 13,
+              marginBottom: 8,
+            }}
+          >
+            [ ERR ] fatal exception
+          </p>
+          <h1
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 28,
+              fontWeight: 500,
+              letterSpacing: "-0.02em",
+            }}
+          >
             Something went wrong.
           </h1>
-          <p style={{ marginTop: "1rem", color: "#666" }}>
+          <p
+            style={{
+              marginTop: "1rem",
+              color: "var(--fg-muted, #A8ADA0)",
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 15,
+              lineHeight: 1.6,
+            }}
+          >
             An unexpected error occurred.
           </p>
           <button
             onClick={reset}
-            style={{
-              marginTop: "2rem",
-              padding: "0.75rem 1.5rem",
-              backgroundColor: "#8C91FA",
-              color: "#FFFFFF",
-              border: "none",
-              cursor: "pointer",
-              fontSize: "0.875rem",
-              fontWeight: 500,
-            }}
+            className="btn"
+            style={{ marginTop: "1.5rem" }}
           >
-            Try Again
+            retry
           </button>
         </div>
       </body>

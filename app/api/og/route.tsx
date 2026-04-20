@@ -3,10 +3,19 @@ import { NextRequest } from "next/server";
 
 export const runtime = "edge";
 
+const MAX_TITLE_LENGTH = 200;
+
+function sanitizeTitle(raw: string | null): string | null {
+  if (!raw) return null;
+  // Strip control chars, cap length to prevent abuse of the public endpoint.
+  // eslint-disable-next-line no-control-regex
+  return raw.replace(/[\x00-\x1F\x7F]/g, "").slice(0, MAX_TITLE_LENGTH);
+}
+
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = request.nextUrl;
-    const title = searchParams.get("title");
+    const title = sanitizeTitle(searchParams.get("title"));
 
     return new ImageResponse(
       (
@@ -81,6 +90,10 @@ export async function GET(request: NextRequest) {
       {
         width: 1200,
         height: 630,
+        headers: {
+          // The image for a given title never changes; cache hard at the edge.
+          "Cache-Control": "public, max-age=31536000, immutable",
+        },
       },
     );
   } catch (error) {

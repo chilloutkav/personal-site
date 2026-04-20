@@ -1,6 +1,10 @@
+import fs from 'fs'
+import path from 'path'
+import matter from 'gray-matter'
 import { type ReactElement } from 'react'
 import { compileMDX } from 'next-mdx-remote/rsc'
-import { createContentLoader } from './content'
+
+const BLOG_DIR = path.join(process.cwd(), 'content/blog')
 
 export interface BlogPostMeta {
   id: string
@@ -9,19 +13,25 @@ export interface BlogPostMeta {
   excerpt: string
   tags: string[]
   featured: boolean
-  [key: string]: unknown
 }
 
-const blogLoader = createContentLoader<BlogPostMeta>('content/blog')
+function readAllPosts(): BlogPostMeta[] {
+  if (!fs.existsSync(BLOG_DIR)) return []
+  return fs
+    .readdirSync(BLOG_DIR)
+    .filter((name) => /\.(md|mdx)$/.test(name))
+    .map((name) => {
+      const id = name.replace(/\.(md|mdx)$/, '')
+      const raw = fs.readFileSync(path.join(BLOG_DIR, name), 'utf8')
+      const { data } = matter(raw)
+      return { id, ...data } as BlogPostMeta
+    })
+}
 
 export function getAllPosts(): BlogPostMeta[] {
-  return blogLoader
-    .getAll()
-    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-}
-
-export function getFeaturedPosts(): BlogPostMeta[] {
-  return getAllPosts().filter((post) => post.featured)
+  return readAllPosts().sort(
+    (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+  )
 }
 
 export function getLatestPosts(count: number): BlogPostMeta[] {
@@ -29,21 +39,30 @@ export function getLatestPosts(count: number): BlogPostMeta[] {
 }
 
 export function getAllSlugs(): { slug: string }[] {
-  return blogLoader.getAll().map((post) => ({ slug: post.id }))
+  return readAllPosts().map((post) => ({ slug: post.id }))
 }
 
 export async function getPostBySlug(
   slug: string
 ): Promise<{ meta: BlogPostMeta; content: ReactElement }> {
-  const raw = await blogLoader.getById(slug)
+  let fullPath = path.join(BLOG_DIR, `${slug}.mdx`)
+  if (!fs.existsSync(fullPath)) {
+    fullPath = path.join(BLOG_DIR, `${slug}.md`)
+  }
+  if (!fs.existsSync(fullPath)) {
+    throw new Error(`Content file not found: ${slug}`)
+  }
 
-  const { content } = await compileMDX({
-    source: raw.content,
+  const raw = fs.readFileSync(fullPath, 'utf8')
+  const { content, data } = matter(raw)
+
+  const { content: compiled } = await compileMDX({
+    source: content,
     options: { parseFrontmatter: false },
   })
 
   return {
-    meta: raw.metadata,
-    content,
+    meta: { id: slug, ...data } as BlogPostMeta,
+    content: compiled,
   }
 }

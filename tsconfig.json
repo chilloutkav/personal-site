@@ -7,7 +7,7 @@
    */
   "compilerOptions": {
     /* Language and Output */
-    "target": "es5",                          // Target ES5 for broad browser compatibility
+    "target": "es2022",                       // Modern output; Next.js handles browser transpilation
     "lib": ["dom", "dom.iterable", "esnext"], // Include modern DOM and ES features
     
     /* Module Resolution */

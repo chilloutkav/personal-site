@@ -1,16 +1,17 @@
-"use client";
-
 import type { CaseStudy } from "@/lib/results";
 import ResultCard from "./ResultCard";
-import ScrollReveal from "./ScrollReveal";
 
-export default function ResultsGrid({ studies }: { studies: CaseStudy[] }) {
+type Props = {
+  studies: CaseStudy[];
+  /** When true, each card renders the full problem/action/result narrative. */
+  detailed?: boolean;
+};
+
+export default function ResultsGrid({ studies, detailed = false }: Props) {
   return (
-    <div className="mt-10 grid gap-6 md:grid-cols-2 md:gap-8">
-      {studies.map((study, i) => (
-        <ScrollReveal key={study.id} delay={i * 120}>
-          <ResultCard study={study} index={i} />
-        </ScrollReveal>
+    <div className="receipts">
+      {studies.map((study) => (
+        <ResultCard key={study.id} study={study} detailed={detailed} />
       ))}
     </div>
   );

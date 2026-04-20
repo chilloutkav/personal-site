@@ -1,40 +1,31 @@
 import type { Metadata } from "next";
+import PageHeader from "@/components/PageHeader";
+import BottomPrompt from "@/components/BottomPrompt";
 import ResultsGrid from "@/components/ResultsGrid";
-import ContactSection from "@/components/ContactSection";
 import { getAllResults } from "@/lib/results";
 
 export const metadata: Metadata = {
-  title: "Results",
+  title: "Work",
   description:
-    "Real results from product management, growth marketing, ecommerce, and hands-on building by Kaven Kim.",
+    "Case studies across product, growth marketing, ecommerce, and AI-driven building.",
 };
 
 export default function ResultsPage() {
   const studies = getAllResults();
 
   return (
-    <>
-      <section className="mx-auto max-w-[1200px] px-6 pt-16 pb-4 md:px-8 md:pt-20 lg:px-10">
-        <p className="font-[family-name:var(--font-heading)] text-[14px] uppercase tracking-[0.25em] text-[var(--muted)]">
-          Case Studies
-        </p>
-        <h1 className="mt-3 font-[family-name:var(--font-heading)] text-[clamp(2.5rem,5vw,4.5rem)] leading-[1.1] tracking-tight text-[var(--text)]">
-          How I&apos;ve Helped
-        </h1>
-        <p className="mt-4 max-w-[560px] text-[16px] leading-relaxed text-[var(--muted)]">
-          A selection of results across product management, growth marketing,
-          ecommerce, and hands-on building. Each engagement is different. Here&apos;s what
-          the outcomes looked like.
-        </p>
-      </section>
+    <section>
+      <PageHeader
+        path="~/work"
+        cmd="ls receipts/ --sort=impact"
+        title="Receipts"
+        subtitle={`Product. Growth. Ecommerce. Building. ${studies.length} receipts, clients under NDA, metrics verified.`}
+        divider
+      />
 
-      <section className="mx-auto max-w-[1200px] px-6 pb-16 md:px-8 md:pb-20 lg:px-10">
-        <ResultsGrid studies={studies} />
-      </section>
+      <ResultsGrid studies={studies} detailed />
 
-      <section className="border-t-2 border-dashed border-[var(--border-light)]">
-        <ContactSection variant="compact" />
-      </section>
-    </>
+      <BottomPrompt path="~/work" />
+    </section>
   );
 }

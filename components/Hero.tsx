@@ -1,87 +1,86 @@
-"use client";
-
-import Image from "next/image";
 import Link from "next/link";
+import BottomPrompt from "./BottomPrompt";
+import TopPrompt from "./TopPrompt";
 
-const TITLES = [
-  "Product Manager.",
-  "Growth Marketer.",
-  "Builder.",
-] as const;
+const HAS_ANALYTICS = Boolean(process.env.NEXT_PUBLIC_GTM_ID);
+
+const BANNER = ` _                                _    _
+| | ____ ___   _____ _ __   | | _(_)_ __ ___
+| |/ / _\` \\ \\ / / _ \\ '_ \\  | |/ / | '_ \` _ \\
+|   < (_| |\\ V /  __/ | | | |   <| | | | | | |
+|_|\\_\\__,_| \\_/ \\___|_| |_| |_|\\_\\_|_| |_| |_|`;
+
+type LsItem = {
+  href: string;
+  k: string;
+  d: string;
+};
+
+const LS_ITEMS: LsItem[] = [
+  { href: "/results", k: "work/", d: "Case studies with real numbers" },
+  { href: "/blog", k: "writing/", d: "Dispatches, mostly about AI experiments" },
+  { href: "/about", k: "about.md", d: "The short version plus sysinfo" },
+  { href: "/contact", k: "contact", d: "Email, LinkedIn, Upwork" },
+];
 
 export default function Hero() {
   return (
-    <section className="mx-auto flex min-h-[calc(100vh-76px)] max-w-[1200px] items-center px-6 py-16 md:px-8 md:py-20 lg:px-10">
-      <div className="grid w-full items-center gap-12 md:grid-cols-[1fr_0.7fr] md:gap-16 lg:gap-20">
-        {/* Text column */}
-        <div className="order-2 md:order-1">
-          <p
-            className="mb-6 font-[family-name:var(--font-heading)] text-[14px] uppercase tracking-[0.25em] text-[var(--muted)]"
-            style={{ animation: "fadeIn 0.6s ease-out both" }}
-          >
-            Kaven Kim
-          </p>
+    <section>
+      <div className="boot" aria-label="boot log">
+        <span className="line">
+          <span className="ok">[ OK ]</span> kavenkim.portfolio v3.0 · build 2026.04.19
+        </span>
+        <span className="line">
+          <span className="ok">[ OK ]</span> loaded 5 case studies, 3 dispatches, 1 shiba
+        </span>
+        {HAS_ANALYTICS ? (
+          <span className="line">
+            <span className="ok">[ OK ]</span> analytics: ga4 active
+          </span>
+        ) : (
+          <span className="line">
+            <span className="warn">[ -- ]</span> trackers &amp; analytics{" "}
+            <span className="err">disabled</span>
+          </span>
+        )}
+        <span className="line">
+          <span className="ok">[ OK ]</span> ready.
+        </span>
+      </div>
 
-          <h1 className="font-[family-name:var(--font-heading)] text-[clamp(2.5rem,7vw,5.5rem)] leading-[1.05] tracking-tight text-[var(--text)]">
-            {TITLES.map((title, i) => (
-              <span
-                key={title}
-                className="block"
-                style={{
-                  animation: `fadeInUp 0.7s ease-out ${200 + i * 200}ms both`,
-                }}
-              >
-                {title}
-              </span>
-            ))}
-          </h1>
+      <pre className="ascii-banner" aria-hidden="true">
+{BANNER}
+      </pre>
 
-          <p
-            className="mt-6 max-w-[480px] text-[16px] leading-relaxed text-[var(--muted)] md:text-[17px]"
-            style={{ animation: "fadeInUp 0.7s ease-out 900ms both" }}
-          >
-            I build products and growth systems, from strategy to working
-            prototype. Not just decks and specs. I ship things that run.
-          </p>
-
-          <div
-            className="mt-8 flex flex-wrap items-center gap-4"
-            style={{ animation: "fadeInUp 0.7s ease-out 1100ms both" }}
-          >
-            <Link
-              href="#contact"
-              className="inline-flex items-center bg-[var(--accent)] px-6 py-3 text-[14px] font-medium tracking-wide text-[var(--text-inverse)] transition-colors hover:bg-[var(--accent-hover)]"
-            >
-              Get in Touch
-            </Link>
-            <a
-              href="https://www.linkedin.com/in/kavenkim/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center text-[14px] font-medium tracking-wide text-[var(--muted)] transition-colors hover:text-[var(--accent)]"
-            >
-              LinkedIn &rarr;
-            </a>
-          </div>
-        </div>
-
-        {/* Headshot column */}
-        <div
-          className="order-1 flex justify-center md:order-2 md:justify-end"
-          style={{ animation: "scaleIn 0.8s ease-out 300ms both" }}
-        >
-          <div className="relative aspect-[3/4] w-full max-w-[320px] overflow-hidden md:max-w-none">
-            <Image
-              src="/images/profile.jpg"
-              alt="Kaven Kim, Product Manager, Growth Marketer, and Builder"
-              fill
-              priority
-              className="object-cover"
-              sizes="(max-width: 768px) 320px, 40vw"
-            />
-          </div>
+      <div className="intro">
+        <h1>
+          Product, growth, and the <em>building in between</em>.
+        </h1>
+        <p className="dek">
+          I&apos;m <strong>Kav</strong>. Thirteen years across product, paid
+          media, and Shopify. Now freelancing: PM work, growth programs, and
+          small tools I build end-to-end with Claude Code and n8n.
+        </p>
+        <div className="badges">
+          <span className="badge on">top rated · upwork</span>
+          <span className="badge">$8M+ ad spend</span>
+          <span className="badge">stack: claude + n8n</span>
         </div>
       </div>
+
+      <div style={{ marginTop: 28 }}>
+        <TopPrompt path="~" cmd="ls" />
+      </div>
+      <div className="ls">
+        {LS_ITEMS.map((item) => (
+          <Link key={item.href} href={item.href} className="item">
+            <span className="k">{item.k}</span>
+            <span className="d">{item.d}</span>
+          </Link>
+        ))}
+      </div>
+
+      <BottomPrompt path="~" />
     </section>
   );
 }

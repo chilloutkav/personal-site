@@ -44,3 +44,9 @@ yarn-error.log*
 
 # Local Netlify folder
 .netlify
+
+# Scratchpad screenshot outputs (root-level only; public/images/ preserved)
+/*.png
+/*.jpg
+/*.jpeg
+.playwright-mcp/

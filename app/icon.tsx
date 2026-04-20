@@ -1,29 +1,12 @@
 import { ImageResponse } from "next/og";
+import { renderKKIcon } from "@/lib/icon";
 
 export const size = { width: 32, height: 32 };
 export const contentType = "image/png";
 
 export default function Icon() {
   return new ImageResponse(
-    (
-      <div
-        style={{
-          width: "100%",
-          height: "100%",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          backgroundColor: "#000000",
-          borderRadius: "6px",
-          fontSize: "18px",
-          fontWeight: 700,
-          color: "#FFFFFF",
-          letterSpacing: "-0.03em",
-        }}
-      >
-        KK
-      </div>
-    ),
+    renderKKIcon({ fontSize: 18, borderRadius: 6 }),
     { ...size }
   );
 }
